@@ -1,0 +1,386 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif, serif;
+    background-color: #FFF1DB;
+}
+
+nav {
+    background: linear-gradient(45deg, #4CC9FE, #0D92F4);
+    padding: 15px 15px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav .title {
+    flex: left;
+    align-items: center;
+}
+
+nav .title h2 {
+    font-family: "Spicy Rice", serif;
+    font-size: 1.5em;
+    color: #fff;
+    justify-content: left;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-family: "Cinzel", serif;
+    font-weight: bold;
+}
+
+nav .hamburger {
+    display: none;
+    cursor: pointer;
+    font-size: 2em;
+    color: white;
+    text-align: center;
+}
+
+nav {
+    background: linear-gradient(45deg, #4CC9FE, #0D92F4);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    height: 67.83px;
+}
+
+.navbar-container {
+    background: linear-gradient(45deg, #4CC9FE, #0D92F4);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+#logo {
+    width: 60px;  /* Adjust the width as per your preference */
+    height: 56px; /* Adjust the height accordingly */
+    object-fit: contain; /* Ensures the aspect ratio of the logo remains intact */
+    margin-top:2px;
+}
+.title h2 {
+    margin-top:-40px;
+    margin-left: 100px;
+}
+
+ul {
+    float: right;
+}
+
+.links {
+    display: flex;
+    list-style: none;
+    margin-right: 45px;
+}
+
+.links li {
+    margin-left: 35px;
+}
+.links li a.active {
+    color: blue; /* White text for the active link */
+     
+}
+.links li a {
+    text-decoration: none;
+    color: black;
+    transition: 0.3s ease color;
+}
+
+.links li a:hover {
+    color: blue;
+}
+
+.title-main {
+    text-align: center;
+    margin: 60px 0;
+}
+
+
+@media (max-width: 768px) {
+    .mobile-row .col-4 {
+        flex: 0 0 83.3333%;
+        max-width: 83.3333%;
+    }
+
+    .mobile-row .col-8 {
+        flex: 0 0 16.6667%;
+        max-width: 16.6667%;
+    }
+    
+    nav ul {
+        display: none;
+        width: 100%;
+        text-align: center;
+    }
+
+    nav .hamburger {
+        display: block;
+    }
+
+    nav ul.active {
+        display: block;
+        background-color: #333;
+        padding: 10px 0;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+}
+
+section {
+    /* margin-top: 40px;
+    margin-bottom: 20px;     */
+    padding: 40px 0;
+}
+
+h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* per cardat */
+.col {
+    width: 30%;
+    max-width: 300px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    padding: 20px;
+}
+
+.col:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* card image */
+.card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* card title */
+.card h3 {
+    margin-top: 15px;
+    font-size: 1.3em;
+    color: #333;
+}
+
+/* teksti cards */
+.card p {
+    margin-top: 10px;
+    font-size: 1em;
+    color: #666;
+}
+
+/* responsiv */
+@media (max-width: 768px) {
+    .col {
+        width: 45%;
+    }
+}
+
+@media (max-width: 480px) {
+    .col {
+        width: 100%;
+    }
+
+    nav ul {
+        display: none;
+    }
+
+    nav .hamburger {
+        display: block;
+    }
+
+    nav ul.active {
+        display: block;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        background-color: #333;
+        padding: 10px;
+        width: 200px;
+    }
+
+    nav ul li {
+        display: block;
+        margin: 10px 0;
+    }
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(45deg, #4CC9FE, #0D92F4);
+
+}
+
+/* Butonat  */
+.apply-container {
+    text-align: center;
+    margin-top: 40px;
+}
+
+#applyButton {
+    background-color: #0d92f4;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#applyButton:hover {
+    background-color: #0950b7;
+}
+
+/* pop up */
+.apply-modal {
+    display: none; 
+    position: fixed;
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); 
+}
+
+.apply-modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    position: relative;
+}
+
+.apply-modal-content h3 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.apply-modal-content form {
+    display: flex;
+    flex-direction: column;
+}
+
+.apply-modal-content input,
+.apply-modal-content select,
+.apply-modal-content button {
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 1em;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.apply-modal-content button {
+    background-color: #0d92f4;
+    color: white;
+    cursor: pointer;
+}
+
+.apply-modal-content button:hover {
+    background-color: #0950b7;
+}
+/* Styling the drag-and-drop area */
+.drag-drop-area {
+    border: 2px dashed #0D92F4;
+    padding: 20px;
+    text-align: center;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .drag-drop-area p {
+    margin: 0;
+  }
+  
+  .drag-drop-area:hover {
+    background-color: #e0f7ff;
+  }
+  
+  /* Styling the file input (hidden but accessible) */
+  #file-upload {
+    display: none; /* Hide the input element */
+  }
+  
+  #file-upload:focus {
+    outline: none; /* Remove outline when focused */
+  }
+  
+
+
+
+
+
+
+/* Close Button */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #333;
+}
+
+.close-btn:hover {
+    color: #0d92f4;
+}
+
+@font-face {
+    font-family: 'MyFont';
+    src: url(fonts/Rubik/Rubik-VariableFont_wght.ttf); 
+}
+
+@font-face {
+    font-family: 'MyFontItalic';
+    src: url(fonts/Rubik/Rubik-Italic-VariableFont_wght.ttf); 
+}

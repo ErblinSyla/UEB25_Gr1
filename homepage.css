@@ -1,0 +1,860 @@
+/* General Reset */
+body {
+    margin: 0;
+    padding:0;
+    line-height: 1;
+    font-family: sans-serif, serif;
+}
+section{
+    margin:0;
+    padding:0;
+}
+.row {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.row::after {
+    display: table;
+    clear: both;
+    content: "";
+}
+
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
+/* Navbar Container */
+nav {
+    background: linear-gradient(45deg, #4CC9FE, #0D92F4);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    height: 67.83px;
+}
+
+.navbar-container {
+    background: linear-gradient(45deg, #4CC9FE, #0D92F4);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+/* Title */
+.title h2 {
+    margin-top:-40px;
+    margin-left: 100px;
+}
+ul {
+    float: right;
+}
+
+
+/* Links (Full Menu) */
+.links {
+    display: flex;
+    list-style: none;
+    margin-right: 45px;
+
+}
+
+.links li {
+    margin-left: 35px;
+}
+.links li a.active {
+    color: blue; /* White text for the active link */
+     
+}
+
+
+.links li a {
+    text-decoration: none;
+    color: black;
+    transition: 0.3s ease color;
+
+}
+
+.links li a:hover {
+    color: blue;
+}
+
+.title-main {
+    text-align: center;
+    margin: 60px 0;
+}
+
+
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #fff;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    padding: 8px 20px;
+    border: 2px solid black;
+    border-radius: 8px;
+    margin-right: 20px;
+    float: right;
+}
+.hamburger:active,
+.hamburger.active {
+    background-color: #0A7FD1;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+}
+#logo {
+    width: 60px;  /* Adjust the width as per your preference */
+    height: 56px; /* Adjust the height accordingly */
+    object-fit: contain; /* Ensures the aspect ratio of the logo remains intact */
+}
+
+
+/* Responsive Design */
+@media (max-width: 1010px) {
+    .mobile-row .col-4 {
+        flex: 0 0 83.3333%;
+        max-width: 83.3333%;
+    }
+
+    .mobile-row .col-8 {
+        flex: 0 0 16.6667%;
+        max-width: 16.6667%;
+    }
+
+    .col-3, .col-4, .col-5, .col-6 {
+        display: block;
+        margin: auto;
+        width: 60%;
+    }
+    .links {
+        flex-direction: column;
+        gap: 20px;
+        position: absolute;
+        top: 50px;
+        right: -45px;
+        border-bottom-left-radius: 8px;
+        background: linear-gradient(45deg, #4CC9FE, #0D92F4);
+        padding: 15px;
+        z-index: 1;
+        width: 35%;
+        font-size: 18px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-20px);
+        transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.3s;
+    }
+
+    .links.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .hamburger p {
+        margin: 10px 0;
+    }
+}
+
+
+@media (max-width: 810px) {
+    .col-3, .col-4, .col-5, .col-6 {
+        display: block;
+        margin: auto;
+        width: 86%;
+    }
+
+    .enroll ul.ul-list {
+        display: block;
+        margin: auto;
+        margin-top: 50px;
+        width: 200px;
+    }
+
+    ul.ul-list .list {
+        line-height: 2.2;
+        font-size: 18px;
+        width: 400px;
+    }
+}
+
+
+.main-section {
+    min-height: 100vh;
+    margin:0;
+    padding:0;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px); /* Adds a subtle upward motion */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+
+.main-wallpaper {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url(images/homepage-wallpaper.jpg) center/cover no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: center;
+    text-align: left;
+    height: 98vh;
+    align-items:center;
+    position:relative;
+    padding-bottom:80px;
+    padding: 20px;
+   
+}
+
+
+.header-text{
+    font-size:2rem;
+    font-family: "Changa", sans-serif;
+    text-align: center;
+    align-items: center;
+    margin-top: -250px;
+    color:#ffFFFF;
+    opacity: 0; /* Start hidden */
+    animation: fadeIn 1.5s ease-out forwards; /* Apply fade-in animation */
+    animation-delay: 0.3s; /* Stagger animation */
+    
+}
+
+.main-wallpaper p {
+    
+    font-size: 1.2rem;
+    font-family: 'MyFont', Arial, Helvetica, sans-serif;
+    color: #fff; /* Lighter color for the paragraph */
+    margin-bottom: 30px;
+    opacity: 0; /* Start hidden */
+    animation: fadeIn 1.5s ease-out forwards; /* Apply fade-in animation */
+    animation-delay: 0.6s; /* Stagger animation */
+
+}
+.main-wallpaper #tech-text{
+    text-align: left;
+    margin-right:90px;
+    opacity: 0; /* Start hidden */
+    animation: fadeIn 1.5s ease-out forwards; /* Apply fade-in animation */
+    animation-delay: 0.9s; /* Stagger animation */
+}
+
+.text-admission {
+    position: absolute; /* Position at the bottom */
+    bottom: 220px; /* Aligns to the bottom of the section */
+    width: 100%; /* Stretches the div across the section width */
+    text-align: center; /* Centers the content inside */
+    opacity: 0; /* Start hidden */
+    animation: fadeIn 1.5s ease-out forwards; /* Apply fade-in animation */
+    animation-delay: 1.5s/*2.7s; /* Stagger animation */
+}
+
+
+
+.cta-button {
+    background-color: #00B5E2; /* Cyan background for the button */
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    font-size:1.2rem;
+}
+
+.cta-button:hover {
+    background-color: #00FFFF; /* Light cyan hover effect */
+}
+
+
+#apple{
+    width:70px;
+    height:auto;
+    opacity: 0; /* Start hidden */
+    animation: fadeIn 1.5s ease-out forwards; /* Apply fade-in animation */
+    animation-delay: 1.2s; /* Stagger animation */
+}
+ #google{
+    width:100px;
+    height:auto;
+    margin-bottom:-18px;
+    margin-left: 40px;
+    opacity: 0; /* Start hidden */
+    animation: fadeIn 1.5s ease-out forwards; /* Apply fade-in animation */
+    animation-delay: 1.2s/*1.5s; /* Stagger animation */
+}
+#microsoft{
+    width:150px;
+    height:auto;
+    margin-left:40px;
+    opacity: 0; /* Start hidden */
+    animation: fadeIn 1.5s ease-out forwards; /* Apply fade-in animation */
+    animation-delay: 1.2s/*1.8s; /* Stagger animation */
+}
+#spotify{
+    width:100px;
+    height:auto;
+    margin-bottom:7px;
+    margin-left:40px;
+    opacity: 0; /* Start hidden */
+    animation: fadeIn 1.5s ease-out forwards; /* Apply fade-in animation */
+    animation-delay: 1.2s /*2.1s; /* Stagger animation */
+}
+#amazon{
+    width:100px;
+    height:auto;
+    margin-bottom:7px;
+    margin-left: 40px;
+    opacity: 0; /* Start hidden */
+    animation: fadeIn 1.5s ease-out forwards; /* Apply fade-in animation */
+    animation-delay: 1.2s/*2.4s; /* Stagger animation */
+}
+
+
+
+
+
+
+
+
+
+
+
+/*                               INSTRUCTOR SECTION                                         */
+
+
+
+
+
+.instructors {
+    background: #FFF1DB;
+    padding:700px; /* Add space inside the section */
+    margin: 0; /* Ensure no outside gaps */
+    text-align: center;
+    align-items: center;
+    position: relative;
+}
+.instructors h2 {
+    position: absolute;
+    top: 5px; /* Moves the heading above the section */
+    left: 0; /* Aligns to the left of the section */
+    width: 100%; /* Ensures the heading spans the full width */
+    text-align: center; /* Centers the text horizontally */
+    font-size: 1.5rem;
+    
+}
+.instructors p{
+    position:absolute;
+    top:50px;
+    left:0;
+    width:100%;
+    text-align: center;
+    font-size:1.2rem;
+    font-family: 'MyFont', Arial, Helvetica, sans-serif;
+}
+.instructor-1{
+    background: #E4C89C;
+    position: absolute;
+    top:130px;
+    width:1300px;
+    height:305.75px;
+    right:120px;
+    text-align:center;
+    justify-content: space-between; /* Space between image and text */
+    box-sizing: border-box;  /* Ensure padding doesn't affect the width of the div */
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(50, 50, 50, 0.7);
+    
+}
+.instructor-1:hover,
+.instructor-2:hover, 
+.instructor-3:hover  {
+    box-shadow: 1px 1px 7px #0D92F4; /* Blue shadow on hover */
+    transform: scale(1.05); /* Slight scale effect */
+    transition: all 0.3s ease;
+}
+
+
+
+#instructor1_image{
+    width:300px;
+    height:305.75px;
+    float:left;
+    margin-right:1000px;
+}
+#instructor1-name{
+    position:absolute;
+    top:-10px;
+    right:450px;
+}
+#instructor1-degree{
+    font-size:1.2rem;
+    margin-top:50px;
+    margin-left:120px;
+}
+#instructor1-description{
+    font-size:1.2rem;
+    margin-top:40px;
+    margin-right:400px;
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    text-align: left;
+    line-height: 1.5;
+    padding-left: 320px;  /* Keep space from the left of the image */
+    margin-right: 20px;
+    overflow: hidden;  /* Hide text if it exceeds the container's boundaries */
+    text-overflow: ellipsis;  
+    max-width: calc(100% - 320px);
+    margin-right: 20px;  /* Ensure it doesn't touch the right edge */
+}
+
+.instructor-2{
+    position: absolute;
+    bottom:20px;
+    background: #E4C89C;
+    width:1300px;
+    height:305.85px;
+    top:550px;
+    right:120px;
+    box-shadow: 0 4px 10px rgba(50, 50, 50, 0.7);
+}
+#instructor2_image{
+    width:300px;
+    height:305.85px;
+    margin-right:1000px;
+    
+}
+#instructor2-name{
+    margin-top:-290px;
+    margin-left:250px;
+}
+#instructor2-degree{
+    font-size:1.2rem;
+    margin-top:50px;
+    margin-left:120px;
+}
+#instructor2-description{
+    font-size:1.2rem;
+    margin-top:40px;
+    margin-right:400px;
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    text-align: left;
+    line-height: 1.5;
+    padding-left: 320px;  /* Keep space from the left of the image */
+    margin-right: 20px;
+    overflow: hidden;  /* Hide text if it exceeds the container's boundaries */
+    text-overflow: ellipsis;  
+    max-width: calc(100% - 320px);
+    margin-right: 20px;  /* Ensure it doesn't touch the right edge */
+}
+.instructor-3{
+    position:absolute;
+    bottom:20px;
+    background:#E4C89C;
+    width:1300px;
+    height:305.75px;
+    top:970px;
+    right:120px;
+    box-shadow: 0 4px 10px rgba(50, 50, 50, 0.7);
+}
+#instructor3_image{
+    width:300px;
+    height:305.75px;
+    margin-right:1000px;
+}
+#instructor3-name{
+    margin-top:-290px;
+    margin-left:250px;
+}
+#instructor3-degree{
+    font-size:1.2rem;
+    margin-top:50px;
+    margin-left:120px;
+}
+#instructor3-description{
+    font-size:1.2rem;
+    margin-top:40px;
+    margin-right:400px;
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    text-align: left;
+    line-height: 1.5;
+    padding-left: 320px;  /* Keep space from the left of the image */
+    margin-right: 20px;
+    overflow: hidden;  /* Hide text if it exceeds the container's boundaries */
+    text-overflow: ellipsis;  
+    max-width: calc(100% - 320px);
+    margin-right: 20px;  /* Ensure it doesn't touch the right edge */
+}
+
+.instructors, .instructor-1, .instructor-2, .instructor-3 {
+    opacity: 0; /* Start hidden */
+    transform: translateY(20px); /* Add a slight downward offset */
+    transition: opacity 1s ease-out, transform 1s ease-out; /* Smooth transition */
+}
+
+
+
+
+
+
+
+
+/*                          PROJECTS                               */
+
+
+
+
+
+
+
+.projects-main h2{
+    font-size:1.5rem;
+    text-align:center;
+    margin-bottom: 5px;
+}
+.projects-main p{
+    text-align:center;
+    margin-bottom:50px;
+   
+}
+
+.projects {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 300px;
+    position:relative;
+}
+
+
+.calculator-project {
+    position:absolute;
+    background: #eaeaea;
+    width:400px;
+    height:500px;
+    top:20px;
+    left:60px;
+    text-align: center;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(50, 50, 50, 0.7);
+}
+.calculator-project:hover{
+    box-shadow: 1px 1px 7px #0D92F4;
+}
+.todo-list-project{
+    position:absolute;
+    background:#eaeaea;
+    width:400px;
+    height:500px;
+    top:20px;
+    left:555px;
+    text-align: center;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(50, 50, 50, 0.7);
+}
+.todo-list-project:hover{
+    box-shadow: 1px 1px 7px #0D92F4;
+}
+
+.weather-project{
+    position: absolute;
+    background:#eaeaea;
+    width:400px;
+    height:500px;
+    top:20px;
+    left:1050px;
+    text-align: center;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(50, 50, 50, 0.7);
+} 
+.weather-project:hover{
+    box-shadow: 1px 1px 7px #0D92F4;
+}
+
+.calculator-project iframe,
+.todo-list-project iframe,
+.weather-project iframe {
+    
+    width: 80%;
+    height: 220px;
+    margin-top:70px;
+    margin-bottom:50px;
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 4px 10px rgba(50, 50, 50, 0.7);
+}
+
+
+
+/*
+.project img {
+    width: 100%;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+*/
+/*
+.calculator-project img:hover {
+    transform: scale(1.2);
+    box-shadow: 0 4px 10px rgba(50, 50, 50, 0.7);
+}
+.todo-list-project img:hover {
+    transform: scale(1.2);
+    box-shadow: 0 4px 10px rgba(50, 50, 50, 0.7);
+}
+.weather-project img:hover {
+    transform: scale(1.2);
+    box-shadow: 0 4px 10px rgba(50, 50, 50, 0.7);
+    }
+
+
+/*
+.flexible-features {
+    list-style-type: none;
+    padding: 0;
+}
+
+.flexible-features li {
+    margin: 10px 0;
+}
+
+blockquote {
+    font-style: italic;
+    background: #f4f4f4;
+    padding: 10px 15px;
+    border-left: 4px solid #ccc;
+    margin: 20px 0;
+}
+*/
+
+
+
+
+/*                             FLEXIBLE                                */
+
+.flexible-learning{
+    background: #FFF1DB;
+    padding:600px; /* Add space inside the section */
+    margin: 0; /* Ensure no outside gaps */
+    text-align: center;
+    align-items: center;
+    position: relative;
+}
+.flexible-title h2{
+    position: absolute;
+    top: 5px; /* Moves the heading above the section */
+    left: 0; /* Aligns to the left of the section */
+    width: 100%; /* Ensures the heading spans the full width */
+    text-align: center; /* Centers the text horizontally */
+    font-size: 1.5rem;
+}
+.flexible-title p{
+    position:absolute;
+    top:50px;
+    left:0;
+    width:100%;
+    text-align: center;
+    font-size:1.2rem;
+}
+.flexible-content{
+    text-align:left;
+}
+.flexible-options{
+    position:absolute;
+    top:240px;
+    right:100px;
+    list-style-position: inside;
+    list-style: none;
+}
+.flexible-options  li{
+   font-size:1.2rem;
+    
+    margin-bottom: 200px; /* Add space between list items if needed */
+    margin-top:-100px;
+    margin-right:-50px;
+   
+}
+.flexible-options #mobile{
+    
+  
+    display: flex; /* Enable flexbox for alignment */
+    align-items: center; /* Align text and image vertically */
+    gap: 10px; /* Add space between the image and the text */
+    padding-left: 100px; /* Space for the image and text */
+
+    min-height: 70px; /* Ensure the list item is tall enough for the image */
+    background-image: url('images/mobile.png'); /* Replace with your image path */
+    background-repeat: no-repeat;
+    background-size: 70px 70px; /* Adjust size of the image */
+    background-position: left center; /* Center the image vertically */
+    
+}
+.flexible-options #download{
+    display: flex; /* Enable flexbox for alignment */
+    align-items: center; /* Align text and image vertically */
+    gap: 10px; /* Add space between the image and the text */
+    padding-left: 100px; /* Space for the image and text */
+    min-height: 85px; /* Ensure the list item is tall enough for the image */
+    background-image: url('images/download.png'); /* Replace with your image path */
+    background-repeat: no-repeat;
+    background-size: 85px 85px; /* Adjust size of the image */
+    background-position: left center; /* Center the image vertically */
+}
+
+.flexible-options #support{
+    display: flex; /* Enable flexbox for alignment */
+    align-items: center; /* Align text and image vertically */
+    gap: 10px; /* Add space between the image and the text */
+    padding-left: 100px; /* Space for the image and text */
+    min-height: 70px; /* Ensure the list item is tall enough for the image */
+    background-image: url('images/support.png'); /* Replace with your image path */
+    background-repeat: no-repeat;
+    background-size: 70px 70px; /* Adjust size of the image */
+    background-position: left center; /* Center the image vertically */
+}
+
+.flexible-options  li:hover{
+    color:#0D92F4;
+}
+
+
+.flexible-content #quote{
+   position:absolute;
+   bottom:500px;
+   right:50px;
+}
+
+
+#flexible-image{
+    width:700px;
+    height:auto;
+    position:absolute;
+    top:150px;
+   left:100px;
+   border-radius: 20px;
+   box-shadow: 0 4px 10px rgba(50, 50, 50, 0.7);
+
+}
+#flexible-image:hover{
+    box-shadow: 1px 1px 7px #0D92F4;
+}
+/* Initial state for animations */
+.projects-main,.projects, .calculator-project, .todo-list-project, .weather-project,
+.flexible-learning, .flexible-title h2, .flexible-title p, .flexible-options li,#flexible-image,#quote,.form-div,.form-div h3,.form-div h4,.form-div input,.form-div #submit-input {
+    opacity: 0; /* Hidden initially */
+    transform: translateY(20px); /* Start with a slight downward offset */
+    transition: opacity 1s ease-out, transform 1s ease-out; /* Smooth animation */
+}
+
+.form-div {
+    position:absolute;
+    bottom:40px;
+    left:550px;
+    padding: 40px;
+    margin: 20px;
+    border-radius: 10px;
+    width:400px;
+    min-height:60px;
+    box-shadow: 1px 1px 7px;
+    transition: 0.3s ease box-shadow;
+    padding: 20px;
+    margin: 40px 0;
+}
+.form-div:hover{
+    box-shadow: 1px 1px 7px #0D92F4;
+}
+
+.form-div h4{
+    text-align: left;
+}
+
+
+.form-div input{
+    margin-right:100px;
+    width: 300px;
+    min-height: 30px;
+    border-radius: 7px;
+    border: 2px solid black;
+}
+.form-div input:focus {
+    outline: 2px solid blue; /* Adds an outline when the input is focused */
+}
+
+.form-div textarea:focus {
+    border: 2px solid red;
+}
+
+.form-div #submit-input {
+    display: block;
+    margin: auto;
+    padding: 9px 9px;
+    width:70px;
+    height:40px;
+    color: darkblue;
+    border-radius: 4px;
+    text-decoration: none;
+    border: 2px solid black;
+    background-color: #0D92F4;
+    transition: 0.3s ease background-color;
+    margin-top: 25px;
+}
+
+.form-div #submit-input:hover {
+    cursor: pointer;
+    background-color: #4CC9FE;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+footer{
+background: linear-gradient(45deg, #4CC9FE, #0D92F4);
+    text-align: center;
+    font-size: 15px;
+}
