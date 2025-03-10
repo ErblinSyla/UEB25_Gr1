@@ -1,7 +1,9 @@
-Projekti ne Programim ne Ueb
+Projekti ne Programim ne Ueb 2
 
 Pjesemarresit:
-Erblin Syla (Team Leader),
+Erblin Syla,
 Fatos Rama,
 Endri Sojeva,
-Lis Spahija.
+Diellart Mulolli,
+Bashkim Hashani,
+Benjamin Voca
