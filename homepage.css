@@ -1,4 +1,3 @@
-/* General Reset */
 body {
     margin: 0;
     padding:0;
@@ -34,7 +33,7 @@ section{
 .col-10 {width: 83.33%;}
 .col-11 {width: 91.66%;}
 .col-12 {width: 100%;}
-/* Navbar Container */
+
 nav {
     background: linear-gradient(45deg, #4CC9FE, #0D92F4);
     display: flex;
@@ -52,7 +51,6 @@ nav {
     padding: 10px 20px;
 }
 
-/* Title */
 .title h2 {
     margin-top:-40px;
     margin-left: 100px;
@@ -61,8 +59,6 @@ ul {
     float: right;
 }
 
-
-/* Links (Full Menu) */
 .links {
     display: flex;
     list-style: none;
@@ -74,10 +70,9 @@ ul {
     margin-left: 35px;
 }
 .links li a.active {
-    color: blue; /* White text for the active link */
+    color: blue;
      
 }
-
 
 .links li a {
     text-decoration: none;
@@ -95,8 +90,6 @@ ul {
     margin: 60px 0;
 }
 
-
-/* Hamburger Menu */
 .hamburger {
     display: none;
     font-size: 1.5rem;
@@ -115,13 +108,11 @@ ul {
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
 }
 #logo {
-    width: 60px;  /* Adjust the width as per your preference */
-    height: 56px; /* Adjust the height accordingly */
-    object-fit: contain; /* Ensures the aspect ratio of the logo remains intact */
+    width: 60px;
+    height: 56px;
+    object-fit: contain;
 }
 
-
-/* Responsive Design */
 @media (max-width: 1010px) {
     .mobile-row .col-4 {
         flex: 0 0 83.3333%;
@@ -204,7 +195,7 @@ ul {
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(20px); /* Adds a subtle upward motion */
+        transform: translateY(20px);
     }
     to {
         opacity: 1;
@@ -219,7 +210,7 @@ ul {
     background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url(images/homepage-wallpaper.jpg) center/cover no-repeat;
     background-size: cover;
     display: flex;
-    flex-direction: column; /* Stack elements vertically */
+    flex-direction: column;
     justify-content: center;
     text-align: left;
     height: 98vh;
@@ -238,9 +229,9 @@ ul {
     align-items: center;
     margin-top: -250px;
     color:#ffFFFF;
-    opacity: 0; /* Start hidden */
-    animation: fadeIn 1.5s ease-out forwards; /* Apply fade-in animation */
-    animation-delay: 0.3s; /* Stagger animation */
+    opacity: 0;
+    animation: fadeIn 1.5s ease-out forwards;
+    animation-delay: 0.3s;
     
 }
 
@@ -248,35 +239,35 @@ ul {
     
     font-size: 1.2rem;
     font-family: 'MyFont', Arial, Helvetica, sans-serif;
-    color: #fff; /* Lighter color for the paragraph */
+    color: #fff;
     margin-bottom: 30px;
-    opacity: 0; /* Start hidden */
-    animation: fadeIn 1.5s ease-out forwards; /* Apply fade-in animation */
-    animation-delay: 0.6s; /* Stagger animation */
+    opacity: 0;
+    animation: fadeIn 1.5s ease-out forwards;
+    animation-delay: 0.6s;
 
 }
 .main-wallpaper #tech-text{
     text-align: left;
     margin-right:90px;
-    opacity: 0; /* Start hidden */
-    animation: fadeIn 1.5s ease-out forwards; /* Apply fade-in animation */
-    animation-delay: 0.9s; /* Stagger animation */
+    opacity: 0;
+    animation: fadeIn 1.5s ease-out forwards;
+    animation-delay: 0.9s;
 }
 
 .text-admission {
-    position: absolute; /* Position at the bottom */
-    bottom: 220px; /* Aligns to the bottom of the section */
-    width: 100%; /* Stretches the div across the section width */
-    text-align: center; /* Centers the content inside */
-    opacity: 0; /* Start hidden */
-    animation: fadeIn 1.5s ease-out forwards; /* Apply fade-in animation */
-    animation-delay: 1.5s/*2.7s; /* Stagger animation */
+    position: absolute;
+    bottom: 220px;
+    width: 100%;
+    text-align: center;
+    opacity: 0;
+    animation: fadeIn 1.5s ease-out forwards;
+    animation-delay: 1.5s;
 }
 
 
 
 .cta-button {
-    background-color: #00B5E2; /* Cyan background for the button */
+    background-color: #00B5E2;
     color: white;
     padding: 10px 20px;
     text-decoration: none;
@@ -286,83 +277,69 @@ ul {
 }
 
 .cta-button:hover {
-    background-color: #00FFFF; /* Light cyan hover effect */
+    background-color: #00FFFF;
 }
 
 
 #apple{
     width:70px;
     height:auto;
-    opacity: 0; /* Start hidden */
-    animation: fadeIn 1.5s ease-out forwards; /* Apply fade-in animation */
-    animation-delay: 1.2s; /* Stagger animation */
+    opacity: 0;
+    animation: fadeIn 1.5s ease-out forwards;
+    animation-delay: 1.2s;
 }
  #google{
     width:100px;
     height:auto;
     margin-bottom:-18px;
     margin-left: 40px;
-    opacity: 0; /* Start hidden */
-    animation: fadeIn 1.5s ease-out forwards; /* Apply fade-in animation */
-    animation-delay: 1.2s/*1.5s; /* Stagger animation */
+    opacity: 0;
+    animation: fadeIn 1.5s ease-out forwards;
+    animation-delay: 1.2s;
 }
 #microsoft{
     width:150px;
     height:auto;
     margin-left:40px;
-    opacity: 0; /* Start hidden */
-    animation: fadeIn 1.5s ease-out forwards; /* Apply fade-in animation */
-    animation-delay: 1.2s/*1.8s; /* Stagger animation */
+    opacity: 0;
+    animation: fadeIn 1.5s ease-out forwards;
+    animation-delay: 1.2s;
 }
 #spotify{
     width:100px;
     height:auto;
     margin-bottom:7px;
     margin-left:40px;
-    opacity: 0; /* Start hidden */
-    animation: fadeIn 1.5s ease-out forwards; /* Apply fade-in animation */
-    animation-delay: 1.2s /*2.1s; /* Stagger animation */
+    opacity: 0;
+    animation: fadeIn 1.5s ease-out forwards;
+    animation-delay: 1.2s;
 }
 #amazon{
     width:100px;
     height:auto;
     margin-bottom:7px;
     margin-left: 40px;
-    opacity: 0; /* Start hidden */
-    animation: fadeIn 1.5s ease-out forwards; /* Apply fade-in animation */
-    animation-delay: 1.2s/*2.4s; /* Stagger animation */
+    opacity: 0;
+    animation: fadeIn 1.5s ease-out forwards;
+    animation-delay: 1.2s;
 }
-
-
-
-
-
-
-
-
-
-
 
 /*                               INSTRUCTOR SECTION                                         */
 
-
-
-
-
 .instructors {
     background: #FFF1DB;
-    padding:700px; /* Add space inside the section */
-    margin: 0; /* Ensure no outside gaps */
+    padding:700px;
+    margin: 0;
     text-align: center;
     align-items: center;
     position: relative;
 }
 .instructors h2 {
     position: absolute;
-    top: 5px; /* Moves the heading above the section */
-    left: 0; /* Aligns to the left of the section */
-    width: 100%; /* Ensures the heading spans the full width */
-    text-align: center; /* Centers the text horizontally */
+    top: 5px;
+    left: 0;
+    width: 100%;
+    text-align: center;
     font-size: 1.5rem;
     
 }
@@ -383,8 +360,8 @@ ul {
     height:305.75px;
     right:120px;
     text-align:center;
-    justify-content: space-between; /* Space between image and text */
-    box-sizing: border-box;  /* Ensure padding doesn't affect the width of the div */
+    justify-content: space-between;
+    box-sizing: border-box;
     overflow: hidden;
     box-shadow: 0 4px 10px rgba(50, 50, 50, 0.7);
     
@@ -392,12 +369,10 @@ ul {
 .instructor-1:hover,
 .instructor-2:hover, 
 .instructor-3:hover  {
-    box-shadow: 1px 1px 7px #0D92F4; /* Blue shadow on hover */
-    transform: scale(1.05); /* Slight scale effect */
+    box-shadow: 1px 1px 7px #0D92F4;
+    transform: scale(1.05);
     transition: all 0.3s ease;
 }
-
-
 
 #instructor1_image{
     width:300px;
@@ -424,12 +399,12 @@ ul {
     overflow-wrap: break-word;
     text-align: left;
     line-height: 1.5;
-    padding-left: 320px;  /* Keep space from the left of the image */
+    padding-left: 320px;
     margin-right: 20px;
-    overflow: hidden;  /* Hide text if it exceeds the container's boundaries */
+    overflow: hidden;
     text-overflow: ellipsis;  
     max-width: calc(100% - 320px);
-    margin-right: 20px;  /* Ensure it doesn't touch the right edge */
+    margin-right: 20px;
 }
 
 .instructor-2{
@@ -466,12 +441,12 @@ ul {
     overflow-wrap: break-word;
     text-align: left;
     line-height: 1.5;
-    padding-left: 320px;  /* Keep space from the left of the image */
+    padding-left: 320px;
     margin-right: 20px;
-    overflow: hidden;  /* Hide text if it exceeds the container's boundaries */
+    overflow: hidden;
     text-overflow: ellipsis;  
     max-width: calc(100% - 320px);
-    margin-right: 20px;  /* Ensure it doesn't touch the right edge */
+    margin-right: 20px;
 }
 .instructor-3{
     position:absolute;
@@ -506,34 +481,21 @@ ul {
     overflow-wrap: break-word;
     text-align: left;
     line-height: 1.5;
-    padding-left: 320px;  /* Keep space from the left of the image */
+    padding-left: 320px; 
     margin-right: 20px;
-    overflow: hidden;  /* Hide text if it exceeds the container's boundaries */
+    overflow: hidden; 
     text-overflow: ellipsis;  
     max-width: calc(100% - 320px);
-    margin-right: 20px;  /* Ensure it doesn't touch the right edge */
+    margin-right: 20px;
 }
 
 .instructors, .instructor-1, .instructor-2, .instructor-3 {
-    opacity: 0; /* Start hidden */
-    transform: translateY(20px); /* Add a slight downward offset */
-    transition: opacity 1s ease-out, transform 1s ease-out; /* Smooth transition */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
 }
 
-
-
-
-
-
-
-
 /*                          PROJECTS                               */
-
-
-
-
-
-
 
 .projects-main h2{
     font-size:1.5rem;
@@ -612,68 +574,22 @@ ul {
     box-shadow: 0 4px 10px rgba(50, 50, 50, 0.7);
 }
 
-
-
-/*
-.project img {
-    width: 100%;
-    border-radius: 8px;
-    transition: transform 0.3s ease;
-}
-*/
-/*
-.calculator-project img:hover {
-    transform: scale(1.2);
-    box-shadow: 0 4px 10px rgba(50, 50, 50, 0.7);
-}
-.todo-list-project img:hover {
-    transform: scale(1.2);
-    box-shadow: 0 4px 10px rgba(50, 50, 50, 0.7);
-}
-.weather-project img:hover {
-    transform: scale(1.2);
-    box-shadow: 0 4px 10px rgba(50, 50, 50, 0.7);
-    }
-
-
-/*
-.flexible-features {
-    list-style-type: none;
-    padding: 0;
-}
-
-.flexible-features li {
-    margin: 10px 0;
-}
-
-blockquote {
-    font-style: italic;
-    background: #f4f4f4;
-    padding: 10px 15px;
-    border-left: 4px solid #ccc;
-    margin: 20px 0;
-}
-*/
-
-
-
-
 /*                             FLEXIBLE                                */
 
 .flexible-learning{
     background: #FFF1DB;
-    padding:600px; /* Add space inside the section */
-    margin: 0; /* Ensure no outside gaps */
+    padding:600px;
+    margin: 0;
     text-align: center;
     align-items: center;
     position: relative;
 }
 .flexible-title h2{
     position: absolute;
-    top: 5px; /* Moves the heading above the section */
-    left: 0; /* Aligns to the left of the section */
-    width: 100%; /* Ensures the heading spans the full width */
-    text-align: center; /* Centers the text horizontally */
+    top: 5px;
+    left: 0;
+    width: 100%;
+    text-align: center;
     font-size: 1.5rem;
 }
 .flexible-title p{
@@ -697,7 +613,7 @@ blockquote {
 .flexible-options  li{
    font-size:1.2rem;
     
-    margin-bottom: 200px; /* Add space between list items if needed */
+    margin-bottom: 200px;
     margin-top:-100px;
     margin-right:-50px;
    
@@ -705,40 +621,40 @@ blockquote {
 .flexible-options #mobile{
     
   
-    display: flex; /* Enable flexbox for alignment */
-    align-items: center; /* Align text and image vertically */
-    gap: 10px; /* Add space between the image and the text */
-    padding-left: 100px; /* Space for the image and text */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-left: 100px;
 
-    min-height: 70px; /* Ensure the list item is tall enough for the image */
-    background-image: url('images/mobile.png'); /* Replace with your image path */
+    min-height: 70px;
+    background-image: url('images/mobile.png');
     background-repeat: no-repeat;
-    background-size: 70px 70px; /* Adjust size of the image */
-    background-position: left center; /* Center the image vertically */
+    background-size: 70px 70px;
+    background-position: left center;
     
 }
 .flexible-options #download{
-    display: flex; /* Enable flexbox for alignment */
-    align-items: center; /* Align text and image vertically */
-    gap: 10px; /* Add space between the image and the text */
-    padding-left: 100px; /* Space for the image and text */
-    min-height: 85px; /* Ensure the list item is tall enough for the image */
-    background-image: url('images/download.png'); /* Replace with your image path */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-left: 100px;
+    min-height: 85px;
+    background-image: url('images/download.png');
     background-repeat: no-repeat;
-    background-size: 85px 85px; /* Adjust size of the image */
-    background-position: left center; /* Center the image vertically */
+    background-size: 85px 85px;
+    background-position: left center;
 }
 
 .flexible-options #support{
-    display: flex; /* Enable flexbox for alignment */
-    align-items: center; /* Align text and image vertically */
-    gap: 10px; /* Add space between the image and the text */
-    padding-left: 100px; /* Space for the image and text */
-    min-height: 70px; /* Ensure the list item is tall enough for the image */
-    background-image: url('images/support.png'); /* Replace with your image path */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-left: 100px;
+    min-height: 70px;
+    background-image: url('images/support.png');
     background-repeat: no-repeat;
-    background-size: 70px 70px; /* Adjust size of the image */
-    background-position: left center; /* Center the image vertically */
+    background-size: 70px 70px;
+    background-position: left center;
 }
 
 .flexible-options  li:hover{
@@ -766,12 +682,12 @@ blockquote {
 #flexible-image:hover{
     box-shadow: 1px 1px 7px #0D92F4;
 }
-/* Initial state for animations */
+
 .projects-main,.projects, .calculator-project, .todo-list-project, .weather-project,
 .flexible-learning, .flexible-title h2, .flexible-title p, .flexible-options li,#flexible-image,#quote,.form-div,.form-div h3,.form-div h4,.form-div input,.form-div #submit-input {
-    opacity: 0; /* Hidden initially */
-    transform: translateY(20px); /* Start with a slight downward offset */
-    transition: opacity 1s ease-out, transform 1s ease-out; /* Smooth animation */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
 }
 
 .form-div {
@@ -796,7 +712,6 @@ blockquote {
     text-align: left;
 }
 
-
 .form-div input{
     margin-right:100px;
     width: 300px;
@@ -805,7 +720,7 @@ blockquote {
     border: 2px solid black;
 }
 .form-div input:focus {
-    outline: 2px solid blue; /* Adds an outline when the input is focused */
+    outline: 2px solid blue;
 }
 
 .form-div textarea:focus {
@@ -831,27 +746,6 @@ blockquote {
     cursor: pointer;
     background-color: #4CC9FE;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 footer{
 background: linear-gradient(45deg, #4CC9FE, #0D92F4);

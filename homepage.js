@@ -2,22 +2,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const hamburger = document.getElementById("hamburger");
     const navLinks = document.getElementById("nav-links");
 
-    // Toggle the menu visibility on click
     hamburger.addEventListener("click", () => {
         navLinks.classList.toggle("active");
     });
 });
 document.addEventListener('DOMContentLoaded', () => {
-    // Get the current URL
     const currentPage = window.location.href;
-
-    // Get all anchor tags in the navigation
     const navLinks = document.querySelectorAll('.links a');
 
-    // Check if the current URL matches any of the link URLs
     navLinks.forEach(link => {
         if (currentPage.match(link.href)) {
-            // Add an active class to highlight the current page
             link.classList.add('active');
         }
     });
@@ -31,16 +25,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = '1'; // Make visible
-                entry.target.style.transform = 'translateY(0)'; // Reset position
-                observer.unobserve(entry.target); // Stop observing once animated
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+                observer.unobserve(entry.target);
             }
         });
     }, {
-        threshold: 0.1 // Trigger when 10% of the element is visible
+        threshold: 0.1
     });
 
-    // Observe each instructor element
     observer.observe(instructorsSection);
     instructorElements.forEach(element => observer.observe(element));
 });
@@ -52,13 +45,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = '1'; // Make visible
-                entry.target.style.transform = 'translateY(0)'; // Reset position
-                observer.unobserve(entry.target); // Stop observing
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+                observer.unobserve(entry.target);
             }
         });
     }, {
-        threshold: 0.1 // Trigger when 10% of the element is visible
+        threshold: 0.1
     });
 
     elementsToAnimate.forEach(element => observer.observe(element));

@@ -1,24 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Get the current URL
     const currentPage = window.location.href;
-
-    // Get all anchor tags in the navigation
     const navLinks = document.querySelectorAll('.links a');
-
-    // Check if the current URL matches any of the link URLs
     navLinks.forEach(link => {
         if (currentPage.match(link.href)) {
-            // Add an active class to highlight the current page
             link.classList.add('active');
         }
     });
 });
-
-
-
-
-
-
 
 function reveal() {
     var reveals = document.querySelectorAll('.reveal');

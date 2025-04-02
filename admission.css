@@ -71,7 +71,7 @@ ul {
     margin-left: 35px;
 }
 .links li a.active {
-    color: blue; /* White text for the active link */
+    color: blue;
      
 }
 .links li a {

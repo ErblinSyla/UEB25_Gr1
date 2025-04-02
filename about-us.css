@@ -49,9 +49,9 @@ nav {
 }
 
 #logo {
-    width: 60px;  /* Adjust the width as per your preference */
-    height: 56px; /* Adjust the height accordingly */
-    object-fit: contain; /* Ensures the aspect ratio of the logo remains intact */
+    width: 60px;
+    height: 56px;
+    object-fit: contain;
     margin-top:2px;
 }
 .title h2 {
@@ -73,7 +73,7 @@ nav ul {
     margin-left: 35px;
 }
 .links li a.active {
-    color: blue; /* White text for the active link */
+    color: blue;
      
 }
 .links li a {

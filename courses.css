@@ -78,9 +78,9 @@ nav {
     padding: 10px 20px;
 }
 #logo {
-    width: 60px;  /* Adjust the width as per your preference */
-    height: 56px; /* Adjust the height accordingly */
-    object-fit: contain; /* Ensures the aspect ratio of the logo remains intact */
+    width: 60px;
+    height: 56px;
+    object-fit: contain;
     margin-top:2px;
 }
 .title h2 {
@@ -102,7 +102,7 @@ ul {
     margin-left: 35px;
 }
 .links li a.active {
-    color: blue; /* White text for the active link */
+    color: blue;
      
 }
 .links li a {
@@ -154,8 +154,6 @@ ul {
 }
 
 section {
-    /* margin-top: 40px;
-    margin-bottom: 20px;     */
     padding: 40px 0;
 }
 
@@ -173,7 +171,6 @@ h2 {
     justify-content: center;
 }
 
-/* per cardat */
 .col {
     width: 30%;
     max-width: 300px;
@@ -191,28 +188,24 @@ h2 {
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* card image */
 .card img {
     width: 100%;
     height: auto;
     border-radius: 8px;
 }
 
-/* card title */
 .card h3 {
     margin-top: 15px;
     font-size: 1.3em;
     color: #333;
 }
 
-/* teksti cards */
 .card p {
     margin-top: 10px;
     font-size: 1em;
     color: #666;
 }
 
-/* responsiv */
 @media (max-width: 768px) {
     .col {
         width: 45%;
@@ -255,7 +248,6 @@ footer {
 
 }
 
-/* Butonat  */
 .apply-container {
     text-align: center;
     margin-top: 40px;
@@ -276,7 +268,6 @@ footer {
     background-color: #0950b7;
 }
 
-/* pop up */
 .apply-modal {
     display: none; 
     position: fixed;
@@ -327,7 +318,7 @@ footer {
 .apply-modal-content button:hover {
     background-color: #0950b7;
 }
-/* Styling the drag-and-drop area */
+
 .drag-drop-area {
     border: 2px dashed #0D92F4;
     padding: 20px;
@@ -346,13 +337,12 @@ footer {
     background-color: #e0f7ff;
   }
   
-  /* Styling the file input (hidden but accessible) */
   #file-upload {
-    display: none; /* Hide the input element */
+    display: none;
   }
   
   #file-upload:focus {
-    outline: none; /* Remove outline when focused */
+    outline: none;
   }
   
 

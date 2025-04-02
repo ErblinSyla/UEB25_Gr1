@@ -73,7 +73,7 @@ nav ul {
     margin-left: 35px;
 }
 .links li a.active {
-    color: blue; /* White text for the active link */
+    color: blue;
      
 }
 .links li a {
@@ -335,29 +335,29 @@ nav ul {
 .contactForm .inputBox input[type="submit"]:hover {
     background: #008c9e;
 }
-/* Error Message Styling */
+
 .error-message {
-    color: red; /* Red text for error messages */
-    font-size: 10px; /* Smaller font size for error message */
-    display: none; /* Hide error by default */
-    margin-top: 5px; /* Space between input field and error message */
+    color: red;
+    font-size: 10px;
+    display: none;
+    margin-top: 5px;
 }
 
-/* Adjust input field layout */
+
 .inputBox {
-    position: relative; /* Ensure error messages don't overlap the input */
-    margin-bottom: 30px; /* Space between input boxes */
+    position: relative;
+    margin-bottom: 30px;
 }
 
 .inputBox input, .inputBox textarea {
     width: 100%;
     padding: 10px;
-    margin-top: 5px; /* Space above the input fields */
+    margin-top: 5px;
     box-sizing: border-box;
 }
 
 .inputBox textarea {
-    height: 150px; /* Adjust text area size */
+    height: 150px;
     resize: none;
 }
 
