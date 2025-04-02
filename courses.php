@@ -32,11 +32,11 @@
           </div>
           <div class="col-8">
               <ul class="links" id="nav-links">
-                  <li><a href="homepage.html">Homepage</a></li>
-                  <li><a href="about-us.html">About Us</a></li>
-                  <li><a id="courses" href="courses.html">Our Courses</a></li>
-                  <li><a href="admission.html">Admissions</a></li>
-                  <li><a href="contact.html">Contact</a></li>
+                  <li><a href="homepage.php">Homepage</a></li>
+                  <li><a href="about-us.php">About Us</a></li>
+                  <li><a id="courses" href="courses.php">Our Courses</a></li>
+                  <li><a href="admission.php">Admissions</a></li>
+                  <li><a href="contact.php">Contact</a></li>
               </ul>
               <div class="hamburger" id="hamburger">
                   <p>&#9776;</p>
@@ -562,7 +562,7 @@ document.addEventListener("DOMContentLoaded", function () {
     <footer>
       <div class="row">
           <div class="col-12">
-              <p>&copy; <span id="year-month"></span> <em>AlgoVerse Academy. All rights reserved.</em></p>
+          <p>&copy; <span><?php echo date("Y-m-d"); ?></span> <em>AlgoVerse Academy. All rights reserved.</em></p>
           </div>
       </div>
   </footer>
