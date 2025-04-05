@@ -498,6 +498,25 @@ document.getElementById('newsletterForm').addEventListener('submit', async (e) =
         document.getElementById('year-month').textContent = `${currentMonth} ${currentYear}`;
     </script>
 
+<?php 
+
+class FormData{
+    public $name;
+    public $email;
+
+    function __construct($name, $email){
+        $this ->name = $name;
+        $this ->email = $email;
+    }
+
+    function display() {
+        return "Name: " . $this->name . "<br>Email: " . $this->email;
+    }
+    
+}
+
+?>
+
 </body>
 
 </html>

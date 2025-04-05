@@ -220,7 +220,7 @@
       <div class="apply-modal-content">
         <span class="close-btn" id="closeModal">&times;</span>
         <h3>Apply for a Course</h3>
-        <form id="applyForm" autocomplete="on">
+        <form id="applyForm" autocomplete="on" method="POST">
           <label for="name">Name:</label>
           <input type="text" id="name" name="name" required autocomplete="name" />
           <span id="name-error" class="error-message"></span>
@@ -256,7 +256,37 @@
           </div>
           <span id="file-error" class="error-message"></span>
 
+          <?php 
+    
+    require_once 'homepage.php';
 
+    class ApplyCourses extends FormData{
+      public $password;
+      public $course;
+      public $file;
+
+      function __construct($name, $email, $password, $course, $file){
+        $this->name = $name;
+        $this->email = $email;
+        $this->password = $password;
+        $this->course = $course;
+        $this->file = $file;  
+      }
+
+      function NameInEmail(){
+        $NAME  = strtolower($this->name);
+        $EMAIL = strtolower($this->emial);
+
+        if(strpos($EMAIL, $NAME) !== FALSE){
+          echo "Name found in email!";
+        }else{
+          echo "Name not found in Email!";
+        }
+      }
+
+    }
+    
+    ?>
 
           <button type="submit">Submit Application</button>
           <output id="submission-count">No applications submitted yet.</output>
