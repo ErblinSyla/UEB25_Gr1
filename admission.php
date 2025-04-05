@@ -163,6 +163,46 @@
                 </div>
             </div>
         </section>
+        <?php
+        define("MONEDHA", "$");
+
+        $plans = [
+            [
+                "name" => "Basic Plan",
+                "price" => 100,
+                "features" => "Access to basic courses, Community support",
+                "frequency" => "One-time"
+            ],
+            [
+                "name" => "Standard Plan",
+                "price" => 200,
+                "features" => "Access to all courses, Priority support",
+                "frequency" => "Monthly"
+            ],
+            [
+                "name" => "Premium Plan",
+                "price" => 400,
+                "features" => "Access to all courses, Mentorship, Certification",
+                "frequency" => "Yearly"
+            ],
+            [
+                "name" => "Lifetime Plan",
+                "price" => 800,
+                "features" => "Access to all courses forever, One-on-one coaching",
+                "frequency" => "One-time"
+            ]
+        ];
+
+        arsort($plans);
+
+        function formatedPrice($price)
+        {
+            return MONEDHA . number_format($price, 2);
+        }
+
+        $userAgent = $_SERVER['HTTP_USER_AGENT'];
+        ?>
+
         <section class="pricing-plans">
             <div class="row">
                 <div class="col-12 reveal">
@@ -181,36 +221,27 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Basic Plan</td>
-                                <td>$100</td>
-                                <td>Access to basic courses, Community support</td>
-                                <td>One-time</td>
-                            </tr>
-                            <tr>
-                                <td>Standard Plan</td>
-                                <td>$200</td>
-                                <td>Access to all courses, Priority support</td>
-                                <td>Monthly</td>
-                            </tr>
-                            <tr>
-                                <td>Premium Plan</td>
-                                <td>$400</td>
-                                <td>Access to all courses, Mentorship, Certification</td>
-                                <td>Yearly</td>
-                            </tr>
-                            <tr>
-                                <td>Lifetime Plan</td>
-                                <td>$800</td>
-                                <td>Access to all courses forever, One-on-one coaching</td>
-                                <td>One-time</td>
-                            </tr>
+                            <?php foreach ($plans as $plan): ?>
+                                <tr>
+                                    <td><?= strtoupper($plan["name"]) ?></td>
+                                    <td><?= formatedPrice($plan["price"]) ?></td>
+                                    <td><?= ucfirst($plan["features"]) ?></td>
+                                    <td>
+                                        <?php
+                                        if ($plan["frequency"] === "One-time") {
+                                            echo "<span style='color:green;'>One-time</span>";
+                                        } else {
+                                            echo "<span style='color:blue;'>{$plan["frequency"]}</span>";
+                                        }
+                                        ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>
             </div>
             <audio id="td-hover-audio" src="audio/div-hover.mp3"></audio>
-
         </section>
         <section class="payment">
             <div class="row">
