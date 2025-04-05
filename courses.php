@@ -275,7 +275,7 @@
 
       function NameInEmail(){
         $NAME  = strtolower($this->name);
-        $EMAIL = strtolower($this->emial);
+        $EMAIL = strtolower($this->email);
 
         if(strpos($EMAIL, $NAME) !== FALSE){
           echo "Name found in email!";
