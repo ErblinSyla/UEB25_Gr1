@@ -1,3 +1,49 @@
+<?php
+// Enhanced validation functions
+function validateEmail($email) {
+    return preg_match("/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/", $email);
+}
+
+function cleanName($input) {
+    $clean = preg_replace("/[^a-zA-Z\s]/", "", $input); // Remove non-letters and spaces
+    return preg_replace("/\s+/", " ", trim($clean));    // Remove extra spaces
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $name = cleanName($_POST['name-input'] ?? '');
+    $email = $_POST['email-input'] ?? '';
+    
+    $errors = [];
+    
+    // Name validation
+    if (empty($name)) {
+        $errors[] = "Name is required";
+    } elseif (preg_match("/[0-9]/", $name)) {
+        $errors[] = "Name cannot contain numbers";
+    }
+    
+    // Email validation
+    if (!validateEmail($email)) {
+        $errors[] = "Invalid email format";
+    }
+    
+    if (empty($errors)) {
+        $message = "Thank you for signing up, " . $name . "!";
+    } else {
+        $message = implode("\n", $errors);
+    }
+    
+    if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+        echo $message;
+        exit();
+    }
+}
+?>
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -292,12 +338,12 @@
                 </blockquote>
             </div>
             <div class="form-div reveal">
-                <form id="newsletterForm" autocomplete="on">
-                    <h3>Sign Up to our Newsletter!</h3>
-                    <h4 id="name">Enter your Name:</h4>
-                    <input type="text" id="name-input" placeholder="Enter your name: " required autocomplete="name">
-                    <h4 id="name">Enter your E-mail:</h4>
-                    <input type="email" id="email-input" placeholder="example@mail.com" required autocomplete="email">
+    <form id="newsletterForm" autocomplete="on" method="POST">
+        <h3>Sign Up to our Newsletter!</h3>
+        <h4>Enter your Name:</h4>
+        <input type="text" name="name-input" placeholder="Enter your name" required>
+        <h4>Enter your E-mail:</h4>
+        <input type="email" name="email-input" placeholder="example@mail.com" required>
                     <input type="submit" id="submit-input">
                 </form>
             </div>
@@ -305,7 +351,7 @@
         </section>
     </main>
     <script>
-        document.getElementById('newsletterForm').addEventListener('submit', function(event) {
+       /* document.getElementById('newsletterForm').addEventListener('submit', function(event) {
             const nameInput = document.getElementById('name-input');
             const nameError = document.getElementById('name-error');
 
@@ -335,6 +381,33 @@
                 alert("Please fill in all the fields.");
             }
         });
+*/
+document.getElementById('newsletterForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    // Clean name input before submission
+    const nameInput = document.querySelector('[name="name-input"]');
+    nameInput.value = nameInput.value.replace(/[^a-zA-Z\s]/g, '')
+                                     .replace(/\s+/g, ' ')
+                                     .trim();
+
+    const response = await fetch('', {
+        method: 'POST',
+        body: new FormData(e.target),
+        headers: {'X-Requested-With': 'XMLHttpRequest'}
+    });
+    
+    const result = await response.text();
+    alert(result);
+    
+    // Clear form if successful
+    if (!result.includes("Invalid")) {
+        e.target.reset();
+    }
+});
+
+
+
 
         function addHoverAudioEffect(instructorSelector, audioId) {
             const instructor = document.querySelector(instructorSelector);
