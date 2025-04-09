@@ -1,3 +1,35 @@
+<?php 
+
+require_once 'BaseFormData.php';
+
+class ContactFormData extends ParentClass {
+    public $gender;
+    public $age;
+    public $interests = [];
+    public $message;
+
+    public function __construct($name, $email, $gender, $age, $interests = [], $message = '') {
+        parent::__construct($name, $email);
+        $this->gender = $gender;
+        $this->age = $age;
+        $this->interests = $interests;
+        $this->message = $message;
+    }
+}
+if($_SERVER('REQUEST_METHOD') == 'POST'){
+    $name = $_POST['name'] ?? '';
+    $email =$_POST['email'] ?? '';
+    $gender = $_POST['gender'] ?? '';
+    $age = $_POST['age'] ?? 0 ;
+    $interests = $_POST['interests'] ?? [];
+    $message = $_POST['message'] ?? '';
+
+    $formData = new ContactFormData($name, $email, $gender, $age, $interests, $message);
+
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
 

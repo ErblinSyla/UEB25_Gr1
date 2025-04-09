@@ -1,18 +1,11 @@
 <?php 
 
-class FormData{
-    public $name;
-    public $email;
+require_once 'BaseFormData.php';
 
-    function __construct($name, $email){
-        $this ->name = $name;
-        $this ->email = $email;
-    }
-
-    function JSONify() {
-        return "\n\t{ \n\t\"Name\": "."\"".$this->name."\""." ,\n\t\"Email\": "."\"". $this->email."\"\n\t}";
-    }
+class FormData extends ParentClass {
+    // Inherits everything, no extra logic needed for now
 }
+
 $jsonArray = [];
 file_put_contents('data/data.json', "[");
 ?>

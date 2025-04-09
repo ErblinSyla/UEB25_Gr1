@@ -258,33 +258,34 @@
 
           <?php 
     
-    require_once 'homepage.php';
+    // Include the ParentClass file
+    require_once 'BaseFormData.php';
 
-    class ApplyCourses extends FormData{
-      public $password;
-      public $course;
-      public $file;
-
-      function __construct($name, $email, $password, $course, $file){
-        $this->name = $name;
-        $this->email = $email;
-        $this->password = $password;
-        $this->course = $course;
-        $this->file = $file;  
-      }
-
-      function NameInEmail(){
-        $NAME  = strtolower($this->name);
-        $EMAIL = strtolower($this->email);
-
-        if(strpos($EMAIL, $NAME) !== FALSE){
-          echo "Name found in email!";
-        }else{
-          echo "Name not found in Email!";
+    class ApplyCourses extends ParentClass {
+        public $password;
+        public $course;
+        public $file;
+    
+        public function __construct($name, $email, $password, $course, $file) {
+            parent::__construct($name, $email);
+            $this->password = $password;
+            $this->course = $course;
+            $this->file = $file;
         }
-      }
-
+    
+        public function NameInEmail() {
+            $NAME  = strtolower($this->name);
+            $EMAIL = strtolower($this->email);
+    
+            if (strpos($EMAIL, $NAME) !== false) {
+                echo "Name found in email!";
+            } else {
+                echo "Name not found in Email!";
+            }
+        }
     }
+    
+
     
     ?>
 
