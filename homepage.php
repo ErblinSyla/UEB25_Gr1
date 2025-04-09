@@ -6,8 +6,7 @@ class FormData extends ParentClass {
     // Inherits everything, no extra logic needed for now
 }
 
-$jsonArray = [];
-file_put_contents('data/data.json', "[");
+$jsonPath = 'data/homepage_form.json';
 ?>
 <?php
 // Enhanced validation functions
@@ -41,23 +40,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($errors)) {
         $obj = new FormData($name, $email);
         $message = "Thank you for signing up, " . $obj->name . "!";
-        array_push($jsonArray, $obj -> JSONify());
-        
-        if (sizeof($jsonArray) > 0){
-            // $jsonArray = array_unique($jsonArray);
-            // $jsonArray = array_values($jsonArray); // Re-index the array
-            // $jsonArray = array_map('trim', $jsonArray); // Trim whitespace from each element
-            // $jsonArray = array_filter($jsonArray); // Remove empty elements
-            
-              
-            foreach($jsonArray as $item){
-                file_put_contents('data/data.json', "\t".$item , FILE_APPEND | LOCK_EX);
-                if ($item !== end($jsonArray)) {
-                    file_put_contents('data/data.json', " , \n" , FILE_APPEND | LOCK_EX);
-                }
-            }
-            file_put_contents('data/data.json', "\n]" , FILE_APPEND | LOCK_EX);
-        }
+
+        file_put_contents($jsonPath , "["."\t".$obj->JSONify()."\n]");
+
     } else {
         $message = implode("\n", $errors);
     }
