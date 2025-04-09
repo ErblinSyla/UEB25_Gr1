@@ -16,7 +16,7 @@ class ContactFormData extends ParentClass {
         $this->message = $message;
     }
 }
-if($_SERVER('REQUEST_METHOD') == 'POST'){
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $name = $_POST['name'] ?? '';
     $email =$_POST['email'] ?? '';
     $gender = $_POST['gender'] ?? '';
