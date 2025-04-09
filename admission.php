@@ -1,3 +1,53 @@
+<?php
+$name = $email = $comment = "";
+$errors = [];
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = trim($_POST["name"]);
+    $email = trim($_POST["email"]);
+    $comment = trim($_POST["comment"]);
+
+    if (!preg_match("/^[a-zA-ZëËçÇáàéèËÏîÎÜüÙùËÄäÖö\s]{2,50}$/", $name)) {
+        $errors[] = "Emri nuk është i vlefshëm (vetëm shkronja, 2-50 karaktere).";
+    }
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "Email-i nuk është i vlefshëm.";
+    }
+
+    if (!preg_match("/^.{5,500}$/s", $comment)) {
+        $errors[] = "Komenti duhet të ketë të paktën 5 karaktere.";
+    }
+
+    if (empty($errors)) {
+        $review = new ReviewFormData($name, $email, $comment);
+        $successMessage = $review->display();
+    } else {
+        echo "<script>alert('Gabim në plotësim! Kontrolloni të dhënat.');</script>";
+    }
+}
+
+class ReviewFormData
+{
+    public $name;
+    public $email;
+    public $comment;
+
+    function __construct($name, $email, $comment)
+    {
+        $this->name = $name;
+        $this->email = $email;
+        $this->comment = $comment;
+    }
+
+    function display()
+    {
+        return "Name: " . htmlspecialchars($this->name) . "<br>Email: " . htmlspecialchars($this->email) . "<br>Comment: " . nl2br(htmlspecialchars($this->comment));
+    }
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -373,10 +423,14 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="form-div reveal">
-                                <form>
+                                <form method="POST" action="">
                                     <h3>Leave a Review</h3>
+                                    <h4>Name:</h4>
+                                    <input type="text" name="name" value="<?= htmlspecialchars($name) ?>">
+                                    <h4>Email</h4>
+                                    <input type="email" name="email" value="<?= htmlspecialchars($email) ?>">
                                     <h4>Comment:</h4>
-                                    <textarea id="comment-input"></textarea>
+                                    <textarea id="comment-input" name="comment"><?= htmlspecialchars($comment) ?></textarea>
                                     <h4 class="rating-h4">Rating:</h4>
                                     <div class="clickable-rating">
                                         <span data-value="1">★</span>
@@ -385,7 +439,20 @@
                                         <span data-value="4">★</span>
                                         <span data-value="5">★</span>
                                     </div>
-                                    <button type="button" onclick="formFilled()">Submit</button>
+                                    <button type="submit">Submit</button>
+                                    <?php if (!empty($errors)) : ?>
+                                        <div style="color: red; margin-top: 10px;">
+                                            <?php foreach ($errors as $error) : ?>
+                                                <div><?= $error ?></div>
+                                            <?php endforeach; ?>
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <?php if (!empty($successMessage)) : ?>
+                                        <div style="color: green; margin-top: 10px;">
+                                            <?= $successMessage ?>
+                                        </div>
+                                    <?php endif; ?>
                                 </form>
                             </div>
                         </div>

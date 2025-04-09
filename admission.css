@@ -534,6 +534,17 @@ td {
     margin-bottom: 6px;
 }
 
+.form-div input{
+    width: 100%;
+    border-radius: 7px;
+    border: 2px solid black;
+    min-height: 27px;
+}
+
+.form-div input:focus {
+    border: 2px solid red;
+}
+
 .form-div textarea{
     width: 100%;
     min-height: 120px;
