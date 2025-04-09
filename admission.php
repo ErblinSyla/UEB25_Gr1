@@ -1,11 +1,12 @@
 <?php
-$name = $email = $comment = "";
+$name = $email = $comment = $phone = "";
 $errors = [];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = trim($_POST["name"]);
     $email = trim($_POST["email"]);
     $comment = trim($_POST["comment"]);
+    $phone = trim($_POST["phone"]);
 
     if (!preg_match("/^[a-zA-ZëËçÇáàéèËÏîÎÜüÙùËÄäÖö\s]{2,50}$/", $name)) {
         $errors[] = "Emri nuk është i vlefshëm (vetëm shkronja, 2-50 karaktere).";
@@ -19,8 +20,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = "Komenti duhet të ketë të paktën 5 karaktere.";
     }
 
+    if (!preg_match("/^\+?[0-9]{8,15}$/", $phone)) {
+        $errors[] = "Numri i telefonit nuk është i vlefshëm.";
+    }
+
     if (empty($errors)) {
-        $review = new ReviewFormData($name, $email, $comment);
+        $review = new ReviewFormData($name, $email, $phone, $comment);
         $successMessage = $review->display();
     } else {
         echo "<script>alert('Gabim në plotësim! Kontrolloni të dhënat.');</script>";
@@ -31,20 +36,26 @@ class ReviewFormData
 {
     public $name;
     public $email;
+    public $phone;
     public $comment;
 
-    function __construct($name, $email, $comment)
+    function __construct($name, $email, $phone, $comment)
     {
         $this->name = $name;
         $this->email = $email;
+        $this->phone = $phone;
         $this->comment = $comment;
     }
 
     function display()
     {
-        return "Name: " . htmlspecialchars($this->name) . "<br>Email: " . htmlspecialchars($this->email) . "<br>Comment: " . nl2br(htmlspecialchars($this->comment));
+        return "Name: " . htmlspecialchars($this->name) .
+            "<br>Email: " . htmlspecialchars($this->email) .
+            "<br>Phone: " . htmlspecialchars($this->phone) .
+            "<br>Comment: " . nl2br(htmlspecialchars($this->comment));
     }
 }
+
 ?>
 
 
@@ -429,6 +440,8 @@ class ReviewFormData
                                     <input type="text" name="name" value="<?= htmlspecialchars($name) ?>">
                                     <h4>Email</h4>
                                     <input type="email" name="email" value="<?= htmlspecialchars($email) ?>">
+                                    <h4>Phone Number:</h4>
+                                    <input type="text" name="phone" value="<?= htmlspecialchars($phone ?? '') ?>">
                                     <h4>Comment:</h4>
                                     <textarea id="comment-input" name="comment"><?= htmlspecialchars($comment) ?></textarea>
                                     <h4 class="rating-h4">Rating:</h4>
