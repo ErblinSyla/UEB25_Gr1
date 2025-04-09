@@ -1,3 +1,21 @@
+<?php 
+
+class FormData{
+    public $name;
+    public $email;
+
+    function __construct($name, $email){
+        $this ->name = $name;
+        $this ->email = $email;
+    }
+
+    function JSONify() {
+        return "\n\t{ \n\t\"Name\": "."\"".$this->name."\""." ,\n\t\"Email\": "."\"". $this->email."\"\n\t}";
+    }
+}
+$jsonArray = [];
+file_put_contents('data/data.json', "[");
+?>
 <?php
 // Enhanced validation functions
 function validateEmail($email) {
@@ -28,7 +46,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     
     if (empty($errors)) {
-        $message = "Thank you for signing up, " . $name . "!";
+        $obj = new FormData($name, $email);
+        $message = "Thank you for signing up, " . $obj->name . "!";
+        array_push($jsonArray, $obj -> JSONify());
+        
+        if (sizeof($jsonArray) > 0){
+            // $jsonArray = array_unique($jsonArray);
+            // $jsonArray = array_values($jsonArray); // Re-index the array
+            // $jsonArray = array_map('trim', $jsonArray); // Trim whitespace from each element
+            // $jsonArray = array_filter($jsonArray); // Remove empty elements
+            
+              
+            foreach($jsonArray as $item){
+                file_put_contents('data/data.json', "\t".$item , FILE_APPEND | LOCK_EX);
+                if ($item !== end($jsonArray)) {
+                    file_put_contents('data/data.json', " , \n" , FILE_APPEND | LOCK_EX);
+                }
+            }
+            file_put_contents('data/data.json', "\n]" , FILE_APPEND | LOCK_EX);
+        }
     } else {
         $message = implode("\n", $errors);
     }
@@ -38,11 +74,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
 }
+
 ?>
-
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -497,26 +530,6 @@ document.getElementById('newsletterForm').addEventListener('submit', async (e) =
         const currentYear = currentDate.getFullYear();
         document.getElementById('year-month').textContent = `${currentMonth} ${currentYear}`;
     </script>
-
-<?php 
-
-class FormData{
-    public $name;
-    public $email;
-
-    function __construct($name, $email){
-        $this ->name = $name;
-        $this ->email = $email;
-    }
-
-    function display() {
-        return "Name: " . $this->name . "<br>Email: " . $this->email;
-    }
-    
-}
-
-?>
-
 </body>
 
 </html>
