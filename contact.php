@@ -1,5 +1,4 @@
 <?php 
-
 $jsonPath = 'data/contact_form.json';
 require_once 'BaseFormData.php';
 
@@ -20,7 +19,7 @@ class ContactFormData extends ParentClass {
     public function createJSONArr(){
         $formattedArray = "";
         foreach($this->interests as $interest){
-            $formattedArray .= "\"$interest\"";
+            formattedArray .= "\"$interest\"";
             if($interest !== end($this->interests)){
                 $formattedArray .= ",";
             }
@@ -34,7 +33,6 @@ class ContactFormData extends ParentClass {
         "\t\t\"Age\": \"" . $this->age . "\",\n".
         "\t\t\"Gender\": \"" . $this->gender . "\",\n".
         "\t\t\"Email\": \"" . $this->email . "\",\n". 
-        // "\t\"Interests\": \"" ."[".implode(" " , $this->interests)."]". "\",\n".
         "\t\t\"Interests\": " ."[".$this->createJSONArr()."]". ",\n".
         "\t\t\"Message\": \"" . $this->message . "\"".
         "\n\t}";
@@ -274,7 +272,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                     <div class="inputBox">
                         <textarea required="required" placeholder="Write a Message..." id = "message" name="message"></textarea>
                         <span id="
-                        -error" class="error-message"></span>
+                        message-error" class="error-message"></span>
                     </div>
                     <div class="inputBox">
                         <input type="submit" value="Send">

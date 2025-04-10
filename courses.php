@@ -1,3 +1,80 @@
+<?php
+  $jsonPath = 'data/courses_form.json';
+    
+    require_once 'BaseFormData.php';
+
+    class ApplyCourses extends ParentClass {
+      private $password;
+      public $course;
+      public $file;
+
+      public function __construct($name, $email, $course, $file) {
+          parent::__construct($name, $email);
+          $this->course = $course;
+          $this->file = $file;
+      }
+
+      // public function NameInEmail() {
+      //     $NAME  = strtolower($this->name);
+      //     $EMAIL = strtolower($this->email);
+  
+      //     if (strpos($EMAIL, $NAME) !== false) {
+      //         echo "Name found in email!";
+      //     } else {
+      //         echo "Name not found in Email!";
+      //     }
+      // }
+
+      public function getPassword() {
+        return $this-> password;
+      }
+
+      public function setPassword($password) {
+        $this->password = $password;
+      }
+
+      public function JSONify(){
+        return "\n\t{\n".
+        "\t\t\"Name\": \"" . $this->name . "\",\n".
+        "\t\t\"Email\": \"" . $this->email . "\",\n". 
+        "\t\t\"Password\": \"" . $this->password . "\",\n".
+        "\t\t\"Course\": \"" . $this->course . "\",\n".
+        "\t\t\"File\": \"" . $this->file . "\"".
+        "\n\t}";
+      }
+  }    
+// Check if the form is submitted
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+  $name = $_POST['name'];
+  $email = $_POST['email'];
+  $password = $_POST['password'];
+  $course = $_POST['course'];
+  if (isset($_POST['file-upload'])) {
+    $file = $_FILES['file-upload'];
+  } else {
+    $file = null; // Handle the case where no file is uploaded
+  }
+  // Validate the file upload
+  
+  $uploadDir = 'uploads/';
+  $fileExt = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+  $safeName = uniqid('', true) . '.' . $fileExt;
+  $destination = $uploadDir . $safeName;
+  move_uploaded_file($file['name'], $destination);
+  $file = $safeName;
+
+  // Ensure this directory exists and is writable
+  // Create an instance of the ApplyCourses class
+  $applyCourses = new ApplyCourses($name, $email, $course, $file);
+  $applyCourses->setPassword($password);
+  
+  file_put_contents($jsonPath , "["."\t".$applyCourses->JSONify()."\n]");
+  // You can now use the methods of the ApplyCourses class as needed
+}    
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -220,7 +297,7 @@
       <div class="apply-modal-content">
         <span class="close-btn" id="closeModal">&times;</span>
         <h3>Apply for a Course</h3>
-        <form id="applyForm" autocomplete="on" method="POST">
+        <form id="applyForm" autocomplete="on" action="courses.php" method="POST" enctype="multipart/form-data">
           <label for="name">Name:</label>
           <input type="text" id="name" name="name" required autocomplete="name" />
           <span id="name-error" class="error-message"></span>
@@ -252,50 +329,17 @@
           <label for="file-upload">Upload your file (e.g., resume or profile picture):</label>
           <div id="drag-drop-area" class="drag-drop-area">
             <p>Drag and drop your file here or click to select a file.</p>
-            <input type="file" id="file-upload" name="file-upload" accept="image/*, .pdf, .doc, .docx" hidden />
+            <input type="file" id="file-upload" name="file-upload" accept="image/*, .pdf, .bmp , .svg , .jpg , .jpeg , .doc , .docx" hidden />
           </div>
           <span id="file-error" class="error-message"></span>
-
-          <?php 
-    
-    // Include the ParentClass file
-    require_once 'BaseFormData.php';
-
-    class ApplyCourses extends ParentClass {
-        public $password;
-        public $course;
-        public $file;
-    
-        public function __construct($name, $email, $password, $course, $file) {
-            parent::__construct($name, $email);
-            $this->password = $password;
-            $this->course = $course;
-            $this->file = $file;
-        }
-    
-        public function NameInEmail() {
-            $NAME  = strtolower($this->name);
-            $EMAIL = strtolower($this->email);
-    
-            if (strpos($EMAIL, $NAME) !== false) {
-                echo "Name found in email!";
-            } else {
-                echo "Name not found in Email!";
-            }
-        }
-    }
-    
-
-    
-    ?>
-
-          <button type="submit">Submit Application</button>
+          <button type="submit" >Submit Application</button>
           <output id="submission-count">No applications submitted yet.</output>
         </form>
       </div>
     </div>
     <audio id="success-audio" src="audio/review-published.mp3"></audio>
     <audio id="failure-audio" src="audio/review-cancel.mp3"></audio>
+
     <script>
       const dragDropArea = document.getElementById("drag-drop-area");
       const fileInput = document.getElementById("file-upload");
@@ -425,6 +469,8 @@
             submissionOutput.textContent = `${totalSubmissions} application(s) submitted.`;
 
             alert("Application submitted successfully!");
+            this.submit(); // Submit the form to the server
+
             modal.style.display = "none";
           } else {
             failureAudio.currentTime = 0;
