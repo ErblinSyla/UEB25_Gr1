@@ -1,5 +1,6 @@
 <?php 
 
+$jsonPath = 'data/contact_form.json';
 require_once 'BaseFormData.php';
 
 class ContactFormData extends ParentClass {
@@ -15,17 +16,43 @@ class ContactFormData extends ParentClass {
         $this->interests = $interests;
         $this->message = $message;
     }
+
+    public function createJSONArr(){
+        $formattedArray = "";
+        foreach($this->interests as $interest){
+            $formattedArray .= "\"$interest\"";
+            if($interest !== end($this->interests)){
+                $formattedArray .= ",";
+            }
+        }
+        return $formattedArray;
+    }
+
+    public function JSONify(){
+        return "\n\t{\n".
+        "\t\t\"Name\": \"" . $this->name . "\",\n".
+        "\t\t\"Age\": \"" . $this->age . "\",\n".
+        "\t\t\"Gender\": \"" . $this->gender . "\",\n".
+        "\t\t\"Email\": \"" . $this->email . "\",\n". 
+        // "\t\"Interests\": \"" ."[".implode(" " , $this->interests)."]". "\",\n".
+        "\t\t\"Interests\": " ."[".$this->createJSONArr()."]". ",\n".
+        "\t\t\"Message\": \"" . $this->message . "\"".
+        "\n\t}";
+    }
+
 }
+
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $name = $_POST['name'] ?? '';
-    $email =$_POST['email'] ?? '';
+    $email = $_POST['email'] ?? '';
     $gender = $_POST['gender'] ?? '';
     $age = $_POST['age'] ?? 0 ;
     $interests = $_POST['interests'] ?? [];
     $message = $_POST['message'] ?? '';
 
     $formData = new ContactFormData($name, $email, $gender, $age, $interests, $message);
-
+    
+    file_put_contents($jsonPath , "["."\t".$formData->JSONify()."\n]");
 }
 
 ?>
@@ -200,7 +227,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 </div>
             </div>
             <div class="contactForm">
-                <form autocomplete="on" id="contact-form">
+                <form autocomplete="on" id="contact-form" action="contact.php" method="POST">
                     <h2>Send Message</h2>
                     <div class="inputBox">
                         <input type="text" name="name" placeholder="Full Name" required="required" autocomplete="name">
@@ -229,15 +256,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                         <label for="interests">Your Interests:</label>
                         <div class="checkbox-group">
                             <label>
-                                <input type="checkbox" id="tech" name="interests" value="tech">
+                                <input type="checkbox" id="Front End" name="interests[]" value="Front End">
                                 Front End
                             </label>
                             <label>
-                                <input type="checkbox" id="sports" name="interests" value="sports">
+                                <input type="checkbox" id="Back End" name="interests[]" value="Back End">
                                 Back End
                             </label>
                             <label>
-                                <input type="checkbox" id="music" name="interests" value="music">
+                                <input type="checkbox" id="Full Stack" name="interests[]" value="Full Stack">
                                 Full Stack
                             </label>
                         </div>
@@ -245,8 +272,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                     </div>
 
                     <div class="inputBox">
-                        <textarea required="required" placeholder="Write a Message..."></textarea>
-                        <span id="message-error" class="error-message"></span>
+                        <textarea required="required" placeholder="Write a Message..." id = "message" name="message"></textarea>
+                        <span id="
+                        -error" class="error-message"></span>
                     </div>
                     <div class="inputBox">
                         <input type="submit" value="Send">
@@ -261,7 +289,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 const emailInput = document.querySelector('input[name="email"]');
                 const ageInput = document.getElementById('age');
                 const genderInputs = document.querySelectorAll('input[name="gender"]');
-                const interestsInputs = document.querySelectorAll('input[name="interests"]');
+                const interestsInputs = document.querySelectorAll('input[name="interests[]"]');
                 const nameError = document.getElementById('name-error');
                 const emailError = document.getElementById('email-error');
                 const genderError = document.getElementById('gender-error');
