@@ -2,11 +2,48 @@
 $name = $email = $comment = $phone = "";
 $errors = [];
 
+$jsonPath = 'data/admission_form.json';
+require_once 'BaseFormData.php';
+
+class ReviewFormData extends ParentClass
+{
+    public $phone;
+    public $comment;
+    public $star;
+
+    function __construct($name, $email, $phone, $comment , $star = 0)
+    {
+        parent::__construct($name, $email);
+        $this->phone = $phone;
+        $this->comment = $comment;
+        $this->star = $star;
+    }
+
+    function display()
+    {
+        return "Name: " . htmlspecialchars($this->name) .
+            "<br>Email: " . htmlspecialchars($this->email) .
+            "<br>Phone: " . htmlspecialchars($this->phone) .
+            "<br>Comment: " . nl2br(htmlspecialchars($this->comment)).
+            "<br>Star: " . htmlspecialchars($this->star) . "/5" ;
+    }
+    public function JSONify(){
+        return "\n\t{\n".
+        "\t\t\"Name\": \"" . $this->name . "\",\n".
+        "\t\t\"Email\": \"" . $this->email . "\",\n". 
+        "\t\t\"Phone\": \"" . $this->phone . "\",\n".
+        "\t\t\"Comment\": \"" . $this->comment . "\",\n".
+        "\t\t\"Star\": " . $this->star.
+        "\n\t}";
+    }
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = trim($_POST["name"]);
     $email = trim($_POST["email"]);
     $comment = trim($_POST["comment"]);
     $phone = trim($_POST["phone"]);
+    $star = $_POST["star"] ?? null;
 
     if (!preg_match("/^[a-zA-ZëËçÇáàéèËÏîÎÜüÙùËÄäÖö\s]{2,50}$/", $name)) {
         $errors[] = "Emri nuk është i vlefshëm (vetëm shkronja, 2-50 karaktere).";
@@ -25,34 +62,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (empty($errors)) {
-        $review = new ReviewFormData($name, $email, $phone, $comment);
-        $successMessage = $review->display();
+        $review = new ReviewFormData($name, $email, $phone, $comment , $star);
+
+        file_put_contents($jsonPath , "["."\t".$review->JSONify()."\n]");
+        // $successMessage = $review->display();
+
     } else {
         echo "<script>alert('Gabim në plotësim! Kontrolloni të dhënat.');</script>";
-    }
-}
-
-class ReviewFormData
-{
-    public $name;
-    public $email;
-    public $phone;
-    public $comment;
-
-    function __construct($name, $email, $phone, $comment)
-    {
-        $this->name = $name;
-        $this->email = $email;
-        $this->phone = $phone;
-        $this->comment = $comment;
-    }
-
-    function display()
-    {
-        return "Name: " . htmlspecialchars($this->name) .
-            "<br>Email: " . htmlspecialchars($this->email) .
-            "<br>Phone: " . htmlspecialchars($this->phone) .
-            "<br>Comment: " . nl2br(htmlspecialchars($this->comment));
     }
 }
 
@@ -434,7 +450,7 @@ class ReviewFormData
                     <div class="row">
                         <div class="col-12">
                             <div class="form-div reveal">
-                                <form method="POST" action="">
+                                <form method="POST" action="admission.php" id="review-form" enctype="multipart/form-data">
                                     <h3>Leave a Review</h3>
                                     <h4>Name:</h4>
                                     <input type="text" name="name" value="<?= htmlspecialchars($name) ?>">
@@ -451,6 +467,7 @@ class ReviewFormData
                                         <span data-value="3">★</span>
                                         <span data-value="4">★</span>
                                         <span data-value="5">★</span>
+                                        <input type="hidden" name="star" id="starRating" value="">
                                     </div>
                                     <button type="submit">Submit</button>
                                     <?php if (!empty($errors)) : ?>
@@ -467,6 +484,24 @@ class ReviewFormData
                                         </div>
                                     <?php endif; ?>
                                 </form>
+
+                                <script>
+                                    // Star rating functionality
+                                    // when clicking star hidden input gets the value of the selected star
+                                    document.querySelectorAll('.clickable-rating span').forEach(star => {
+                                        star.addEventListener('click', function() {
+                                        document.querySelectorAll('.clickable-rating span').forEach(s => {
+                                            s.classList.remove('active');
+                                        });
+                                        const rating = this.getAttribute('data-value');
+                                        for (let i = 1; i <= rating; i++) {
+                                            document.querySelector(`.clickable-rating span[data-value="${i}"]`).classList.add('active');
+                                        }
+                                        document.getElementById('starRating').value = rating;
+                                        });
+                                    });
+                                </script>
+
                             </div>
                         </div>
                     </div>
