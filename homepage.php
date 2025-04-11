@@ -7,6 +7,7 @@ class FormData extends ParentClass {
 }
 
 $jsonPath = 'data/homepage_form.json';
+
 ?>
 <?php
 // Enhanced validation functions
@@ -21,7 +22,7 @@ function cleanName($input) {
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = cleanName($_POST['name-input'] ?? '');
-    $email = $_POST['email-input'] ?? '';
+    $email = trim($_POST['email-input'] ?? '');
     
     $errors = [];
     
@@ -38,11 +39,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     
     if (empty($errors)) {
-        $obj = new FormData($name, $email);
-        $message = "Thank you for signing up, " . $obj->name . "!";
+        $newsletter = new FormData($name, $email);
+        $message = "Thank you for signing up, " . $newsletter->name . "!";
 
-        file_put_contents($jsonPath , "["."\t".$obj->JSONify()."\n]");
-
+        if (filesize($jsonPath) == 0) {
+            $jsonData = "[" . $newsletter->JSONify() . "\n]";
+            file_put_contents($jsonPath, $jsonData);
+          } else {
+            //if file is not empty execute this code
+            $jsonData = file_get_contents($jsonPath);
+            $jsonData = rtrim($jsonData, "]\n") . "\n ," . $newsletter->JSONify() . "\n]";
+            file_put_contents($jsonPath, $jsonData);
+          }
     } else {
         $message = implode("\n", $errors);
     }

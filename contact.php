@@ -19,7 +19,7 @@ class ContactFormData extends ParentClass {
     public function createJSONArr(){
         $formattedArray = "";
         foreach($this->interests as $interest){
-            formattedArray .= "\"$interest\"";
+            $formattedArray .= "\"$interest\"";
             if($interest !== end($this->interests)){
                 $formattedArray .= ",";
             }
@@ -41,16 +41,24 @@ class ContactFormData extends ParentClass {
 }
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $name = $_POST['name'] ?? '';
-    $email = $_POST['email'] ?? '';
+    $name = trim($_POST['name'] ?? '');
+    $email = trim($_POST['email'] ?? '');
     $gender = $_POST['gender'] ?? '';
     $age = $_POST['age'] ?? 0 ;
     $interests = $_POST['interests'] ?? [];
-    $message = $_POST['message'] ?? '';
+    $message = trim($_POST['message'] ?? '');
 
     $formData = new ContactFormData($name, $email, $gender, $age, $interests, $message);
-    
-    file_put_contents($jsonPath , "["."\t".$formData->JSONify()."\n]");
+
+    if (filesize($jsonPath) == 0) {
+        $jsonData = "[" . $formData->JSONify() . "\n]";
+        file_put_contents($jsonPath, $jsonData);
+    } else {
+        //if file is not empty execute this code
+        $jsonData = file_get_contents($jsonPath);
+        $jsonData = rtrim($jsonData, "]\n") . "\n ," . $formData->JSONify() . "\n]";
+        file_put_contents($jsonPath, $jsonData);
+    }
 }
 
 ?>

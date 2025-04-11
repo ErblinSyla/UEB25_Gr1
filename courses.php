@@ -71,7 +71,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $applyCourses = new ApplyCourses($name, $email, $course, $file);
   $applyCourses->setPassword($password);
   
-  file_put_contents($jsonPath , "["."\t".$applyCourses->JSONify()."\n]");
+  if (filesize($jsonPath) == 0) {
+    $jsonData = "[" . $applyCourses->JSONify() . "\n]";
+    file_put_contents($jsonPath, $jsonData);
+  } else {
+    //if file is not empty execute this code
+    $jsonData = file_get_contents($jsonPath);
+    $jsonData = rtrim($jsonData, "]\n") . "\n ," . $applyCourses->JSONify() . "\n]";
+    file_put_contents($jsonPath, $jsonData);
+  }
   // You can now use the methods of the ApplyCourses class as needed
 }    
 ?>

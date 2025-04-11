@@ -9,7 +9,7 @@ class ReviewFormData extends ParentClass
 {
     public $phone;
     public $comment;
-    public $star;
+    public $star = 0;
 
     function __construct($name, $email, $phone, $comment , $star = 0)
     {
@@ -61,10 +61,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = "Numri i telefonit nuk është i vlefshëm.";
     }
 
+    if ($star == null){$star = 0;}
     if (empty($errors)) {
         $review = new ReviewFormData($name, $email, $phone, $comment , $star);
 
-        file_put_contents($jsonPath , "["."\t".$review->JSONify()."\n]");
+        //if file is empty execute this code
+
+        if (filesize($jsonPath) == 0) {
+            $jsonData = "[" . $review->JSONify() . "\n]";
+            file_put_contents($jsonPath, $jsonData);
+        } else {
+            //if file is not empty execute this code
+            $jsonData = file_get_contents($jsonPath);
+            $jsonData = rtrim($jsonData, "]\n") . "\n ," . $review->JSONify() . "\n]";
+            file_put_contents($jsonPath, $jsonData);
+        }
+
         // $successMessage = $review->display();
 
     } else {
