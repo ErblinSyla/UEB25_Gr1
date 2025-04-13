@@ -110,6 +110,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Changa:wght@200..800&family=Cinzel:wght@400..900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Spicy+Rice&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 
+  <script src="javascript.js"></script>
+
 </head>
 
 <body>
@@ -202,7 +204,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       </div>
     </div>
     <audio id="card-hover-audio" src="audio/div-hover.mp3"></audio>
-    <div class="apply-container">
+    <div class="apply-container reveal">
       <audio id="button-click-audio" src="audio/button-click.mp3"></audio>
 
       <button id="applyButton">Apply for a Course</button>
@@ -261,7 +263,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <section style="background-color: white">
     <h2>Our Professors</h2>
     <div class="row">
-      <div class="col">
+      <div class="col-other reveal-left">
         <div class="card">
           <img src="images/prof.webp" alt="Professor 1" />
           <h3>Professor John Doe</h3>
@@ -270,7 +272,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </p>
         </div>
       </div>
-      <div class="col">
+      <div class="col-other reveal-right">
         <div class="card">
           <img src="images/prof2.png" alt="Professor 2" />
           <h3>Professor Jane Smith</h3>
@@ -289,6 +291,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
   </footer>
   <script>
+    window.addEventListener('scroll', reveal);
+    window.addEventListener('scroll', revealLeft);
+    window.addEventListener('scroll', revealRight);
+
     function addHoverAudioEffectToLinks(linkSelector, audioId) {
       const links = document.querySelectorAll(linkSelector);
       const audio = document.getElementById(audioId);
