@@ -116,7 +116,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
 
-  <nav>
+  <nav id = "top">
     <div class="row mobile-row" style="justify-content: space-between; width: 100%;">
       <div class="col-4 title">
         <div class="logo">
@@ -206,8 +206,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <audio id="card-hover-audio" src="audio/div-hover.mp3"></audio>
     <div class="apply-container reveal">
       <audio id="button-click-audio" src="audio/button-click.mp3"></audio>
-
-      <button id="applyButton">Apply for a Course</button>
+      <a href="#top"><button id="applyButton">Apply for a Course</button></a>
+      
     </div>
     <div id="applyModal" class="apply-modal">
       <div class="apply-modal-content">
@@ -437,10 +437,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       applyButton.onclick = function() {
         modal.style.display = "block";
-      };
+        document.body.style.overflow = "hidden"; 
+      };      
 
       closeModal.onclick = function() {
         modal.style.display = "none";
+        document.body.style.overflow = "auto"; 
       };
 
       window.onclick = function(event) {
