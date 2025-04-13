@@ -282,7 +282,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ]
         ];
 
-        arsort($plans);
+        usort($plans, function($a, $b) {
+            return $a['price'] <=> $b['price'];
+        });              
 
         function formatedPrice($price)
         {

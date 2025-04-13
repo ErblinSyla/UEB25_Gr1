@@ -246,6 +246,67 @@
                     addHoverAudioToIframe('iframe', 'iframe-hover-audio');
                 });
             </script>
+            <?php
+
+            $continents = [
+                [
+                    "name" => "North America",
+                    "percentage" => 35,
+                    "countries" => "USA, Canada, Mexico",
+                    "comment" => "High engagement due to a strong tech culture."
+                ],
+                [
+                    "name" => "Europe",
+                    "percentage" => 30,
+                    "countries" => "UK, Germany, France, Spain",
+                    "comment" => "Significant interest in tech education and development."
+                ],
+                [
+                    "name" => "Asia",
+                    "percentage" => 25,
+                    "countries" => "India, China, Japan, Philippines",
+                    "comment" => "Growing user base driven by demand for coding skills."
+                ],
+                [
+                    "name" => "South America",
+                    "percentage" => 5,
+                    "countries" => "Brazil, Argentina, Colombia",
+                    "comment" => "Emerging interest in online tech courses."
+                ],
+                [
+                    "name" => "Africa",
+                    "percentage" => 3,
+                    "countries" => "Nigeria, South Africa, Kenya",
+                    "comment" => "Developing market with increasing digital adoption."
+                ],
+                [
+                    "name" => "Australia/Oceania",
+                    "percentage" => 2,
+                    "countries" => "Australia, New Zealand",
+                    "comment" => "Niche audience with steady engagement."
+                ]
+            ];
+
+            usort($continents, function ($a, $b) {
+                return $b['percentage'] <=> $a['percentage'];
+            });
+
+            $percentages = array_column($continents, 'percentage');
+            $maxPercentage = max($percentages);
+            $minPercentage = min($percentages);
+
+            function getColorFromPercentage($percentage, $min, $max)
+            {
+                $ratio = ($percentage - $min) / ($max - $min);
+
+                $r = (int)(213 + (0 - 213) * $ratio);
+                $g = (int)(0 + (200 - 0) * $ratio);
+                $b = 0;
+
+                return "rgb($r, $g, $b)";
+            }
+
+            ?>
             <div class="demographics">
                 <div class="row">
                     <div class="col-12 reveal">
@@ -264,42 +325,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>North America</td>
-                                    <td>35%</td>
-                                    <td>USA, Canada, Mexico</td>
-                                    <td>High engagement due to a strong tech culture.</td>
-                                </tr>
-                                <tr>
-                                    <td>Europe</td>
-                                    <td>30%</td>
-                                    <td>UK, Germany, France, Spain</td>
-                                    <td>Significant interest in tech education and development.</td>
-                                </tr>
-                                <tr>
-                                    <td>Asia</td>
-                                    <td>25%</td>
-                                    <td>India, China, Japan, Philippines</td>
-                                    <td>Growing user base driven by demand for coding skills.</td>
-                                </tr>
-                                <tr>
-                                    <td>South America</td>
-                                    <td>5%</td>
-                                    <td>Brazil, Argentina, Colombia</td>
-                                    <td>Emerging interest in online tech courses.</td>
-                                </tr>
-                                <tr>
-                                    <td>Africa</td>
-                                    <td>3%</td>
-                                    <td>Nigeria, South Africa, Kenya</td>
-                                    <td>Developing market with increasing digital adoption.</td>
-                                </tr>
-                                <tr>
-                                    <td>Australia/Oceania</td>
-                                    <td>2%</td>
-                                    <td>Australia, New Zealand</td>
-                                    <td>Niche audience with steady engagement.</td>
-                                </tr>
+                                <?php foreach ($continents as $c):
+                                    $color = getColorFromPercentage($c['percentage'], $minPercentage, $maxPercentage);
+                                ?>
+                                    <tr>
+                                        <td><?= $c['name'] ?></td>
+                                        <td><span style="color: <?= $color ?>;"><?= $c['percentage'] ?>%</span></td>
+                                        <td><?= $c['countries'] ?></td>
+                                        <td><?= $c['comment'] ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>

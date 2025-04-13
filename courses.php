@@ -1,48 +1,53 @@
 <?php
-  $jsonPath = 'data/courses_form.json';
-    
-    require_once 'BaseFormData.php';
+$jsonPath = 'data/courses_form.json';
 
-    class ApplyCourses extends ParentClass {
-      private $password;
-      public $course;
-      public $file;
+require_once 'BaseFormData.php';
 
-      public function __construct($name, $email, $course, $file) {
-          parent::__construct($name, $email);
-          $this->course = $course;
-          $this->file = $file;
-      }
+class ApplyCourses extends ParentClass
+{
+  private $password;
+  public $course;
+  public $file;
 
-      // public function NameInEmail() {
-      //     $NAME  = strtolower($this->name);
-      //     $EMAIL = strtolower($this->email);
-  
-      //     if (strpos($EMAIL, $NAME) !== false) {
-      //         echo "Name found in email!";
-      //     } else {
-      //         echo "Name not found in Email!";
-      //     }
-      // }
+  public function __construct($name, $email, $course, $file)
+  {
+    parent::__construct($name, $email);
+    $this->course = $course;
+    $this->file = $file;
+  }
 
-      public function getPassword() {
-        return $this-> password;
-      }
+  // public function NameInEmail() {
+  //     $NAME  = strtolower($this->name);
+  //     $EMAIL = strtolower($this->email);
 
-      public function setPassword($password) {
-        $this->password = $password;
-      }
+  //     if (strpos($EMAIL, $NAME) !== false) {
+  //         echo "Name found in email!";
+  //     } else {
+  //         echo "Name not found in Email!";
+  //     }
+  // }
 
-      public function JSONify(){
-        return "\n\t{\n".
-        "\t\t\"Name\": \"" . $this->name . "\",\n".
-        "\t\t\"Email\": \"" . $this->email . "\",\n". 
-        "\t\t\"Password\": \"" . $this->password . "\",\n".
-        "\t\t\"Course\": \"" . $this->course . "\",\n".
-        "\t\t\"File\": \"" . $this->file . "\"".
-        "\n\t}";
-      }
-  }    
+  public function getPassword()
+  {
+    return $this->password;
+  }
+
+  public function setPassword($password)
+  {
+    $this->password = $password;
+  }
+
+  public function JSONify()
+  {
+    return "\n\t{\n" .
+      "\t\t\"Name\": \"" . $this->name . "\",\n" .
+      "\t\t\"Email\": \"" . $this->email . "\",\n" .
+      "\t\t\"Password\": \"" . $this->password . "\",\n" .
+      "\t\t\"Course\": \"" . $this->course . "\",\n" .
+      "\t\t\"File\": \"" . $this->file . "\"" .
+      "\n\t}";
+  }
+}
 // Check if the form is submitted
 
 
@@ -58,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $file = null; // Handle the case where no file is uploaded
   }
   // Validate the file upload
-  
+
   $uploadDir = 'uploads/';
   $fileExt = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
   $safeName = uniqid('', true) . '.' . $fileExt;
@@ -70,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // Create an instance of the ApplyCourses class
   $applyCourses = new ApplyCourses($name, $email, $course, $file);
   $applyCourses->setPassword($password);
-  
+
   if (filesize($jsonPath) == 0) {
     $jsonData = "[" . $applyCourses->JSONify() . "\n]";
     file_put_contents($jsonPath, $jsonData);
@@ -81,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     file_put_contents($jsonPath, $jsonData);
   }
   // You can now use the methods of the ApplyCourses class as needed
-}    
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -133,60 +138,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   </nav>
   <audio id="nav-hover-audio" src="audio/navbar-hover.mp3"></audio>
   <audio id="nav-click-audio" src="audio/shift-page.mp3"></audio>
-
-
-  <script>
-    function addHoverAudioEffectToLinks(linkSelector, audioId) {
-      const links = document.querySelectorAll(linkSelector);
-      const audio = document.getElementById(audioId);
-
-      if (audio) {
-        links.forEach(link => {
-          link.addEventListener('mouseenter', () => {
-            audio.currentTime = 0;
-            audio.play().catch(error => {
-              console.error('Audio playback failed:', error);
-            });
-          });
-        });
-      } else {
-        console.error(`Audio element not found: ${audioId}`);
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      addHoverAudioEffectToLinks('.links a', 'nav-hover-audio');
-    });
-
-
-    function addClickAudioEffectToLinks(linkSelector, audioId) {
-      const links = document.querySelectorAll(linkSelector);
-      const audio = document.getElementById(audioId);
-
-      if (audio) {
-        links.forEach(link => {
-          link.addEventListener('click', (event) => {
-            event.preventDefault();
-            audio.currentTime = 0;
-            audio.play().catch(error => {
-              console.error('Audio playback failed:', error);
-            });
-
-            audio.onended = () => {
-              window.location.href = link.href;
-            };
-          });
-        });
-      } else {
-        console.error(`Audio element not found: ${audioId}`);
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      addClickAudioEffectToLinks('.links a', 'nav-click-audio');
-    });
-  </script>
-
   <section class="courses">
     <h2>Our Courses</h2>
     <div class="row">
@@ -251,56 +202,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       </div>
     </div>
     <audio id="card-hover-audio" src="audio/div-hover.mp3"></audio>
-    <script>
-      function addHoverAudioToCourseCards(cardSelector, audioId) {
-        const cards = document.querySelectorAll(cardSelector);
-        const audio = document.getElementById(audioId);
-
-        if (audio) {
-          cards.forEach(card => {
-            card.addEventListener('mouseenter', () => {
-              audio.currentTime = 0;
-              audio.play().catch(error => {
-                console.error('Audio playback failed:', error);
-              });
-            });
-          });
-        } else {
-          console.error(`Audio element not found: ${audioId}`);
-        }
-      }
-
-      document.addEventListener('DOMContentLoaded', () => {
-        addHoverAudioToCourseCards('.card', 'card-hover-audio');
-      });
-    </script>
-
     <div class="apply-container">
       <audio id="button-click-audio" src="audio/button-click.mp3"></audio>
 
       <button id="applyButton">Apply for a Course</button>
     </div>
-    <script>
-      function addClickAudioToButton(buttonSelector, audioId) {
-        const button = document.querySelector(buttonSelector);
-        const audio = document.getElementById(audioId);
-
-        if (button && audio) {
-          button.addEventListener('click', () => {
-            audio.currentTime = 0;
-            audio.play().catch(error => {
-              console.error('Audio playback failed:', error);
-            });
-          });
-        } else {
-          console.error(`Button or audio element not found: ${buttonSelector}, ${audioId}`);
-        }
-      }
-
-      document.addEventListener('DOMContentLoaded', () => {
-        addClickAudioToButton('#applyButton', 'button-click-audio');
-      });
-    </script>
     <div id="applyModal" class="apply-modal">
       <div class="apply-modal-content">
         <span class="close-btn" id="closeModal">&times;</span>
@@ -332,267 +238,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <option value="JavaScript">
           </datalist>
           <span id="course-error" class="error-message"></span>
-
-
           <label for="file-upload">Upload your file (e.g., resume or profile picture):</label>
           <div id="drag-drop-area" class="drag-drop-area">
             <p>Drag and drop your file here or click to select a file.</p>
             <input type="file" id="file-upload" name="file-upload" accept="image/*, .pdf, .bmp , .svg , .jpg , .jpeg , .doc , .docx" hidden />
           </div>
           <span id="file-error" class="error-message"></span>
-          <button type="submit" >Submit Application</button>
+          <button type="submit">Submit Application</button>
           <output id="submission-count">No applications submitted yet.</output>
         </form>
       </div>
     </div>
     <audio id="success-audio" src="audio/review-published.mp3"></audio>
     <audio id="failure-audio" src="audio/review-cancel.mp3"></audio>
-
-    <script>
-      const dragDropArea = document.getElementById("drag-drop-area");
-      const fileInput = document.getElementById("file-upload");
-
-
-      dragDropArea.addEventListener("click", () => {
-        fileInput.click();
-      });
-
-
-      dragDropArea.addEventListener("dragover", (event) => {
-        event.preventDefault();
-        dragDropArea.style.backgroundColor = "#e0f7ff";
-      });
-
-
-      dragDropArea.addEventListener("drop", (event) => {
-        event.preventDefault();
-        dragDropArea.style.backgroundColor = "#f9f9f9";
-        const files = event.dataTransfer.files;
-        if (files.length > 0) {
-          fileInput.files = files;
-        }
-      });
-
-
-      fileInput.addEventListener("change", (event) => {
-        const file = event.target.files[0];
-        if (file) {
-          dragDropArea.innerHTML = `<p>File selected: ${file.name}</p>`;
-        } else {
-          dragDropArea.innerHTML = "<p>Drag and drop your file here or click to select a file.</p>";
-        }
-      });
-
-      document.addEventListener("DOMContentLoaded", function() {
-        const modal = document.getElementById("applyModal");
-        const applyButton = document.getElementById("applyButton");
-        const closeModal = document.getElementById("closeModal");
-
-        applyButton.onclick = function() {
-          modal.style.display = "block";
-        };
-
-        closeModal.onclick = function() {
-          modal.style.display = "none";
-        };
-
-        window.onclick = function(event) {
-          if (event.target == modal) {
-            modal.style.display = "none";
-          }
-        };
-
-        const applyForm = document.getElementById("applyForm");
-        applyForm.onsubmit = function(event) {
-          event.preventDefault();
-
-          const name = document.getElementById("name").value;
-          const email = document.getElementById("email").value;
-          const course = document.getElementById("course").value;
-
-          const successAudio = document.getElementById("success-audio");
-          const failureAudio = document.getElementById("failure-audio");
-
-          if (name && email && course) {
-            successAudio.currentTime = 0;
-            successAudio.play().catch(error => {
-              console.error('Audio playback failed:', error);
-            });
-
-            alert("Application submitted successfully!");
-            modal.style.display = "none";
-          } else {
-            failureAudio.currentTime = 0;
-            failureAudio.play().catch(error => {
-              console.error('Audio playback failed:', error);
-            });
-
-            alert("Please fill in all the fields.");
-          }
-        };
-      });
-      document.addEventListener("DOMContentLoaded", function() {
-        const modal = document.getElementById("applyModal");
-        const applyButton = document.getElementById("applyButton");
-        const closeModal = document.getElementById("closeModal");
-
-        let submissionCount = [];
-
-        applyButton.onclick = function() {
-          modal.style.display = "block";
-        };
-
-        closeModal.onclick = function() {
-          modal.style.display = "none";
-        };
-
-        window.onclick = function(event) {
-          if (event.target == modal) {
-            modal.style.display = "none";
-          }
-        };
-
-        const applyForm = document.getElementById("applyForm");
-        const submissionOutput = document.getElementById("submission-count");
-
-        applyForm.onsubmit = function(event) {
-          event.preventDefault();
-
-          const name = document.getElementById("name").value;
-          const email = document.getElementById("email").value;
-          const course = document.getElementById("course").value;
-
-          const successAudio = document.getElementById("success-audio");
-          const failureAudio = document.getElementById("failure-audio");
-
-          if (name && email && course) {
-            successAudio.currentTime = 0;
-            successAudio.play().catch(error => {
-              console.error('Audio playback failed:', error);
-            });
-
-            submissionCount = [...submissionCount, 1];
-            const totalSubmissions = submissionCount.reduce((acc, curr) => acc + curr, 0);
-
-            submissionOutput.textContent = `${totalSubmissions} application(s) submitted.`;
-
-            alert("Application submitted successfully!");
-            this.submit(); // Submit the form to the server
-
-            modal.style.display = "none";
-          } else {
-            failureAudio.currentTime = 0;
-            failureAudio.play().catch(error => {
-              console.error('Audio playback failed:', error);
-            });
-
-            alert("Please fill in all the fields.");
-          }
-        };
-      });
-
-      function validateNotEmpty(value, errorId) {
-        const errorMessage = document.getElementById(errorId);
-        if (value.trim().length === 0) {
-          errorMessage.textContent = "This field is required.";
-          return false;
-        } else {
-          errorMessage.textContent = "";
-          return true;
-        }
-      }
-
-      function validateEmail(email) {
-        const errorMessage = document.getElementById('email-error');
-        const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-        if (!regex.test(email)) {
-          errorMessage.textContent = "Please enter a valid email address.";
-          return false;
-        } else {
-          errorMessage.textContent = "";
-          return true;
-        }
-      }
-
-      function validatePassword(password) {
-        const errorMessage = document.getElementById('password-error');
-        const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-        if (!regex.test(password)) {
-          errorMessage.textContent = "Password must be at least 8 characters long and contain at least one number.";
-          return false;
-        } else {
-          errorMessage.textContent = "";
-          return true;
-        }
-      }
-
-      document.getElementById('applyForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        const course = document.getElementById('course').value;
-        const fileUpload = document.getElementById('file-upload').files.length > 0;
-
-        let isValid = true;
-
-        if (!validateNotEmpty(name, 'name-error')) {
-          isValid = false;
-        }
-
-        if (!validateEmail(email)) {
-          isValid = false;
-        }
-
-        if (!validatePassword(password)) {
-          isValid = false;
-        }
-
-        if (!validateNotEmpty(course, 'course-error')) {
-          isValid = false;
-        }
-
-        if (!fileUpload) {
-          document.getElementById('file-error').textContent = "Please upload a file.";
-          isValid = false;
-        } else {
-          document.getElementById('file-error').textContent = "";
-        }
-
-        if (isValid) {
-          console.log("Form is valid. Submit the application.");
-          document.getElementById('submission-count').textContent = "Application submitted successfully!";
-        }
-      });
-
-      document.getElementById('name').addEventListener('blur', function() {
-        validateNotEmpty(this.value, 'name-error');
-      });
-
-      document.getElementById('email').addEventListener('blur', function() {
-        validateEmail(this.value);
-      });
-
-      document.getElementById('password').addEventListener('blur', function() {
-        validatePassword(this.value);
-      });
-
-      document.getElementById('course').addEventListener('blur', function() {
-        validateNotEmpty(this.value, 'course-error');
-      });
-
-      document.getElementById('drag-drop-area').addEventListener('click', function() {
-        document.getElementById('file-upload').click();
-      });
-
-      document.getElementById('file-upload').addEventListener('change', function(event) {
-        const fileName = event.target.files[0]?.name;
-        if (fileName) {
-          console.log('File selected:', fileName);
-        }
-      });
-    </script>
     <style>
       .error-message {
         color: red;
@@ -623,7 +281,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       </div>
     </div>
   </section>
-
   <footer>
     <div class="row">
       <div class="col-12">
@@ -631,7 +288,346 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       </div>
     </div>
   </footer>
+  <script>
+    function addHoverAudioEffectToLinks(linkSelector, audioId) {
+      const links = document.querySelectorAll(linkSelector);
+      const audio = document.getElementById(audioId);
 
+      if (audio) {
+        links.forEach(link => {
+          link.addEventListener('mouseenter', () => {
+            audio.currentTime = 0;
+            audio.play().catch(error => {
+              console.error('Audio playback failed:', error);
+            });
+          });
+        });
+      } else {
+        console.error(`Audio element not found: ${audioId}`);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      addHoverAudioEffectToLinks('.links a', 'nav-hover-audio');
+    });
+
+
+    function addClickAudioEffectToLinks(linkSelector, audioId) {
+      const links = document.querySelectorAll(linkSelector);
+      const audio = document.getElementById(audioId);
+
+      if (audio) {
+        links.forEach(link => {
+          link.addEventListener('click', (event) => {
+            event.preventDefault();
+            audio.currentTime = 0;
+            audio.play().catch(error => {
+              console.error('Audio playback failed:', error);
+            });
+
+            audio.onended = () => {
+              window.location.href = link.href;
+            };
+          });
+        });
+      } else {
+        console.error(`Audio element not found: ${audioId}`);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      addClickAudioEffectToLinks('.links a', 'nav-click-audio');
+    });
+  </script>
+  <script>
+    const dragDropArea = document.getElementById("drag-drop-area");
+    const fileInput = document.getElementById("file-upload");
+
+
+    dragDropArea.addEventListener("click", () => {
+      fileInput.click();
+    });
+
+
+    dragDropArea.addEventListener("dragover", (event) => {
+      event.preventDefault();
+      dragDropArea.style.backgroundColor = "#e0f7ff";
+    });
+
+
+    dragDropArea.addEventListener("drop", (event) => {
+      event.preventDefault();
+      dragDropArea.style.backgroundColor = "#f9f9f9";
+      const files = event.dataTransfer.files;
+      if (files.length > 0) {
+        fileInput.files = files;
+      }
+    });
+
+
+    fileInput.addEventListener("change", (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        dragDropArea.innerHTML = `<p>File selected: ${file.name}</p>`;
+      } else {
+        dragDropArea.innerHTML = "<p>Drag and drop your file here or click to select a file.</p>";
+      }
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+      const modal = document.getElementById("applyModal");
+      const applyButton = document.getElementById("applyButton");
+      const closeModal = document.getElementById("closeModal");
+
+      applyButton.onclick = function() {
+        modal.style.display = "block";
+      };
+
+      closeModal.onclick = function() {
+        modal.style.display = "none";
+      };
+
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
+
+      const applyForm = document.getElementById("applyForm");
+      applyForm.onsubmit = function(event) {
+        event.preventDefault();
+
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const course = document.getElementById("course").value;
+
+        const successAudio = document.getElementById("success-audio");
+        const failureAudio = document.getElementById("failure-audio");
+
+        if (name && email && course) {
+          successAudio.currentTime = 0;
+          successAudio.play().catch(error => {
+            console.error('Audio playback failed:', error);
+          });
+
+          alert("Application submitted successfully!");
+          modal.style.display = "none";
+        } else {
+          failureAudio.currentTime = 0;
+          failureAudio.play().catch(error => {
+            console.error('Audio playback failed:', error);
+          });
+
+          alert("Please fill in all the fields.");
+        }
+      };
+    });
+    document.addEventListener("DOMContentLoaded", function() {
+      const modal = document.getElementById("applyModal");
+      const applyButton = document.getElementById("applyButton");
+      const closeModal = document.getElementById("closeModal");
+
+      let submissionCount = [];
+
+      applyButton.onclick = function() {
+        modal.style.display = "block";
+      };
+
+      closeModal.onclick = function() {
+        modal.style.display = "none";
+      };
+
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
+
+      const applyForm = document.getElementById("applyForm");
+      const submissionOutput = document.getElementById("submission-count");
+
+      applyForm.onsubmit = function(event) {
+        event.preventDefault();
+
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const course = document.getElementById("course").value;
+
+        const successAudio = document.getElementById("success-audio");
+        const failureAudio = document.getElementById("failure-audio");
+
+        if (name && email && course) {
+          successAudio.currentTime = 0;
+          successAudio.play().catch(error => {
+            console.error('Audio playback failed:', error);
+          });
+
+          submissionCount = [...submissionCount, 1];
+          const totalSubmissions = submissionCount.reduce((acc, curr) => acc + curr, 0);
+
+          submissionOutput.textContent = `${totalSubmissions} application(s) submitted.`;
+
+          alert("Application submitted successfully!");
+          this.submit(); // Submit the form to the server
+
+          modal.style.display = "none";
+        } else {
+          failureAudio.currentTime = 0;
+          failureAudio.play().catch(error => {
+            console.error('Audio playback failed:', error);
+          });
+
+          alert("Please fill in all the fields.");
+        }
+      };
+    });
+
+    function validateNotEmpty(value, errorId) {
+      const errorMessage = document.getElementById(errorId);
+      if (value.trim().length === 0) {
+        errorMessage.textContent = "This field is required.";
+        return false;
+      } else {
+        errorMessage.textContent = "";
+        return true;
+      }
+    }
+
+    function validateEmail(email) {
+      const errorMessage = document.getElementById('email-error');
+      const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+      if (!regex.test(email)) {
+        errorMessage.textContent = "Please enter a valid email address.";
+        return false;
+      } else {
+        errorMessage.textContent = "";
+        return true;
+      }
+    }
+
+    function validatePassword(password) {
+      const errorMessage = document.getElementById('password-error');
+      const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+      if (!regex.test(password)) {
+        errorMessage.textContent = "Password must be at least 8 characters long and contain at least one number.";
+        return false;
+      } else {
+        errorMessage.textContent = "";
+        return true;
+      }
+    }
+
+    document.getElementById('applyForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const course = document.getElementById('course').value;
+      const fileUpload = document.getElementById('file-upload').files.length > 0;
+
+      let isValid = true;
+
+      if (!validateNotEmpty(name, 'name-error')) {
+        isValid = false;
+      }
+
+      if (!validateEmail(email)) {
+        isValid = false;
+      }
+
+      if (!validatePassword(password)) {
+        isValid = false;
+      }
+
+      if (!validateNotEmpty(course, 'course-error')) {
+        isValid = false;
+      }
+
+      if (!fileUpload) {
+        document.getElementById('file-error').textContent = "Please upload a file.";
+        isValid = false;
+      } else {
+        document.getElementById('file-error').textContent = "";
+      }
+
+      if (isValid) {
+        console.log("Form is valid. Submit the application.");
+        document.getElementById('submission-count').textContent = "Application submitted successfully!";
+      }
+    });
+
+    document.getElementById('name').addEventListener('blur', function() {
+      validateNotEmpty(this.value, 'name-error');
+    });
+
+    document.getElementById('email').addEventListener('blur', function() {
+      validateEmail(this.value);
+    });
+
+    document.getElementById('password').addEventListener('blur', function() {
+      validatePassword(this.value);
+    });
+
+    document.getElementById('course').addEventListener('blur', function() {
+      validateNotEmpty(this.value, 'course-error');
+    });
+
+    document.getElementById('drag-drop-area').addEventListener('click', function() {
+      document.getElementById('file-upload').click();
+    });
+
+    document.getElementById('file-upload').addEventListener('change', function(event) {
+      const fileName = event.target.files[0]?.name;
+      if (fileName) {
+        console.log('File selected:', fileName);
+      }
+    });
+  </script>
+  <script>
+    function addClickAudioToButton(buttonSelector, audioId) {
+      const button = document.querySelector(buttonSelector);
+      const audio = document.getElementById(audioId);
+
+      if (button && audio) {
+        button.addEventListener('click', () => {
+          audio.currentTime = 0;
+          audio.play().catch(error => {
+            console.error('Audio playback failed:', error);
+          });
+        });
+      } else {
+        console.error(`Button or audio element not found: ${buttonSelector}, ${audioId}`);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      addClickAudioToButton('#applyButton', 'button-click-audio');
+    });
+  </script>
+  <script>
+    function addHoverAudioToCourseCards(cardSelector, audioId) {
+      const cards = document.querySelectorAll(cardSelector);
+      const audio = document.getElementById(audioId);
+
+      if (audio) {
+        cards.forEach(card => {
+          card.addEventListener('mouseenter', () => {
+            audio.currentTime = 0;
+            audio.play().catch(error => {
+              console.error('Audio playback failed:', error);
+            });
+          });
+        });
+      } else {
+        console.error(`Audio element not found: ${audioId}`);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      addHoverAudioToCourseCards('.card', 'card-hover-audio');
+    });
+  </script>
   <script>
     const currentDate = new Date();
     const currentMonth = currentDate.toLocaleString('default', {
@@ -641,9 +637,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     document.getElementById('year-month').textContent = `${currentMonth} ${currentYear}`;
   </script>
-
-</body>
-
 </body>
 
 </html>
