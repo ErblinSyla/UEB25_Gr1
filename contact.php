@@ -16,7 +16,7 @@ class ContactFormData extends ParentClass {
         $this->message = $message;
     }
 
-    public function createJSONArr(){
+    private function createJSONArr(){
         $formattedArray = "";
         foreach($this->interests as $interest){
             $formattedArray .= "\"$interest\"";
@@ -84,6 +84,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Changa:wght@200..800&family=Cinzel:wght@400..900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Spicy+Rice&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 
+    
 
     <script src="javascript.js"></script>
     <script>
@@ -203,18 +204,26 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         <div class="content">
             <h2>Contact Us</h2>
             <p>All information about us are displayed down below</p>
+            
         </div>
         <div class="container">
             <div class="contactInfo">
                 <div class="box">
                     <div class="icon"><i class="fa fa-location-arrow" aria-hidden="true"></i></div>
                     <div class="text">
+                        
                         <h3>Address</h3>
                         <address>
                             "Luan Haradinaj" St.,<br>
                             Nr. 11,<br>
-                            10000 Prishtinë, Kosovë<br>
+                            10000 Prishtinë, Kosovë<br><br><br>
                         </address>
+                        <div id="google-map">
+                            <div id="google-maps-canvas" style="height:100%; width:100%;max-width:100%;">
+                                <iframe style="height:100%;width:100%;border:0;" frameborder="0" src="https://www.google.com/maps/embed/v1/place?q=11+Luan+Haradinaj,+Prishtinë+10000&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8">
+                                </iframe>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="box">
