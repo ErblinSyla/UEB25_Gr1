@@ -245,7 +245,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <div class="col-7">
                     <ul class="ul-list" style="list-style-type: disc;">
-                        <li class="list reveal-left">Select the desired <mark><a href="#" target="_blank">course</a></mark> you wish to follow,</li>
+                        <li class="list reveal-left">Select the desired <mark><a href="courses.php" target="_blank">course</a></mark> you wish to follow,</li>
                         <li class="list reveal-right">Fill out the form with all your details,</li>
                         <li class="list reveal-left">Wait for our response by email or phone number.</li>
                     </ul>
@@ -473,7 +473,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <h4>Phone Number:</h4>
                                     <input type="text" name="phone" value="<?= htmlspecialchars($phone ?? '') ?>">
                                     <h4>Comment:</h4>
-                                    <textarea id="comment-input" name="comment"><?= htmlspecialchars($comment) ?></textarea>
+                                    <textarea id="comment-input" name="comment" style="resize:vertical;max-height: 300px;"><?= htmlspecialchars($comment) ?></textarea>
                                     <h4 class="rating-h4">Rating:</h4>
                                     <div class="clickable-rating">
                                         <span data-value="1">★</span>

@@ -57,23 +57,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $email = $_POST['email'];
   $password = $_POST['password'];
   $course = $_POST['course'];
-  if (isset($_POST['file-upload'])) {
-    $file = $_FILES['file-upload'];
-  } else {
-    $file = null; // Handle the case where no file is uploaded
+  
+  if(isset($_POST["file-upload"])) {
+    $fileName = basename($_FILES["file-upload"]["name"]);
+    $targetFilePath = "uploads/" . $fileName;
+  
+    if(file_exists($targetFilePath)) {
+      die("Sorry, file already exists.");
+    }
+    if(move_uploaded_file($_FILES["file-upload"]["name"], $targetFilePath)) {
+      echo "The file " . htmlspecialchars($fileName) . " has been uploaded.";
+    } else {
+      echo "Sorry, there was an error uploading your file.";
+    }
+  }else{
+    $targetFilePath = "uploads/default.svg";
   }
-  // Validate the file upload
 
-  $uploadDir = 'uploads/';
-  $fileExt = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-  $safeName = uniqid('', true) . '.' . $fileExt;
-  $destination = $uploadDir . $safeName;
-  move_uploaded_file($file['name'], $destination);
-  $file = $safeName;
-
-  // Ensure this directory exists and is writable
-  // Create an instance of the ApplyCourses class
-  $applyCourses = new ApplyCourses($name, $email, $course, $file);
+  $applyCourses = new ApplyCourses($name, $email, $course, $targetFilePath);
   $applyCourses->setPassword($password);
 
   if (filesize($jsonPath) == 0) {

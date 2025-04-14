@@ -168,16 +168,16 @@ nav ul {
     border-radius:10px;
     overflow:hidden;
     border:1px solid #ccc;
-    box-shadow:0 0 5px rgba(0,0,0,0.5);
+    box-shadow:0 0 10px rgba(0,0,0,0.5);
     transition: 0.5s;
     position: relative;
-    right: 75px !important;
+    right: 80px !important;
 }
 #google-map:hover{
     transition: 0.5s;
     border:1px solid #00bcd4;
+    box-shadow:0 0 10px #00bcd4;
 }
-
 
 #google-maps-canvas img{
     max-width:none!important;
