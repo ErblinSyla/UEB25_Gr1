@@ -10,7 +10,7 @@ class ParentClass {
         $this->email = $email;
     }
 
-    public function JSONify() {
+    protected function JSONify() {
         return "\n\t{ \n\t\t\"Name\": \"" . $this->name . "\",\n\t\t\"Email\": \"" . $this->email . "\"\n\t}";
     }
 }

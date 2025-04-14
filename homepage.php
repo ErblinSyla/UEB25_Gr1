@@ -3,7 +3,9 @@
 require_once 'BaseFormData.php';
 
 class FormData extends ParentClass {
-    // Inherits everything, no extra logic needed for now
+    public function inherJSONify(){
+        return $this->JSONify();
+    }
 }
 
 $jsonPath = 'data/homepage_form.json';
@@ -43,12 +45,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $message = "Thank you for signing up, " . $newsletter->name . "!";
 
         if (filesize($jsonPath) == 0) {
-            $jsonData = "[" . $newsletter->JSONify() . "\n]";
+            $jsonData = "[" . $newsletter->inherJSONify() . "\n]";
             file_put_contents($jsonPath, $jsonData);
           } else {
             //if file is not empty execute this code
             $jsonData = file_get_contents($jsonPath);
-            $jsonData = rtrim($jsonData, "]\n") . "\n ," . $newsletter->JSONify() . "\n]";
+            $jsonData = rtrim($jsonData, "]\n") . "\n ," . $newsletter->inherJSONify() . "\n]";
             file_put_contents($jsonPath, $jsonData);
           }
     } else {
