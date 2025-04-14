@@ -1,0 +1,92 @@
+array(4) {
+  [0]=>
+  array(4) {
+    ["name"]=>
+    string(10) "Basic Plan"
+    ["price"]=>
+    int(100)
+    ["features"]=>
+    string(42) "Access to basic courses, Community support"
+    ["frequency"]=>
+    string(8) "One-time"
+  }
+  [1]=>
+  array(4) {
+    ["name"]=>
+    string(13) "Standard Plan"
+    ["price"]=>
+    int(200)
+    ["features"]=>
+    string(39) "Access to all courses, Priority support"
+    ["frequency"]=>
+    string(7) "Monthly"
+  }
+  [2]=>
+  array(4) {
+    ["name"]=>
+    string(12) "Premium Plan"
+    ["price"]=>
+    int(400)
+    ["features"]=>
+    string(48) "Access to all courses, Mentorship, Certification"
+    ["frequency"]=>
+    string(6) "Yearly"
+  }
+  [3]=>
+  array(4) {
+    ["name"]=>
+    string(13) "Lifetime Plan"
+    ["price"]=>
+    int(800)
+    ["features"]=>
+    string(50) "Access to all courses forever, One-on-one coaching"
+    ["frequency"]=>
+    string(8) "One-time"
+  }
+}
+array(4) {
+  [0]=>
+  array(4) {
+    ["name"]=>
+    string(10) "Basic Plan"
+    ["price"]=>
+    int(100)
+    ["features"]=>
+    string(42) "Access to basic courses, Community support"
+    ["frequency"]=>
+    string(8) "One-time"
+  }
+  [1]=>
+  array(4) {
+    ["name"]=>
+    string(13) "Standard Plan"
+    ["price"]=>
+    int(200)
+    ["features"]=>
+    string(39) "Access to all courses, Priority support"
+    ["frequency"]=>
+    string(7) "Monthly"
+  }
+  [2]=>
+  array(4) {
+    ["name"]=>
+    string(12) "Premium Plan"
+    ["price"]=>
+    int(400)
+    ["features"]=>
+    string(48) "Access to all courses, Mentorship, Certification"
+    ["frequency"]=>
+    string(6) "Yearly"
+  }
+  [3]=>
+  array(4) {
+    ["name"]=>
+    string(13) "Lifetime Plan"
+    ["price"]=>
+    int(800)
+    ["features"]=>
+    string(50) "Access to all courses forever, One-on-one coaching"
+    ["frequency"]=>
+    string(8) "One-time"
+  }
+}

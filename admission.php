@@ -11,7 +11,7 @@ class ReviewFormData extends ParentClass
     public $comment;
     public $star = 0;
 
-    function __construct($name, $email, $phone, $comment , $star = 0)
+    function __construct($name, $email, $phone, $comment, $star = 0)
     {
         parent::__construct($name, $email);
         $this->phone = $phone;
@@ -24,17 +24,18 @@ class ReviewFormData extends ParentClass
         return "Name: " . htmlspecialchars($this->name) .
             "<br>Email: " . htmlspecialchars($this->email) .
             "<br>Phone: " . htmlspecialchars($this->phone) .
-            "<br>Comment: " . nl2br(htmlspecialchars($this->comment)).
-            "<br>Star: " . htmlspecialchars($this->star) . "/5" ;
+            "<br>Comment: " . nl2br(htmlspecialchars($this->comment)) .
+            "<br>Star: " . htmlspecialchars($this->star) . "/5";
     }
-    public function JSONify(){
-        return "\n\t{\n".
-        "\t\t\"Name\": \"" . $this->name . "\",\n".
-        "\t\t\"Email\": \"" . $this->email . "\",\n". 
-        "\t\t\"Phone\": \"" . $this->phone . "\",\n".
-        "\t\t\"Comment\": \"" . $this->comment . "\",\n".
-        "\t\t\"Star\": " . $this->star.
-        "\n\t}";
+    public function JSONify()
+    {
+        return "\n\t{\n" .
+            "\t\t\"Name\": \"" . $this->name . "\",\n" .
+            "\t\t\"Email\": \"" . $this->email . "\",\n" .
+            "\t\t\"Phone\": \"" . $this->phone . "\",\n" .
+            "\t\t\"Comment\": \"" . $this->comment . "\",\n" .
+            "\t\t\"Star\": " . $this->star .
+            "\n\t}";
     }
 }
 
@@ -61,9 +62,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = "Numri i telefonit nuk është i vlefshëm.";
     }
 
-    if ($star == null){$star = 0;}
+    if ($star == null) {
+        $star = 0;
+    }
     if (empty($errors)) {
-        $review = new ReviewFormData($name, $email, $phone, $comment , $star);
+        $review = new ReviewFormData($name, $email, $phone, $comment, $star);
 
         //if file is empty execute this code
 
@@ -282,9 +285,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ]
         ];
 
-        usort($plans, function($a, $b) {
+        usort($plans, function ($a, $b) {
             return $a['price'] <=> $b['price'];
-        });              
+        });
+
+        // kemi perdor var_dump() per ti futur array contentin ne nje fajll debug.log
+        ob_start();
+        var_dump($plans);
+        file_put_contents('debug.log', ob_get_clean(), FILE_APPEND);
+
 
         function formatedPrice($price)
         {
@@ -504,14 +513,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     // when clicking star hidden input gets the value of the selected star
                                     document.querySelectorAll('.clickable-rating span').forEach(star => {
                                         star.addEventListener('click', function() {
-                                        document.querySelectorAll('.clickable-rating span').forEach(s => {
-                                            s.classList.remove('active');
-                                        });
-                                        const rating = this.getAttribute('data-value');
-                                        for (let i = 1; i <= rating; i++) {
-                                            document.querySelector(`.clickable-rating span[data-value="${i}"]`).classList.add('active');
-                                        }
-                                        document.getElementById('starRating').value = rating;
+                                            document.querySelectorAll('.clickable-rating span').forEach(s => {
+                                                s.classList.remove('active');
+                                            });
+                                            const rating = this.getAttribute('data-value');
+                                            for (let i = 1; i <= rating; i++) {
+                                                document.querySelector(`.clickable-rating span[data-value="${i}"]`).classList.add('active');
+                                            }
+                                            document.getElementById('starRating').value = rating;
                                         });
                                     });
                                 </script>
