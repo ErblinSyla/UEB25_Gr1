@@ -126,7 +126,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             </div>
             <div class="col-8">
                 <ul class="links" id="nav-links">
-                    <li><a href="homepage.php">Homepage</a></li>
+                    <li><a href="index.php">Homepage</a></li>
                     <li><a href="about-us.php">About Us</a></li>
                     <li><a href="courses.php">Our Courses</a></li>
                     <li><a href="admission.php">Admissions</a></li>
