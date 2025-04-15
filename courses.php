@@ -149,67 +149,70 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <audio id="nav-click-audio" src="audio/shift-page.mp3"></audio>
   <section class="courses">
     <h2>Our Courses</h2>
-    <div class="row">
+    <?php
+// Full course data
+$courseData = [
+  "python" => [
+    "title" => "Python",
+    "image" => "images/pythonlogo.jpg",
+    "alt" => "Course 1",
+    "description" => "Python is a versatile programming language known for its simplicity and readability. Perfect for beginners and widely used in web development, data science, AI, and automation."
+  ],
+  "cpp" => [
+    "title" => "C++",
+    "image" => "images/cpplogo.png",
+    "alt" => "Course 2",
+    "description" => "C++ is a powerful, high-performance language often used for system software, game development, and applications requiring real-time performance."
+  ],
+  "javascript" => [
+    "title" => "JavaScript",
+    "image" => "images/javascriptlogo4.png",
+    "alt" => "Course 3",
+    "description" => "JavaScript is the essential language for web development, enabling interactive and dynamic content on websites. Learn to bring your web pages to life!"
+  ],
+  "html" => [
+    "title" => "HTML",
+    "image" => "images/htmllogo.png",
+    "alt" => "Course 4",
+    "description" => "HTML (HyperText Markup Language) is the backbone of every website. It structures web content, allowing you to create pages with text, images, and links."
+  ],
+  "css" => [
+    "title" => "CSS",
+    "image" => "images/csslogo.png",
+    "alt" => "Course 5",
+    "description" => "CSS (Cascading Style Sheets) controls the styling of web pages. Learn how to design beautiful, responsive websites with layout, colors, and animations."
+  ],
+  "github" => [
+    "title" => "GitHub",
+    "image" => "images/github logo.png",
+    "alt" => "Course 6",
+    "description" => "GitHub is a platform for version control and collaboration. Learn to manage your projects, track changes, and collaborate with other developers efficiently."
+  ]
+];
 
-      <div class="col">
-        <div class="card">
-          <img src="images/pythonlogo.jpg" alt="Course 1" />
-          <h3>Python</h3>
-          <p>
-            Python is a versatile programming language known for its simplicity and readability. Perfect for beginners and widely used in web development, data science, AI, and automation
-          </p>
-        </div>
-      </div>
+// Separate array for titles
+$courseTitles = [];
+foreach ($courseData as $key => $course) {
+  $courseTitles[$key] = $course['title'];
+}
 
-      <div class="col">
-        <div class="card">
-          <img src="images/cpplogo.png" alt="Course 2" />
-          <h3>C++</h3>
-          <p>
-            C++ is a powerful, high-performance language often used for system software, game development, and applications requiring real-time performance.
-          </p>
-        </div>
-      </div>
+// Sort by title
+asort($courseTitles);
+?>
 
-      <div class="col">
-        <div class="card">
-          <img src="images/javascriptlogo4.png" alt="Course 3" />
-          <h3>JavaScript</h3>
-          <p>
-            JavaScript is the essential language for web development, enabling interactive and dynamic content on websites. Learn to bring your web pages to life!
-          </p>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="card">
-          <img src="images/htmllogo.png" alt="Course 4" />
-          <h3>HTML</h3>
-          <p>HTML (HyperText Markup Language) is the backbone of every website. It structures web content, allowing you to create pages with text, images, and links.
-          </p>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="card">
-          <img src="images/csslogo.png" alt="Course 5" />
-          <h3>CSS</h3>
-          <p>
-            CSS (Cascading Style Sheets) controls the styling of web pages. Learn how to design beautiful, responsive websites with layout, colors, and animations.
-          </p>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="card">
-          <img src="images/github logo.png" alt="Course 6" />
-          <h3>GitHub</h3>
-          <p>
-            GitHub is a platform for version control and collaboration. Learn to manage your projects, track changes, and collaborate with other developers efficiently.
-          </p>
-        </div>
+<div class="row">
+  <?php foreach ($courseTitles as $key => $title): ?>
+    <?php $course = $courseData[$key]; ?>
+    <div class="col">
+      <div class="card">
+        <img src="<?= $course['image'] ?>" alt="<?= $course['alt'] ?>" />
+        <h3><?= $course['title'] ?></h3>
+        <p><?= $course['description'] ?></p>
       </div>
     </div>
+  <?php endforeach; ?>
+</div>
+
     <audio id="card-hover-audio" src="audio/div-hover.mp3"></audio>
     <div class="apply-container reveal">
       <audio id="button-click-audio" src="audio/button-click.mp3"></audio>
@@ -269,25 +272,57 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   </section>
   <section style="background-color: white">
     <h2>Our Professors</h2>
+    <?php
+        $professors = [
+          "john_doe" => [
+            "name" => "John Doe",
+            "title" => "Professor",
+            "gender" => "male",
+            "bio" => "John Doe is an expert in HTML, CSS and JavaScript, with over 10 years of experience."
+          ],
+          "alice_smith" => [
+            "name" => "Alice Smith",
+            "title" => "Professor",
+            "gender" => "female",
+            "bio" => "Alice Smith specializes in data structures and algorithms, with a strong background in competitive programming and 8 years of teaching experience."
+          ],
+          "bob_johnson" => [
+            "name" => "Bob Johnson",
+            "title" => "Professor",
+            "gender" => "male",
+            "bio" => "Bob Johnson is a seasoned expert in database systems and SQL, having worked in both academia and industry for over 12 years."
+          ],
+          "carol_nguyen" => [
+            "name" => "Carol Nguyen",
+            "title" => "Professor",
+            "gender" => "female",
+            "bio" => "Carol Nguyen focuses on artificial intelligence and machine learning, and has been publishing research in the field for more than 9 years."
+          ],
+          "david_lee" => [
+            "name" => "David Lee",
+            "title" => "Professor",
+            "gender" => "male",
+            "bio" => "David Lee has deep expertise in cybersecurity and network protocols, with 10 years of experience in both teaching and consulting."
+          ]
+        ];
+
+        ksort($professors);
+      ?>
     <div class="row">
+    <?php foreach ($professors as $p): 
+      $imageNumber = ($p['gender'] === 'female') ? 2 : 1;
+    ?>
       <div class="col-other reveal-left">
         <div class="card">
-          <img src="images/prof.webp" alt="Professor 1" />
-          <h3>Professor John Doe</h3>
+          <img src="images/prof<?= $imageNumber ?>.webp" alt="Professor <?= $p['name'] ?>" />
+          <h3><?= $p['title'] ?> <?= $p['name'] ?></h3>
           <p>
-            John Doe is an expert in HTML, CSS and javascript, with over 10+ years of experience.
+            <?= $p['bio'] ?>
           </p>
         </div>
       </div>
-      <div class="col-other reveal-right">
-        <div class="card">
-          <img src="images/prof2.png" alt="Professor 2" />
-          <h3>Professor Jane Smith</h3>
-          <p>
-            Jane Smith specializes in C++, Python and teaches GitHub basics thru our courses.
-          </p>
-        </div>
-      </div>
+    <?php endforeach; ?>
+      
     </div>
   </section>
   <footer>
