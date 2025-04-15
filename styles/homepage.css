@@ -207,7 +207,6 @@ ul {
 
 
 .main-wallpaper {
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url(images/homepage-wallpaper.jpg) center/cover no-repeat;
     background-size: cover;
     display: flex;
     flex-direction: column;
@@ -627,7 +626,7 @@ ul {
     padding-left: 100px;
 
     min-height: 70px;
-    background-image: url('images/mobile.png');
+    background-image: url('../images/mobile.png');
     background-repeat: no-repeat;
     background-size: 70px 70px;
     background-position: left center;
@@ -639,7 +638,7 @@ ul {
     gap: 10px;
     padding-left: 100px;
     min-height: 85px;
-    background-image: url('images/download.png');
+    background-image: url('../images/download.png');
     background-repeat: no-repeat;
     background-size: 85px 85px;
     background-position: left center;
@@ -651,7 +650,7 @@ ul {
     gap: 10px;
     padding-left: 100px;
     min-height: 70px;
-    background-image: url('images/support.png');
+    background-image: url('../images/support.png');
     background-repeat: no-repeat;
     background-size: 70px 70px;
     background-position: left center;

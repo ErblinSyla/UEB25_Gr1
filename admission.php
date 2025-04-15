@@ -3,7 +3,8 @@ $name = $email = $comment = $phone = "";
 $errors = [];
 
 $jsonPath = 'data/admission_form.json';
-require_once 'BaseFormData.php';
+require_once 'utils/BaseFormData.php';
+require 'utils/XSSValidator.php';
 
 class ReviewFormData extends ParentClass
 {
@@ -45,6 +46,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $comment = trim($_POST["comment"]);
     $phone = trim($_POST["phone"]);
     $star = $_POST["star"] ?? null;
+
+    if (validateXSSAttacks($name) || validateXSSAttacks($email) || validateXSSAttacks($phone) || validateXSSAttacks($comment)){
+        exit();
+    }
 
     if (!preg_match("/^[a-zA-ZëËçÇáàéèËÏîÎÜüÙùËÄäÖö\s]{2,50}$/", $name)) {
         $errors[] = "Emri nuk është i vlefshëm (vetëm shkronja, 2-50 karaktere).";
@@ -98,7 +103,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admissions - AlgoVerse Academy</title>
-    <link rel="stylesheet" href="admission.css">
+    <link rel="stylesheet" href="styles/admission.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -112,7 +117,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Changa:wght@200..800&family=Cinzel:wght@400..900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Spicy+Rice&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 
-    <script src="javascript.js"></script>
+    <script src="scripts/javascript.js"></script>
     <style>
         .pay-img:hover {
             box-shadow: 1px 1px 7px #0D92F4;
@@ -156,6 +161,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         table:hover {
             box-shadow: 1px 1px 7px #0D92F4;
         }
+        .wallpaper {
+            background-image: url("./images/admissions-wallpaper.jpg");
+        }
     </style>
 </head>
 
@@ -164,7 +172,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="row mobile-row">
             <div class="col-4 title">
                 <div class="logo">
-                    <img id="logo" src="algoverse_logo.svg" alt="AlgoVerse Academy Logo">
+                    <img id="logo" src="utils/algoverse_logo.svg" alt="AlgoVerse Academy Logo">
                 </div>
                 <h2>AlgoVerse Academy</h2>
             </div>

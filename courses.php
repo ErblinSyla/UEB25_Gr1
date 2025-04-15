@@ -1,7 +1,9 @@
 <?php
 $jsonPath = 'data/courses_form.json';
 
-require_once 'BaseFormData.php';
+require_once 'utils/BaseFormData.php';
+require 'utils/XSSValidator.php';
+
 
 class ApplyCourses extends ParentClass
 {
@@ -48,7 +50,7 @@ class ApplyCourses extends ParentClass
       "\n\t}";
   }
 }
-// Check if the form is submitted
+
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -58,6 +60,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $password = $_POST['password'];
   $course = $_POST['course'];
   
+  if (validateXSSAttacks($name) || validateXSSAttacks($email) || validateXSSAttacks($password)){
+    exit();
+  }
+
   if(isset($_POST["file-upload"])) {
     $fileName = basename($_FILES["file-upload"]["name"]);
     $targetFilePath = "uploads/" . $fileName;
@@ -96,9 +102,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Courses and Professors</title>
-  <link rel="stylesheet" href="courses.css" />
+  <link rel="stylesheet" href="styles/courses.css" />
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="courses.js"></script>
+  <script src="scripts/courses.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Rubik:ital,wght@0,300..900;1,300..900&family=Spicy+Rice&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
@@ -111,7 +117,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Changa:wght@200..800&family=Cinzel:wght@400..900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Spicy+Rice&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 
-  <script src="javascript.js"></script>
+  <script src="scripts/javascript.js"></script>
 
 </head>
 
@@ -121,7 +127,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="row mobile-row" style="justify-content: space-between; width: 100%;">
       <div class="col-4 title">
         <div class="logo">
-          <img id="logo" src="algoverse_logo.svg" alt="AlgoVerse Academy Logo">
+          <img id="logo" src="utils/algoverse_logo.svg" alt="AlgoVerse Academy Logo">
         </div>
         <h2 style="color: black;">AlgoVerse Academy</h2>
       </div>

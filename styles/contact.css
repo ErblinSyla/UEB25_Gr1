@@ -463,10 +463,10 @@ footer {
 
 @font-face {
     font-family: 'MyFont';
-    src: url(fonts/Rubik/Rubik-VariableFont_wght.ttf); 
+    src: url(../fonts/Rubik/Rubik-VariableFont_wght.ttf); 
 }
 
 @font-face {
     font-family: 'MyFontItalic';
-    src: url(fonts/Rubik/Rubik-Italic-VariableFont_wght.ttf); 
+    src: url(../fonts/Rubik/Rubik-Italic-VariableFont_wght.ttf); 
 }

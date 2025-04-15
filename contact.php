@@ -1,6 +1,7 @@
 <?php 
 $jsonPath = 'data/contact_form.json';
-require_once 'BaseFormData.php';
+require_once 'utils/BaseFormData.php';
+require 'utils/XSSValidator.php';
 
 class ContactFormData extends ParentClass {
     public $gender;
@@ -48,6 +49,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $interests = $_POST['interests'] ?? [];
     $message = trim($_POST['message'] ?? '');
 
+    if (validateXSSAttacks($name) || validateXSSAttacks($email) || validateXSSAttacks($age) || validateXSSAttacks($message)){
+        exit();
+    }
     $formData = new ContactFormData($name, $email, $gender, $age, $interests, $message);
 
     if (filesize($jsonPath) == 0) {
@@ -70,7 +74,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     <meta charset="UTF-8">
     <title>Contact Us - AlgoVerse Academy</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="contact.css">
+    <link rel="stylesheet" type="text/css" href="styles/contact.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -86,7 +90,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     
 
-    <script src="javascript.js"></script>
+    <script src="scripts/javascript.js"></script>
     <script>
         window.addEventListener('scroll', reveal);
         window.addEventListener('scroll', revealLeft);
@@ -116,7 +120,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         <div class="row mobile-row">
             <div class="col-4 title">
                 <div class="logo">
-                    <img id="logo" src="algoverse_logo.svg" alt="AlgoVerse Academy Logo">
+                    <img id="logo" src="utils/algoverse_logo.svg" alt="AlgoVerse Academy Logo">
                 </div>
                 <h2>AlgoVerse Academy</h2>
             </div>

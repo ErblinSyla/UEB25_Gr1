@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - AlgoVerse Academy</title>
-    <link rel="stylesheet" href="about-us.css">
+    <link rel="stylesheet" href="styles/about-us.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,7 +20,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Changa:wght@200..800&family=Cinzel:wght@400..900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Spicy+Rice&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 
-    <script src="javascript.js"></script>
+    <script src="scripts/javascript.js"></script>
     <script>
         window.addEventListener('scroll', reveal);
         window.addEventListener('scroll', revealLeft);
@@ -50,7 +50,7 @@
         <div class="row mobile-row">
             <div class="col-4 title">
                 <div class="logo">
-                    <img id="logo" src="algoverse_logo.svg" alt="AlgoVerse Academy Logo">
+                    <img id="logo" src="utils/algoverse_logo.svg" alt="AlgoVerse Academy Logo">
 
                 </div>
                 <h2>AlgoVerse Academy</h2>

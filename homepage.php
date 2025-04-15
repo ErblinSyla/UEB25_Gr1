@@ -1,6 +1,7 @@
 <?php 
 
-require_once 'BaseFormData.php';
+require_once 'utils/BaseFormData.php';
+require 'utils/XSSValidator.php';
 
 class FormData extends ParentClass {
     public function inherJSONify(){
@@ -12,22 +13,30 @@ $jsonPath = 'data/homepage_form.json';
 
 ?>
 <?php
-// Enhanced validation functions
+
+function cleanName($input) {
+    $clean = preg_replace("/[^a-zA-Z\s]/", "", $input); 
+    return preg_replace("/\s+/", " ", trim($clean));    
+}
+
 function validateEmail($email) {
     return preg_match("/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/", $email);
 }
 
-function cleanName($input) {
-    $clean = preg_replace("/[^a-zA-Z\s]/", "", $input); // Remove non-letters and spaces
-    return preg_replace("/\s+/", " ", trim($clean));    // Remove extra spaces
-}
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $name = cleanName($_POST['name-input'] ?? '');
+    $name = trim($_POST['name-input'] ?? '');
     $email = trim($_POST['email-input'] ?? '');
     
     $errors = [];
-    
+
+    if(validateXSSAttacks($name) || validateXSSAttacks($email)) {
+        exit();
+    }
+
+    $name = cleanName($name);
+
     // Name validation
     if (empty($name)) {
         $errors[] = "Name is required";
@@ -74,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AlgoVerse Academy</title>
-    <link rel="stylesheet" href="homepage.css">
+    <link rel="stylesheet" href="styles/homepage.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Rubik:ital,wght@0,300..900;1,300..900&family=Spicy+Rice&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
@@ -86,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Changa:wght@200..800&family=Cinzel:wght@400..900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Spicy+Rice&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
-    <script src="javascript.js"></script>
+    <script src="scripts/javascript.js"></script>
 
     <style>
         nav .title h2 {
@@ -109,6 +118,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             font-family: "Cinzel", serif;
             font-weight: bold;
         }
+        .main-wallpaper {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url("./images/homepage-wallpaper.jpg") center/cover no-repeat;
+        }
     </style>
 </head>
 
@@ -119,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="row mobile-row">
             <div class="col-4 title">
                 <div class="logo">
-                    <img id="logo" src="algoverse_logo.svg" alt="AlgoVerse Academy Logo">
+                    <img id="logo" src="utils/algoverse_logo.svg" alt="AlgoVerse Academy Logo">
 
                 </div>
                 <h2>AlgoVerse Academy</h2>
@@ -194,7 +206,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         });
     </script>
 
-    <script src="homepage.js"></script>
+    <script src="scripts/homepage.js"></script>
     <main class="main-section">
         <!--                                               MAIN SECTION                                          -->
         <section class="main-wallpaper">
