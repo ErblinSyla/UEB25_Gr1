@@ -11,7 +11,7 @@ class ParentClass {
     }
 
     protected function JSONify() {
-        return "\n\t{ \n\t\t\"Name\": \"" . $this->name . "\",\n\t\t\"Email\": \"" . $this->email . "\"\n\t}";
+        return json_encode($this);
     }
 }
 ?>

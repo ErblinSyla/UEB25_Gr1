@@ -41,13 +41,7 @@ class ApplyCourses extends ParentClass
 
   public function JSONify()
   {
-    return "\n\t{\n" .
-      "\t\t\"Name\": \"" . $this->name . "\",\n" .
-      "\t\t\"Email\": \"" . $this->email . "\",\n" .
-      "\t\t\"Password\": \"" . $this->password . "\",\n" .
-      "\t\t\"Course\": \"" . $this->course . "\",\n" .
-      "\t\t\"File\": \"" . $this->file . "\"" .
-      "\n\t}";
+    return json_encode($this);
   }
 }
 
