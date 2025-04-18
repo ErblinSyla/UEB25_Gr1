@@ -1,4 +1,6 @@
 <?php
+$currentPage = 'admission'; 
+require('navbar.php');
 $name = $email = $comment = $phone = "";
 $errors = [];
 
@@ -168,6 +170,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
+    <!--
     <nav>
         <div class="row mobile-row">
             <div class="col-4 title">
@@ -190,6 +193,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </div>
     </nav>
+    -->
     <audio id="nav-hover-audio" src="audio/navbar-hover.mp3"></audio>
     <audio id="nav-click-audio" src="audio/shift-page.mp3"></audio>
     <main class="main-section">

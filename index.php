@@ -1,5 +1,8 @@
 <?php 
 
+$currentPage = 'index'; 
+require('navbar.php');
+
 require_once 'utils/BaseFormData.php';
 require 'utils/XSSValidator.php';
 
@@ -125,7 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 
 <body>
-    <!--                                     NAVBAR                                                      -->
+    <!--                                     NAVBAR                                                    
     <nav>
 
         <div class="row mobile-row">
@@ -150,6 +153,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
         </div>
     </nav>
+      -->
     <audio id="nav-hover-audio" src="audio/navbar-hover.mp3"></audio>
     <audio id="nav-click-audio" src="audio/shift-page.mp3"></audio>
 

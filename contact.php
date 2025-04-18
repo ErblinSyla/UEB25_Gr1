@@ -1,4 +1,8 @@
 <?php 
+
+$currentPage = 'contact'; 
+require('navbar.php');
+
 $jsonPath = 'data/contact_form.json';
 require_once 'utils/BaseFormData.php';
 require 'utils/XSSValidator.php';
@@ -116,6 +120,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 </head>
 
 <body>
+    <!--
     <nav>
         <div class="row mobile-row">
             <div class="col-4 title">
@@ -137,7 +142,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 </div>
             </div>
         </div>
-    </nav>
+    </nav>]
+    -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const currentPage = window.location.href;
