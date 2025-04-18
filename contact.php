@@ -56,17 +56,63 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     if (validateXSSAttacks($name) || validateXSSAttacks($email) || validateXSSAttacks($age) || validateXSSAttacks($message)){
         exit();
     }
+   
+    if (!preg_match('/^[a-zA-Z\s\-\.\'çÇëË]{2,50}$/', $name)) {
+        die("Invalid name format. Only letters, spaces, and basic punctuation allowed.");
+    }
+   
+    if (!preg_match('/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $email)) {
+        die("Invalid email format.");
+    }
+   
+    if (!preg_match('/^(1[0-1][0-9]|120|[1-9][0-9]|[1-9])$/', $age)) {
+        die("Age must be between 1 and 120.");
+    }
+   
+    if (!in_array($gender, ['male', 'female'])) {
+        die("Invalid gender selection.");
+    }
+   
+    if (empty($interests)) {
+        die("Please select at least one interest.");
+    }
+    foreach ($interests as $interest) {
+        if (!in_array($interest, ['Front End', 'Back End', 'Full Stack'])) {
+            die("Invalid interest selected.");
+        }
+    }
+   
+    if (strlen($message) < 10 || strlen($message) > 1000) {
+        die("Message must be between 10 and 1000 characters.");
+    }
+    if (preg_match('/[<>{}]/', $message)) {
+        die("Message contains invalid characters.");
+    }
+   
+    if (isset($_POST['phone']) && !empty($_POST['phone'])) {
+        $phone = preg_replace('/[^0-9]/', '', $_POST['phone']);
+        if (strlen($phone) == 10) {
+            $phone = preg_replace('/(\d{3})(\d{3})(\d{4})/', '($1) $2-$3', $phone);
+        }
+    }
+   
+    $name = preg_replace_callback('/\b(\w)/', function($matches) {
+        return strtoupper($matches[1]);
+    }, strtolower($name));
+   
     $formData = new ContactFormData($name, $email, $gender, $age, $interests, $message);
 
     if (filesize($jsonPath) == 0) {
         $jsonData = "[" . $formData->JSONify() . "\n]";
         file_put_contents($jsonPath, $jsonData);
     } else {
-        //if file is not empty execute this code
         $jsonData = file_get_contents($jsonPath);
         $jsonData = rtrim($jsonData, "]\n") . "\n ," . $formData->JSONify() . "\n]";
         file_put_contents($jsonPath, $jsonData);
     }
+   
+    $formattedInterests = implode(", ", $interests);
+    echo "<script>alert('Thank you, " . addslashes($name) . "! We received your message about " . addslashes($formattedInterests) . ".');</script>";
 }
 
 ?>
