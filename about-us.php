@@ -1,3 +1,12 @@
+<?php 
+
+$currentPage = 'about-us'; 
+require('navbar.php');
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,6 +54,7 @@
 </head>
 
 <body>
+    <!--
     <nav>
 
         <div class="row mobile-row">
@@ -69,6 +79,7 @@
             </div>
         </div>
     </nav>
+    -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const currentPage = window.location.href;
