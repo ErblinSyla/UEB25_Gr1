@@ -1,4 +1,6 @@
 <?php
+$currentPage = 'contact'; 
+require('navbar.php');
 $jsonPath = 'data/courses_form.json';
 
 require_once 'utils/BaseFormData.php';
@@ -53,24 +55,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $email = $_POST['email'];
   $password = $_POST['password'];
   $course = $_POST['course'];
-  
-  if (validateXSSAttacks($name) || validateXSSAttacks($email) || validateXSSAttacks($password)){
+
+  if (validateXSSAttacks($name) || validateXSSAttacks($email) || validateXSSAttacks($password)) {
     exit();
   }
 
-  if(isset($_POST["file-upload"])) {
+  if (isset($_POST["file-upload"])) {
     $fileName = basename($_FILES["file-upload"]["name"]);
     $targetFilePath = "uploads/" . $fileName;
-  
-    if(file_exists($targetFilePath)) {
+
+    if (file_exists($targetFilePath)) {
       die("Sorry, file already exists.");
     }
-    if(move_uploaded_file($_FILES["file-upload"]["name"], $targetFilePath)) {
+    if (move_uploaded_file($_FILES["file-upload"]["name"], $targetFilePath)) {
       echo "The file " . htmlspecialchars($fileName) . " has been uploaded.";
     } else {
       echo "Sorry, there was an error uploading your file.";
     }
-  }else{
+  } else {
     $targetFilePath = "uploads/default.svg";
   }
 
@@ -96,7 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Courses and Professors</title>
-  <link rel="stylesheet" href="styles/courses.css" />
+  <link rel="stylesheet" href="styles/courses.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="scripts/courses.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -117,13 +119,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
 
-  <nav id = "top">
-    <div class="row mobile-row" style="justify-content: space-between; width: 100%;">
+  <!-- <nav>
+
+    <div class="row mobile-row">
       <div class="col-4 title">
         <div class="logo">
           <img id="logo" src="utils/algoverse_logo.svg" alt="AlgoVerse Academy Logo">
+
         </div>
-        <h2 style="color: black;">AlgoVerse Academy</h2>
+        <h2>AlgoVerse Academy</h2>
       </div>
       <div class="col-8">
         <ul class="links" id="nav-links">
@@ -138,80 +142,80 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
       </div>
     </div>
-  </nav>
+  </nav> -->
   <audio id="nav-hover-audio" src="audio/navbar-hover.mp3"></audio>
   <audio id="nav-click-audio" src="audio/shift-page.mp3"></audio>
   <section class="courses">
     <h2>Our Courses</h2>
     <?php
-// Full course data
-$courseData = [
-  "python" => [
-    "title" => "Python",
-    "image" => "images/pythonlogo.jpg",
-    "alt" => "Course 1",
-    "description" => "Python is a versatile programming language known for its simplicity and readability. Perfect for beginners and widely used in web development, data science, AI, and automation."
-  ],
-  "cpp" => [
-    "title" => "C++",
-    "image" => "images/cpplogo.png",
-    "alt" => "Course 2",
-    "description" => "C++ is a powerful, high-performance language often used for system software, game development, and applications requiring real-time performance."
-  ],
-  "javascript" => [
-    "title" => "JavaScript",
-    "image" => "images/javascriptlogo4.png",
-    "alt" => "Course 3",
-    "description" => "JavaScript is the essential language for web development, enabling interactive and dynamic content on websites. Learn to bring your web pages to life!"
-  ],
-  "html" => [
-    "title" => "HTML",
-    "image" => "images/htmllogo.png",
-    "alt" => "Course 4",
-    "description" => "HTML (HyperText Markup Language) is the backbone of every website. It structures web content, allowing you to create pages with text, images, and links."
-  ],
-  "css" => [
-    "title" => "CSS",
-    "image" => "images/csslogo.png",
-    "alt" => "Course 5",
-    "description" => "CSS (Cascading Style Sheets) controls the styling of web pages. Learn how to design beautiful, responsive websites with layout, colors, and animations."
-  ],
-  "github" => [
-    "title" => "GitHub",
-    "image" => "images/github logo.png",
-    "alt" => "Course 6",
-    "description" => "GitHub is a platform for version control and collaboration. Learn to manage your projects, track changes, and collaborate with other developers efficiently."
-  ]
-];
+    // Full course data
+    $courseData = [
+      "python" => [
+        "title" => "Python",
+        "image" => "images/pythonlogo.jpg",
+        "alt" => "Course 1",
+        "description" => "Python is a versatile programming language known for its simplicity and readability. Perfect for beginners and widely used in web development, data science, AI, and automation."
+      ],
+      "cpp" => [
+        "title" => "C++",
+        "image" => "images/cpplogo.png",
+        "alt" => "Course 2",
+        "description" => "C++ is a powerful, high-performance language often used for system software, game development, and applications requiring real-time performance."
+      ],
+      "javascript" => [
+        "title" => "JavaScript",
+        "image" => "images/javascriptlogo4.png",
+        "alt" => "Course 3",
+        "description" => "JavaScript is the essential language for web development, enabling interactive and dynamic content on websites. Learn to bring your web pages to life!"
+      ],
+      "html" => [
+        "title" => "HTML",
+        "image" => "images/htmllogo.png",
+        "alt" => "Course 4",
+        "description" => "HTML (HyperText Markup Language) is the backbone of every website. It structures web content, allowing you to create pages with text, images, and links."
+      ],
+      "css" => [
+        "title" => "CSS",
+        "image" => "images/csslogo.png",
+        "alt" => "Course 5",
+        "description" => "CSS (Cascading Style Sheets) controls the styling of web pages. Learn how to design beautiful, responsive websites with layout, colors, and animations."
+      ],
+      "github" => [
+        "title" => "GitHub",
+        "image" => "images/github logo.png",
+        "alt" => "Course 6",
+        "description" => "GitHub is a platform for version control and collaboration. Learn to manage your projects, track changes, and collaborate with other developers efficiently."
+      ]
+    ];
 
-// Separate array for titles
-$courseTitles = [];
-foreach ($courseData as $key => $course) {
-  $courseTitles[$key] = $course['title'];
-}
+    // Separate array for titles
+    $courseTitles = [];
+    foreach ($courseData as $key => $course) {
+      $courseTitles[$key] = $course['title'];
+    }
 
-// Sort by title
-asort($courseTitles);
-?>
+    // Sort by title
+    asort($courseTitles);
+    ?>
 
-<div class="row">
-  <?php foreach ($courseTitles as $key => $title): ?>
-    <?php $course = $courseData[$key]; ?>
-    <div class="col">
-      <div class="card">
-        <img src="<?= $course['image'] ?>" alt="<?= $course['alt'] ?>" />
-        <h3><?= $course['title'] ?></h3>
-        <p><?= $course['description'] ?></p>
-      </div>
+    <div class="row-other">
+      <?php foreach ($courseTitles as $key => $title): ?>
+        <?php $course = $courseData[$key]; ?>
+        <div class="col">
+          <div class="card">
+            <img src="<?= $course['image'] ?>" alt="<?= $course['alt'] ?>" />
+            <h3><?= $course['title'] ?></h3>
+            <p><?= $course['description'] ?></p>
+          </div>
+        </div>
+      <?php endforeach; ?>
     </div>
-  <?php endforeach; ?>
-</div>
 
     <audio id="card-hover-audio" src="audio/div-hover.mp3"></audio>
     <div class="apply-container reveal">
       <audio id="button-click-audio" src="audio/button-click.mp3"></audio>
       <a href="#top"><button id="applyButton">Apply for a Course</button></a>
-      
+
     </div>
     <div id="applyModal" class="apply-modal">
       <div class="apply-modal-content">
@@ -267,56 +271,56 @@ asort($courseTitles);
   <section style="background-color: white">
     <h2>Our Professors</h2>
     <?php
-        $professors = [
-          "john_doe" => [
-            "name" => "John Doe",
-            "title" => "Professor",
-            "gender" => "male",
-            "bio" => "John Doe is an expert in HTML, CSS and JavaScript, with over 10 years of experience."
-          ],
-          "alice_smith" => [
-            "name" => "Alice Smith",
-            "title" => "Professor",
-            "gender" => "female",
-            "bio" => "Alice Smith specializes in data structures and algorithms, with a strong background in competitive programming and 8 years of teaching experience."
-          ],
-          "bob_johnson" => [
-            "name" => "Bob Johnson",
-            "title" => "Professor",
-            "gender" => "male",
-            "bio" => "Bob Johnson is a seasoned expert in database systems and SQL, having worked in both academia and industry for over 12 years."
-          ],
-          "carol_nguyen" => [
-            "name" => "Carol Nguyen",
-            "title" => "Professor",
-            "gender" => "female",
-            "bio" => "Carol Nguyen focuses on artificial intelligence and machine learning, and has been publishing research in the field for more than 9 years."
-          ],
-          "david_lee" => [
-            "name" => "David Lee",
-            "title" => "Professor",
-            "gender" => "male",
-            "bio" => "David Lee has deep expertise in cybersecurity and network protocols, with 10 years of experience in both teaching and consulting."
-          ]
-        ];
+    $professors = [
+      "john_doe" => [
+        "name" => "John Doe",
+        "title" => "Professor",
+        "gender" => "male",
+        "bio" => "John Doe is an expert in HTML, CSS and JavaScript, with over 10 years of experience."
+      ],
+      "alice_smith" => [
+        "name" => "Alice Smith",
+        "title" => "Professor",
+        "gender" => "female",
+        "bio" => "Alice Smith specializes in data structures and algorithms, with a strong background in competitive programming and 8 years of teaching experience."
+      ],
+      "bob_johnson" => [
+        "name" => "Bob Johnson",
+        "title" => "Professor",
+        "gender" => "male",
+        "bio" => "Bob Johnson is a seasoned expert in database systems and SQL, having worked in both academia and industry for over 12 years."
+      ],
+      "carol_nguyen" => [
+        "name" => "Carol Nguyen",
+        "title" => "Professor",
+        "gender" => "female",
+        "bio" => "Carol Nguyen focuses on artificial intelligence and machine learning, and has been publishing research in the field for more than 9 years."
+      ],
+      "david_lee" => [
+        "name" => "David Lee",
+        "title" => "Professor",
+        "gender" => "male",
+        "bio" => "David Lee has deep expertise in cybersecurity and network protocols, with 10 years of experience in both teaching and consulting."
+      ]
+    ];
 
-        ksort($professors);
-      ?>
-    <div class="row">
-    <?php foreach ($professors as $p): 
-      $imageNumber = ($p['gender'] === 'female') ? 2 : 1;
+    ksort($professors);
     ?>
-      <div class="col-other reveal-left">
-        <div class="card">
-          <img src="images/prof<?= $imageNumber ?>.webp" alt="Professor <?= $p['name'] ?>" />
-          <h3><?= $p['title'] ?> <?= $p['name'] ?></h3>
-          <p>
-            <?= $p['bio'] ?>
-          </p>
+    <div class="row-other">
+      <?php foreach ($professors as $p):
+        $imageNumber = ($p['gender'] === 'female') ? 2 : 1;
+      ?>
+        <div class="col-other reveal-left">
+          <div class="card">
+            <img src="images/prof<?= $imageNumber ?>.webp" alt="Professor <?= $p['name'] ?>" />
+            <h3><?= $p['title'] ?> <?= $p['name'] ?></h3>
+            <p>
+              <?= $p['bio'] ?>
+            </p>
+          </div>
         </div>
-      </div>
-    <?php endforeach; ?>
-      
+      <?php endforeach; ?>
+
     </div>
   </section>
   <footer>
@@ -473,12 +477,12 @@ asort($courseTitles);
 
       applyButton.onclick = function() {
         modal.style.display = "block";
-        document.body.style.overflow = "hidden"; 
-      };      
+        document.body.style.overflow = "hidden";
+      };
 
       closeModal.onclick = function() {
         modal.style.display = "none";
-        document.body.style.overflow = "auto"; 
+        document.body.style.overflow = "auto";
       };
 
       window.onclick = function(event) {
