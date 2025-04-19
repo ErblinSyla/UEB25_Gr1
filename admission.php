@@ -170,30 +170,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
-    <!--
-    <nav>
-        <div class="row mobile-row">
-            <div class="col-4 title">
-                <div class="logo">
-                    <img id="logo" src="utils/algoverse_logo.svg" alt="AlgoVerse Academy Logo">
-                </div>
-                <h2>AlgoVerse Academy</h2>
-            </div>
-            <div class="col-8">
-                <ul class="links" id="nav-links">
-                    <li><a href="index.php">Homepage</a></li>
-                    <li><a href="about-us.php">About Us</a></li>
-                    <li><a href="courses.php">Our Courses</a></li>
-                    <li><a id="admission" href="admission.php">Admissions</a></li>
-                    <li><a href="contact.php">Contact</a></li>
-                </ul>
-                <div class="hamburger" id="hamburger">
-                    <p>&#9776;</p>
-                </div>
-            </div>
-        </div>
-    </nav>
-    -->
     <audio id="nav-hover-audio" src="audio/navbar-hover.mp3"></audio>
     <audio id="nav-click-audio" src="audio/shift-page.mp3"></audio>
     <main class="main-section">
@@ -519,10 +495,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         </div>
                                     <?php endif; ?>
                                 </form>
-
                                 <script>
-                                    // Star rating functionality
-                                    // when clicking star hidden input gets the value of the selected star
                                     document.querySelectorAll('.clickable-rating span').forEach(star => {
                                         star.addEventListener('click', function() {
                                             document.querySelectorAll('.clickable-rating span').forEach(s => {
@@ -536,7 +509,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         });
                                     });
                                 </script>
-
                             </div>
                         </div>
                     </div>
@@ -574,17 +546,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </section>
     </main>
-    <!-- <footer>
-        <div class="row">
-            <div class="col-12">
-                <p>&copy; <span><?php echo date("Y-m-d"); ?></span> <em>AlgoVerse Academy. All rights reserved.</em></p>
-            </div>
-        </div>
-    </footer> -->
     <?php
     require('footer.php');
     ?>
-
     <script>
         window.addEventListener('scroll', reveal);
         window.addEventListener('scroll', revealLeft);
