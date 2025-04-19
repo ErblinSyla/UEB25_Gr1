@@ -515,13 +515,16 @@ document.getElementById('newsletterForm').addEventListener('submit', async (e) =
         });
     </script>
     <!--                                                    COPYRIGHT                                                -->
-    <footer>
+    <!-- <footer>
         <div class="row">
             <div class="col-12">
                 <p>&copy; <span><?php echo date("Y-m-d"); ?></span> <em>AlgoVerse Academy. All rights reserved.</em></p>
             </div>
         </div>
-    </footer>
+    </footer> -->
+    <?php
+    require('footer.php');
+    ?>
 
     <script>
         const currentDate = new Date();
