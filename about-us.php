@@ -1,6 +1,6 @@
-<?php 
+<?php
 
-$currentPage = 'about-us'; 
+$currentPage = 'about-us';
 require('navbar.php');
 ?>
 
