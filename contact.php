@@ -49,6 +49,12 @@ class ContactFormData extends ParentClass
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    function showAlertAndGoBack($message)
+    {
+        echo "<script>alert('" . addslashes($message) . "'); window.history.back();</script>";
+        exit();
+    }
+
     $name = trim($_POST['name'] ?? '');
     $email = trim($_POST['email'] ?? '');
     $gender = $_POST['gender'] ?? '';
@@ -61,35 +67,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if (!preg_match('/^[a-zA-Z\s\-\.\'çÇëË]{2,50}$/', $name)) {
-        die("Invalid name format. Only letters, spaces, and basic punctuation allowed.");
+        showAlertAndGoBack("Invalid name format. Only letters, spaces, and basic punctuation allowed.");
     }
 
     if (!preg_match('/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $email)) {
-        die("Invalid email format.");
+        showAlertAndGoBack("Invalid email format.");
     }
 
     if (!preg_match('/^(1[0-1][0-9]|120|[1-9][0-9]|[1-9])$/', $age)) {
-        die("Age must be between 1 and 120.");
+        showAlertAndGoBack("Age must be between 1 and 120.");
     }
 
     if (!in_array($gender, ['male', 'female'])) {
-        die("Invalid gender selection.");
+        showAlertAndGoBack("Invalid gender selection.");
     }
 
     if (empty($interests)) {
-        die("Please select at least one interest.");
+        showAlertAndGoBack("Please select at least one interest.");
     }
+
     foreach ($interests as $interest) {
         if (!in_array($interest, ['Front End', 'Back End', 'Full Stack'])) {
-            die("Invalid interest selected.");
+            showAlertAndGoBack("Invalid interest selected.");
         }
     }
 
     if (strlen($message) < 10 || strlen($message) > 1000) {
-        die("Message must be between 10 and 1000 characters.");
+        showAlertAndGoBack("Message must be between 10 and 1000 characters.");
     }
+
     if (preg_match('/[<>{}]/', $message)) {
-        die("Message contains invalid characters.");
+        showAlertAndGoBack("Message contains invalid characters.");
     }
 
     if (isset($_POST['phone']) && !empty($_POST['phone'])) {
@@ -117,6 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $formattedInterests = implode(", ", $interests);
     echo "<script>alert('Thank you, " . addslashes($name) . "!\n We received your message about " . addslashes($formattedInterests) . ".');</script>";
 }
+
 
 ?>
 
