@@ -115,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     $formattedInterests = implode(", ", $interests);
-    echo "<script>alert('Thank you, " . addslashes($name) . "! We received your message about " . addslashes($formattedInterests) . ".');</script>";
+    echo "<script>alert('Thank you, " . addslashes($name) . "!\n We received your message about " . addslashes($formattedInterests) . ".');</script>";
 }
 
 ?>

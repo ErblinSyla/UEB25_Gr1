@@ -1,11 +1,7 @@
 <?php
-
 $currentPage = 'about-us';
 require('navbar.php');
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">

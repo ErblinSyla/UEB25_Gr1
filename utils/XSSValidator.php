@@ -3,17 +3,25 @@
 function validateXSSAttacks($data)
 {
 
-    $jsXSS = preg_match("/<script.*?>.*?<\/script>/", $data);
+    $jsXSS = preg_match("/<\/?script>/", $data);
+    $htmlXSS = preg_match("/<\/?\w+>/", $data);
     $xmlXSS = preg_match("/<\?xml.*?\?>/", $data);
     $sqlXSS = preg_match("/[\'\"\\\]/", $data);
     $phpXSS = preg_match("/<\?php.*?\?>/", $data);
 
     switch (true) {
-        case $jsXSS:
-            echo "<script>
-                    alert('JS XSS attack in $data'); 
-                    console.log('JS XSS attack in $data');
-                  </script>";
+        case $htmlXSS:
+            if($jsXSS == 1){
+                echo "<script>
+                        alert('HTML XSS attack in $data'); 
+                        console.log('HTML XSS attack in $data');
+                      </script>";
+            } else {
+                echo "<script>
+                        alert('JS XSS attack in $data'); 
+                        console.log('JS XSS attack in $data');
+                    </script>";
+            }
             break;
         case $xmlXSS:
             echo "<script>

@@ -4,6 +4,10 @@ body {
     font-family: sans-serif, serif;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 .row {
     width: 100%;
     display: flex;

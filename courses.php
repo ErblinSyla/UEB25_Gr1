@@ -1,6 +1,6 @@
 <?php
 $currentPage = 'contact';
-require('navbar.php');
+require 'navbar.php';
 $jsonPath = 'data/courses_form.json';
 
 require_once 'utils/BaseFormData.php';
@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (file_exists($targetFilePath)) {
             die("Sorry, file already exists.");
         }
-        if (move_uploaded_file($_FILES["file-upload"]["name"], $targetFilePath)) {
+        if (move_uploaded_file($_FILES["file-upload"]["tmp_name"], $targetFilePath)) {
             echo "The file " . htmlspecialchars($fileName) . " has been uploaded.";
         } else {
             echo "Sorry, there was an error uploading your file.";
@@ -88,7 +88,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $jsonData = rtrim($jsonData, "]\n") . "\n ," . $applyCourses->JSONify() . "\n]";
         file_put_contents($jsonPath, $jsonData);
     }
-    // You can now use the methods of the ApplyCourses class as needed
 }
 ?>
 <!DOCTYPE html>

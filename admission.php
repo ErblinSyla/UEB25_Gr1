@@ -75,13 +75,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($errors)) {
         $review = new ReviewFormData($name, $email, $phone, $comment, $star);
 
-        //if file is empty execute this code
-
         if (filesize($jsonPath) == 0) {
             $jsonData = "[" . $review->JSONify() . "\n]";
             file_put_contents($jsonPath, $jsonData);
         } else {
-            //if file is not empty execute this code
+            
             $jsonData = file_get_contents($jsonPath);
             $jsonData = rtrim($jsonData, "]\n") . "\n ," . $review->JSONify() . "\n]";
             file_put_contents($jsonPath, $jsonData);

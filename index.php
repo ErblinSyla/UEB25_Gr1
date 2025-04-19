@@ -1,7 +1,6 @@
 <?php
 
 $currentPage = 'index';
-require('navbar.php');
 
 require_once 'utils/BaseFormData.php';
 require 'utils/XSSValidator.php';
@@ -44,14 +43,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $name = cleanName($name);
 
-    // Name validation
+    // Validon emrin
     if (empty($name)) {
         $errors[] = "Name is required";
     } elseif (preg_match("/[0-9]/", $name)) {
         $errors[] = "Name cannot contain numbers";
     }
 
-    // Email validation
+    // Validon emailin
     if (!validateEmail($email)) {
         $errors[] = "Invalid email format";
     }
@@ -64,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $jsonData = "[" . $newsletter->inherJSONify() . "\n]";
             file_put_contents($jsonPath, $jsonData);
         } else {
-            //if file is not empty execute this code
+            
             $jsonData = file_get_contents($jsonPath);
             $jsonData = rtrim($jsonData, "]\n") . "\n ," . $newsletter->inherJSONify() . "\n]";
             file_put_contents($jsonPath, $jsonData);
@@ -133,32 +132,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 
 <body>
-    <!--                                     NAVBAR                                                    
-    <nav>
+    <!--                                     NAVBAR                                                    -->
+    <?php require 'navbar.php'; ?>
 
-        <div class="row mobile-row">
-            <div class="col-4 title">
-                <div class="logo">
-                    <img id="logo" src="utils/algoverse_logo.svg" alt="AlgoVerse Academy Logo">
-
-                </div>
-                <h2>AlgoVerse Academy</h2>
-            </div>
-            <div class="col-8">
-                <ul class="links" id="nav-links">
-                    <li><a id="homepage" href="index.php">Homepage</a></li>
-                    <li><a href="about-us.php">About Us</a></li>
-                    <li><a href="courses.php">Our Courses</a></li>
-                    <li><a href="admission.php">Admissions</a></li>
-                    <li><a href="contact.php">Contact</a></li>
-                </ul>
-                <div class="hamburger" id="hamburger">
-                    <p>&#9776;</p>
-                </div>
-            </div>
-        </div>
-    </nav>
-      -->
     <audio id="nav-hover-audio" src="audio/navbar-hover.mp3"></audio>
     <audio id="nav-click-audio" src="audio/shift-page.mp3"></audio>
 
