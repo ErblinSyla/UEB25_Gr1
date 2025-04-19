@@ -1,12 +1,13 @@
 <?php
 
-function validateXSSAttacks($data) {
+function validateXSSAttacks($data)
+{
 
     $jsXSS = preg_match("/<script.*?>.*?<\/script>/", $data);
     $xmlXSS = preg_match("/<\?xml.*?\?>/", $data);
     $sqlXSS = preg_match("/[\'\"\\\]/", $data);
     $phpXSS = preg_match("/<\?php.*?\?>/", $data);
-    
+
     switch (true) {
         case $jsXSS:
             echo "<script>
@@ -35,5 +36,3 @@ function validateXSSAttacks($data) {
     }
     return $jsXSS || $sqlXSS || $phpXSS || $xmlXSS;
 }
-
-?>

@@ -1,13 +1,15 @@
-<?php 
+<?php
 
-$currentPage = 'index'; 
+$currentPage = 'index';
 require('navbar.php');
 
 require_once 'utils/BaseFormData.php';
 require 'utils/XSSValidator.php';
 
-class FormData extends ParentClass {
-    public function inherJSONify(){
+class FormData extends ParentClass
+{
+    public function inherJSONify()
+    {
         return $this->JSONify();
     }
 }
@@ -17,12 +19,14 @@ $jsonPath = 'data/homepage_form.json';
 ?>
 <?php
 
-function cleanName($input) {
-    $clean = preg_replace("/[^a-zA-Z\s]/", "", $input); 
-    return preg_replace("/\s+/", " ", trim($clean));    
+function cleanName($input)
+{
+    $clean = preg_replace("/[^a-zA-Z\s]/", "", $input);
+    return preg_replace("/\s+/", " ", trim($clean));
 }
 
-function validateEmail($email) {
+function validateEmail($email)
+{
     return preg_match("/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/", $email);
 }
 
@@ -31,10 +35,10 @@ function validateEmail($email) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = trim($_POST['name-input'] ?? '');
     $email = trim($_POST['email-input'] ?? '');
-    
+
     $errors = [];
 
-    if(validateXSSAttacks($name) || validateXSSAttacks($email)) {
+    if (validateXSSAttacks($name) || validateXSSAttacks($email)) {
         exit();
     }
 
@@ -46,12 +50,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } elseif (preg_match("/[0-9]/", $name)) {
         $errors[] = "Name cannot contain numbers";
     }
-    
+
     // Email validation
     if (!validateEmail($email)) {
         $errors[] = "Invalid email format";
     }
-    
+
     if (empty($errors)) {
         $newsletter = new FormData($name, $email);
         $message = "Thank you for signing up, " . $newsletter->name . "!";
@@ -59,16 +63,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (filesize($jsonPath) == 0) {
             $jsonData = "[" . $newsletter->inherJSONify() . "\n]";
             file_put_contents($jsonPath, $jsonData);
-          } else {
+        } else {
             //if file is not empty execute this code
             $jsonData = file_get_contents($jsonPath);
             $jsonData = rtrim($jsonData, "]\n") . "\n ," . $newsletter->inherJSONify() . "\n]";
             file_put_contents($jsonPath, $jsonData);
-          }
+        }
     } else {
         $message = implode("\n", $errors);
     }
-    
+
     if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
         echo $message;
         exit();
@@ -121,6 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             font-family: "Cinzel", serif;
             font-weight: bold;
         }
+
         .main-wallpaper {
             background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url("./images/homepage-wallpaper.jpg") center/cover no-repeat;
         }
@@ -376,12 +381,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </blockquote>
             </div>
             <div class="form-div reveal">
-    <form id="newsletterForm" autocomplete="on" method="POST">
-        <h3>Sign Up to our Newsletter!</h3>
-        <h4>Enter your Name:</h4>
-        <input type="text" name="name-input" placeholder="Enter your name" required>
-        <h4>Enter your E-mail:</h4>
-        <input type="email" name="email-input" placeholder="example@mail.com" required>
+                <form id="newsletterForm" autocomplete="on" method="POST">
+                    <h3>Sign Up to our Newsletter!</h3>
+                    <h4>Enter your Name:</h4>
+                    <input type="text" name="name-input" placeholder="Enter your name" required>
+                    <h4>Enter your E-mail:</h4>
+                    <input type="email" name="email-input" placeholder="example@mail.com" required>
                     <input type="submit" id="submit-input">
                 </form>
             </div>
@@ -389,7 +394,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </section>
     </main>
     <script>
-       /* document.getElementById('newsletterForm').addEventListener('submit', function(event) {
+        /* document.getElementById('newsletterForm').addEventListener('submit', function(event) {
             const nameInput = document.getElementById('name-input');
             const nameError = document.getElementById('name-error');
 
@@ -420,29 +425,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         });
 */
-document.getElementById('newsletterForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    // Clean name input before submission
-    const nameInput = document.querySelector('[name="name-input"]');
-    nameInput.value = nameInput.value.replace(/[^a-zA-Z\s]/g, '')
-                                     .replace(/\s+/g, ' ')
-                                     .trim();
+        document.getElementById('newsletterForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
 
-    const response = await fetch('', {
-        method: 'POST',
-        body: new FormData(e.target),
-        headers: {'X-Requested-With': 'XMLHttpRequest'}
-    });
-    
-    const result = await response.text();
-    alert(result);
-    
-    // Clear form if successful
-    if (!result.includes("Invalid")) {
-        e.target.reset();
-    }
-});
+            // Clean name input before submission
+            const nameInput = document.querySelector('[name="name-input"]');
+            nameInput.value = nameInput.value.replace(/[^a-zA-Z\s]/g, '')
+                .replace(/\s+/g, ' ')
+                .trim();
+
+            const response = await fetch('', {
+                method: 'POST',
+                body: new FormData(e.target),
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            });
+
+            const result = await response.text();
+            alert(result);
+
+            // Clear form if successful
+            if (!result.includes("Invalid")) {
+                e.target.reset();
+            }
+        });
 
 
 

@@ -1,19 +1,21 @@
-<?php 
+<?php
 
-$currentPage = 'contact'; 
+$currentPage = 'contact';
 require('navbar.php');
 
 $jsonPath = 'data/contact_form.json';
 require_once 'utils/BaseFormData.php';
 require 'utils/XSSValidator.php';
 
-class ContactFormData extends ParentClass {
+class ContactFormData extends ParentClass
+{
     public $gender;
     public $age;
     public $interests = [];
     public $message;
 
-    public function __construct($name, $email, $gender, $age, $interests = [], $message = '') {
+    public function __construct($name, $email, $gender, $age, $interests = [], $message = '')
+    {
         parent::__construct($name, $email);
         $this->gender = $gender;
         $this->age = $age;
@@ -21,58 +23,59 @@ class ContactFormData extends ParentClass {
         $this->message = $message;
     }
 
-    private function createJSONArr(){
+    private function createJSONArr()
+    {
         $formattedArray = "";
-        foreach($this->interests as $interest){
+        foreach ($this->interests as $interest) {
             $formattedArray .= "\"$interest\"";
-            if($interest !== end($this->interests)){
+            if ($interest !== end($this->interests)) {
                 $formattedArray .= ",";
             }
         }
         return $formattedArray;
     }
 
-    public function JSONify(){
-        return "\n\t{\n".
-        "\t\t\"Name\": \"" . $this->name . "\",\n".
-        "\t\t\"Age\": \"" . $this->age . "\",\n".
-        "\t\t\"Gender\": \"" . $this->gender . "\",\n".
-        "\t\t\"Email\": \"" . $this->email . "\",\n". 
-        "\t\t\"Interests\": " ."[".$this->createJSONArr()."]". ",\n".
-        "\t\t\"Message\": \"" . $this->message . "\"".
-        "\n\t}";
+    public function JSONify()
+    {
+        return "\n\t{\n" .
+            "\t\t\"Name\": \"" . $this->name . "\",\n" .
+            "\t\t\"Age\": \"" . $this->age . "\",\n" .
+            "\t\t\"Gender\": \"" . $this->gender . "\",\n" .
+            "\t\t\"Email\": \"" . $this->email . "\",\n" .
+            "\t\t\"Interests\": " . "[" . $this->createJSONArr() . "]" . ",\n" .
+            "\t\t\"Message\": \"" . $this->message . "\"" .
+            "\n\t}";
     }
-
 }
 
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = trim($_POST['name'] ?? '');
     $email = trim($_POST['email'] ?? '');
     $gender = $_POST['gender'] ?? '';
-    $age = $_POST['age'] ?? 0 ;
+    $age = $_POST['age'] ?? 0;
     $interests = $_POST['interests'] ?? [];
     $message = trim($_POST['message'] ?? '');
 
-    if (validateXSSAttacks($name) || validateXSSAttacks($email) || validateXSSAttacks($age) || validateXSSAttacks($message)){
+    if (validateXSSAttacks($name) || validateXSSAttacks($email) || validateXSSAttacks($age) || validateXSSAttacks($message)) {
         exit();
     }
-   
+
     if (!preg_match('/^[a-zA-Z\s\-\.\'çÇëË]{2,50}$/', $name)) {
         die("Invalid name format. Only letters, spaces, and basic punctuation allowed.");
     }
-   
+
     if (!preg_match('/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $email)) {
         die("Invalid email format.");
     }
-   
+
     if (!preg_match('/^(1[0-1][0-9]|120|[1-9][0-9]|[1-9])$/', $age)) {
         die("Age must be between 1 and 120.");
     }
-   
+
     if (!in_array($gender, ['male', 'female'])) {
         die("Invalid gender selection.");
     }
-   
+
     if (empty($interests)) {
         die("Please select at least one interest.");
     }
@@ -81,25 +84,25 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             die("Invalid interest selected.");
         }
     }
-   
+
     if (strlen($message) < 10 || strlen($message) > 1000) {
         die("Message must be between 10 and 1000 characters.");
     }
     if (preg_match('/[<>{}]/', $message)) {
         die("Message contains invalid characters.");
     }
-   
+
     if (isset($_POST['phone']) && !empty($_POST['phone'])) {
         $phone = preg_replace('/[^0-9]/', '', $_POST['phone']);
         if (strlen($phone) == 10) {
             $phone = preg_replace('/(\d{3})(\d{3})(\d{4})/', '($1) $2-$3', $phone);
         }
     }
-   
-    $name = preg_replace_callback('/\b(\w)/', function($matches) {
+
+    $name = preg_replace_callback('/\b(\w)/', function ($matches) {
         return strtoupper($matches[1]);
     }, strtolower($name));
-   
+
     $formData = new ContactFormData($name, $email, $gender, $age, $interests, $message);
 
     if (filesize($jsonPath) == 0) {
@@ -110,7 +113,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $jsonData = rtrim($jsonData, "]\n") . "\n ," . $formData->JSONify() . "\n]";
         file_put_contents($jsonPath, $jsonData);
     }
-   
+
     $formattedInterests = implode(", ", $interests);
     echo "<script>alert('Thank you, " . addslashes($name) . "! We received your message about " . addslashes($formattedInterests) . ".');</script>";
 }
@@ -138,7 +141,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Changa:wght@200..800&family=Cinzel:wght@400..900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Spicy+Rice&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 
-    
+
 
     <script src="scripts/javascript.js"></script>
     <script>
@@ -260,14 +263,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         <div class="content">
             <h2>Contact Us</h2>
             <p>All information about us are displayed down below</p>
-            
+
         </div>
         <div class="container">
             <div class="contactInfo">
                 <div class="box">
                     <div class="icon"><i class="fa fa-location-arrow" aria-hidden="true"></i></div>
                     <div class="text">
-                        
+
                         <h3>Address</h3>
                         <address>
                             "Luan Haradinaj" St.,<br>
@@ -343,7 +346,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                     </div>
 
                     <div class="inputBox">
-                        <textarea required="required" placeholder="Write a Message..." id = "message" name="message"></textarea>
+                        <textarea required="required" placeholder="Write a Message..." id="message" name="message"></textarea>
                         <span id="
                         message-error" class="error-message"></span>
                     </div>
@@ -448,7 +451,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     </footer> -->
     <?php
     require('footer.php');
-?>
+    ?>
 
     <script>
         const currentDate = new Date();

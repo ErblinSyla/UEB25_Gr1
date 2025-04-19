@@ -1,5 +1,5 @@
 <?php
-$currentPage = 'admission'; 
+$currentPage = 'admission';
 require('navbar.php');
 $name = $email = $comment = $phone = "";
 $errors = [];
@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $phone = trim($_POST["phone"]);
     $star = $_POST["star"] ?? null;
 
-    if (validateXSSAttacks($name) || validateXSSAttacks($email) || validateXSSAttacks($phone) || validateXSSAttacks($comment)){
+    if (validateXSSAttacks($name) || validateXSSAttacks($email) || validateXSSAttacks($phone) || validateXSSAttacks($comment)) {
         exit();
     }
 
@@ -163,6 +163,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         table:hover {
             box-shadow: 1px 1px 7px #0D92F4;
         }
+
         .wallpaper {
             background-image: url("./images/admissions-wallpaper.jpg");
         }
