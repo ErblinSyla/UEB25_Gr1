@@ -1,4 +1,5 @@
 <?php
+
 $currentPage = 'admission';
 require('navbar.php');
 $name = $email = $comment = $phone = "";
