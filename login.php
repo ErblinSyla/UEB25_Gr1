@@ -1,5 +1,13 @@
 <?php
 
+require_once('database/db.php');
+
+// Kemi testuar lidhjen me databaze, funksionon
+
+//if($conn) {
+//    echo "Connection successful";
+//}
+
 ?>
 
 <!DOCTYPE html>
