@@ -1,6 +1,34 @@
 <?php
-
+session_start();
 require_once('database/db.php');
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    $sql = "SELECT * FROM users WHERE username = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('s', $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $user = $result->fetch_assoc();
+
+        if (password_verify($password, $user['password'])) {
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['role'] = $user['role'];
+
+            header("Location: index.php");
+            exit();
+        } else {
+            $error = "Invalid password.";
+        }
+    } else {
+        $error = "User not found.";
+    }
+}
+
 
 // Kemi testuar lidhjen me databaze, funksionon
 
@@ -37,21 +65,26 @@ require_once('database/db.php');
 
 <body>
     <section class="log-in-section">
-        <div class="row">
+    <div class="row">
             <div class="col-12">
                 <div class="form-div">
                     <h1>Log into your account</h1>
                     <div class="inner-form">
-                        <form>
+                        <form method="POST">
                             <p>Username:</p>
-                            <input type="text">
+                            <input type="text" name="username" required>
                             <p>Password:</p>
-                            <input type="password">
+                            <input type="password" name="password" required>
                             <div class="log-in-button-div">
                                 <button type="submit">Log In</button>
                                 <h5>Don't have an account? Create one <a href="#">here</a></h5>
                             </div>
                         </form>
+                        <?php
+                        if (isset($error)) {
+                            echo "<p style='color: red;'>$error</p>";
+                        }
+                        ?>
                     </div>
                 </div>
             </div>

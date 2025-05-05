@@ -1,5 +1,20 @@
 <?php
 
+session_start();
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
+}
+
+$role = $_SESSION['role'];
+if ($role == 'admin') {
+    echo "Welcome Admin!";
+} elseif ($role == 'student') {
+    echo "Welcome Student!";
+} else {
+    echo "Welcome, User!";
+}
+
 $currentPage = 'index';
 
 require_once 'utils/BaseFormData.php';

@@ -13,6 +13,9 @@
                 <li><a href="courses.php" <?= ($currentPage == 'courses') ? 'id="courses"' : '' ?>>Our Courses</a></li>
                 <li><a href="admission.php" <?= ($currentPage == 'admission') ? 'id="admission"' : '' ?>>Admissions</a></li>
                 <li><a href="contact.php" <?= ($currentPage == 'contact') ? 'id="contact"' : '' ?>>Contact</a></li>
+                <?php if (isset($_SESSION['username'])): ?>
+                    <li><a href="logout.php" id="logout">Log Out</a></li>
+                <?php endif; ?>
             </ul>
             <div class="hamburger" id="hamburger">
                 <p>&#9776;</p>

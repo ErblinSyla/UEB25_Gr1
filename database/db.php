@@ -3,7 +3,7 @@
 $host = 'localhost';
 $user = 'root';
 $password = '';
-$database = 'algoverseDB';
+$database = 'algoversedb';
 
 $conn = new mysqli($host, $user, $password, $database);
 

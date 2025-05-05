@@ -1,4 +1,10 @@
 <?php
+session_start();
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
+}
+
 $currentPage = 'contact';
 require 'navbar.php';
 $jsonPath = 'data/courses_form.json';
