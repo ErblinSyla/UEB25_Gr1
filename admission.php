@@ -85,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $jsonData = "[" . $review->JSONify() . "\n]";
             file_put_contents($jsonPath, $jsonData);
         } else {
-            
+
             $jsonData = file_get_contents($jsonPath);
             $jsonData = rtrim($jsonData, "]\n") . "\n ," . $review->JSONify() . "\n]";
             file_put_contents($jsonPath, $jsonData);
@@ -334,6 +334,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </table>
                 </div>
             </div>
+            <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                <div class="admin-actions reveal" style="margin-top: 20px;">
+                    <form action="create.php" method="get" style="display: inline;">
+                        <button class="table-button" type="submit">Create</button>
+                    </form>
+                    <form action="update.php" method="get" style="display: inline;">
+                        <button class="table-button" type="submit">Update</button>
+                    </form>
+                    <form action="delete.php" method="get" style="display: inline;">
+                        <button class="table-button" type="submit">Delete</button>
+                    </form>
+                </div>
+            <?php endif; ?>
             <audio id="td-hover-audio" src="audio/div-hover.mp3"></audio>
         </section>
         <section class="payment">

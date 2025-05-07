@@ -6,14 +6,16 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
-$role = $_SESSION['role'];
-if ($role == 'admin') {
-    echo "Welcome Admin!";
-} elseif ($role == 'student') {
-    echo "Welcome Student!";
-} else {
-    echo "Welcome, User!";
-}
+//thjesht sa per testim
+
+//$role = $_SESSION['role'];
+//if ($role == 'admin') {
+//    echo "Welcome Admin!";
+//} elseif ($role == 'student') {
+//    echo "Welcome Student!";
+//} else {
+//    echo "Welcome, User!";
+//}
 
 $currentPage = 'index';
 
