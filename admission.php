@@ -335,7 +335,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
             </div>
             <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
-                <div class="admin-actions reveal" style="margin-top: 20px;">
+                <div class="admin-actions reveal-left" style="margin-top: 20px;">
                     <form action="create.php" method="get" style="display: inline;">
                         <button class="table-button" type="submit">Create</button>
                     </form>

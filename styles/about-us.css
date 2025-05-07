@@ -288,6 +288,25 @@ td {
     font-size: 16px;
 }
 
+.admin-actions {
+    margin-left: 8%;
+}
+
+.table-button {
+    padding: 10px 30px;
+    font-size: 15px;
+    font-family: 'MyFont', Arial, Helvetica, sans-serif;
+    border-radius: 5px;
+    background-color: #0d92f4;
+    transition: 0.3s ease background-color;
+    margin-left: 30px;
+}
+
+.table-button:hover {
+    cursor: pointer;
+    background-color: #0b7cd1;
+}
+
 /* FOOTER */
 
 footer {

@@ -352,6 +352,19 @@ require('navbar.php');
                         </table>
                     </div>
                 </div>
+                <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                    <div class="admin-actions reveal-left" style="margin-top: 20px;">
+                        <form action="create.php" method="get" style="display: inline;">
+                            <button class="table-button" type="submit">Create</button>
+                        </form>
+                        <form action="update.php" method="get" style="display: inline;">
+                            <button class="table-button" type="submit">Update</button>
+                        </form>
+                        <form action="delete.php" method="get" style="display: inline;">
+                            <button class="table-button" type="submit">Delete</button>
+                        </form>
+                    </div>
+                <?php endif; ?>
             </div>
             <audio id="td-hover-audio" src="audio/div-hover.mp3"></audio>
             <script>
