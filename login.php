@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <input type="password" name="password" required>
                             <div class="log-in-button-div">
                                 <button type="submit">Log In</button>
-                                <h5>Don't have an account? Create one <a href="#">here</a></h5>
+                                <h5>Don't have an account? Create one <a href="signup.php">here</a></h5>
                             </div>
                         </form>
                         <?php
