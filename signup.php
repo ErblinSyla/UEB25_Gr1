@@ -2,6 +2,47 @@
 session_start();
 require_once('database/db.php');
 
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $name = trim($_POST['name']);
+    $surname = trim($_POST['surname']);
+    $email = trim($_POST['email']);
+    $age = (int) $_POST['age'];
+    $phone = trim($_POST['phone']);
+    $gender = $_POST['gender'];
+    $username = trim($_POST['username']);
+    $password = $_POST['password'];
+    $role = 'student';
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo "<script>alert('Invalid email format.');</script>";
+    } elseif (strlen($password) < 6) {
+        echo "<script>alert('Password must be at least 6 characters long.');</script>";
+    } else {
+        $stmt = $conn->prepare("SELECT * FROM users WHERE email = ? OR username = ?");
+        $stmt->bind_param("ss", $email, $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            echo "<script>alert('Email or username already exists.');</script>";
+        } else {
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+            $insert = $conn->prepare("INSERT INTO users (name, surname, email, age, phone_number, gender, role, username, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $insert->bind_param("sssisssss", $name, $surname, $email, $age, $phone, $gender, $role, $username, $hashedPassword);
+
+            if ($insert->execute()) {
+                echo "<script>alert('Registration successful! You can now log in.');</script>";
+            } else {
+                echo "<script>alert('Failed to register user.');</script>";
+            }
+        }
+
+        $stmt->close();
+    }
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -62,7 +103,7 @@ require_once('database/db.php');
                             <div class="row">
                                 <div class="col-5 form-field">
                                     <p>Phone Number:</p>
-                                    <input type="tel" name="phone" pattern="[0-9]{10,15}" required>
+                                    <input type="tel" name="phone" pattern="^\+383\d{8}$" required>
                                 </div>
                                 <div class="col-2"></div>
                                 <div class="col-5 form-field">
