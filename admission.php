@@ -263,9 +263,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
 
-        ob_start();
-        var_dump($plans);
-        file_put_contents('debug.log', ob_get_clean(), FILE_APPEND);
+        // ob_start();
+        // var_dump($plans);
+        // file_put_contents('debug.log', ob_get_clean(), FILE_APPEND);
 
         function formatedPrice($price)
         {
