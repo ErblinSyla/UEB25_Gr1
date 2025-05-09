@@ -370,11 +370,16 @@ td {
     font-size: 16px;
 }
 
+table th:nth-child(5),
+table td:nth-child(5) {
+    width: 150px;
+}
+
 .admin-actions {
     margin-left: 8%;
 }
 
-.table-button {
+.table-button-create {
     padding: 10px 30px;
     font-size: 15px;
     font-family: 'MyFont', Arial, Helvetica, sans-serif;
@@ -384,9 +389,24 @@ td {
     margin-left: 30px;
 }
 
-.table-button:hover {
+.table-button-create:hover {
     cursor: pointer;
     background-color: #0b7cd1;
+}
+
+.table-button {
+    font-size: 15px;
+    padding: 10px;
+    font-family: 'MyFont', Arial, Helvetica, sans-serif;
+    border-radius: 50%;
+    background-color: #0d92f4;
+    transition: 0.3s ease background-color;
+    margin: 0 5px;
+}
+
+.table-button img {
+    width: 25px;
+    height: 25px;
 }
 
 /* PAYMENT */

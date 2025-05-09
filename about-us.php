@@ -7,6 +7,7 @@ if (!isset($_SESSION['username'])) {
 
 $currentPage = 'about-us';
 require('navbar.php');
+require_once('database/db.php');
 ?>
 
 <!DOCTYPE html>
@@ -260,49 +261,16 @@ require('navbar.php');
                 });
             </script>
             <?php
+            $sql = "SELECT id, name, percentage, countries, comment FROM demographics ORDER BY percentage DESC";
+            $result = $conn->query($sql);
 
-            $continents = [
-                [
-                    "name" => "North America",
-                    "percentage" => 35,
-                    "countries" => "USA, Canada, Mexico",
-                    "comment" => "High engagement due to a strong tech culture."
-                ],
-                [
-                    "name" => "Europe",
-                    "percentage" => 30,
-                    "countries" => "UK, Germany, France, Spain",
-                    "comment" => "Significant interest in tech education and development."
-                ],
-                [
-                    "name" => "Asia",
-                    "percentage" => 25,
-                    "countries" => "India, China, Japan, Philippines",
-                    "comment" => "Growing user base driven by demand for coding skills."
-                ],
-                [
-                    "name" => "South America",
-                    "percentage" => 5,
-                    "countries" => "Brazil, Argentina, Colombia",
-                    "comment" => "Emerging interest in online tech courses."
-                ],
-                [
-                    "name" => "Africa",
-                    "percentage" => 3,
-                    "countries" => "Nigeria, South Africa, Kenya",
-                    "comment" => "Developing market with increasing digital adoption."
-                ],
-                [
-                    "name" => "Australia/Oceania",
-                    "percentage" => 2,
-                    "countries" => "Australia, New Zealand",
-                    "comment" => "Niche audience with steady engagement."
-                ]
-            ];
+            $continents = [];
 
-            usort($continents, function ($a, $b) {
-                return $b['percentage'] <=> $a['percentage'];
-            });
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $continents[] = $row;
+                }
+            }
 
             $percentages = array_column($continents, 'percentage');
             $maxPercentage = max($percentages);
@@ -318,7 +286,6 @@ require('navbar.php');
 
                 return "rgb($r, $g, $b)";
             }
-
             ?>
             <div class="demographics">
                 <div class="row">
@@ -335,6 +302,9 @@ require('navbar.php');
                                     <th><i>Percentage of Users</i></th>
                                     <th><i>Key Countries</i></th>
                                     <th><i>Comments</i></th>
+                                    <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                                        <th>Actions</th>
+                                    <?php endif; ?>
                                 </tr>
                             </thead>
                             <tbody>
@@ -346,6 +316,22 @@ require('navbar.php');
                                         <td><span style="color: <?= $color ?>;"><?= $c['percentage'] ?>%</span></td>
                                         <td><?= $c['countries'] ?></td>
                                         <td><?= $c['comment'] ?></td>
+                                        <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                                            <td>
+                                                <form action="update.php" method="get" style="display:inline;">
+                                                    <input type="hidden" name="id" value="<?= $c['id'] ?>">
+                                                    <button class="table-button" type="submit">
+                                                        <img class="update-img" src="images/update.png">
+                                                    </button>
+                                                </form>
+                                                <form action="delete.php" method="post" style="display:inline;" onsubmit="return confirm('Are you sure?');">
+                                                    <input type="hidden" name="id" value="<?= $c['id'] ?>">
+                                                    <button class="table-button" type="submit">
+                                                        <img class="delete-img" src="images/delete.png">
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        <?php endif; ?>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
@@ -355,17 +341,12 @@ require('navbar.php');
                 <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
                     <div class="admin-actions reveal-left" style="margin-top: 20px;">
                         <form action="create.php" method="get" style="display: inline;">
-                            <button class="table-button" type="submit">Create</button>
-                        </form>
-                        <form action="update.php" method="get" style="display: inline;">
-                            <button class="table-button" type="submit">Update</button>
-                        </form>
-                        <form action="delete.php" method="get" style="display: inline;">
-                            <button class="table-button" type="submit">Delete</button>
+                            <button class="table-button-create" type="submit">Create</button>
                         </form>
                     </div>
                 <?php endif; ?>
             </div>
+
             <audio id="td-hover-audio" src="audio/div-hover.mp3"></audio>
             <script>
                 function addHoverAudioToTableCells(tdSelector, audioId) {

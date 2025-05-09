@@ -7,6 +7,7 @@ if (!isset($_SESSION['username'])) {
 
 $currentPage = 'admission';
 require('navbar.php');
+require_once('database/db.php');
 $name = $email = $comment = $phone = "";
 $errors = [];
 
@@ -251,42 +252,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php
         define("MONEDHA", "$");
 
-        $plans = [
-            [
-                "name" => "Basic Plan",
-                "price" => 100,
-                "features" => "Access to basic courses, Community support",
-                "frequency" => "One-time"
-            ],
-            [
-                "name" => "Standard Plan",
-                "price" => 200,
-                "features" => "Access to all courses, Priority support",
-                "frequency" => "Monthly"
-            ],
-            [
-                "name" => "Premium Plan",
-                "price" => 400,
-                "features" => "Access to all courses, Mentorship, Certification",
-                "frequency" => "Yearly"
-            ],
-            [
-                "name" => "Lifetime Plan",
-                "price" => 800,
-                "features" => "Access to all courses forever, One-on-one coaching",
-                "frequency" => "One-time"
-            ]
-        ];
+        $sql = "SELECT id, name, price, features, frequency FROM pricing_plans ORDER BY price ASC";
+        $result = $conn->query($sql);
 
-        usort($plans, function ($a, $b) {
-            return $a['price'] <=> $b['price'];
-        });
+        $plans = [];
 
-        // kemi perdor var_dump() per ti futur array contentin ne nje fajll debug.log
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $plans[] = $row;
+            }
+        }
+
         ob_start();
         var_dump($plans);
         file_put_contents('debug.log', ob_get_clean(), FILE_APPEND);
-
 
         function formatedPrice($price)
         {
@@ -311,6 +290,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <th>Price</th>
                                 <th>Features</th>
                                 <th>Payment Frequency</th>
+                                <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                                    <th>Actions</th>
+                                <?php endif; ?>
                             </tr>
                         </thead>
                         <tbody>
@@ -328,6 +310,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         }
                                         ?>
                                     </td>
+                                    <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                                        <td>
+                                            <form action="update.php" method="get" style="display:inline;">
+                                                <input type="hidden" name="id" value="<?= $plan['id'] ?>">
+                                                <button class="table-button" type="submit">
+                                                    <img class="update-img" src="images/update.png">
+                                                </button>
+                                            </form>
+                                            <form action="delete.php" method="post" style="display:inline;" onsubmit="return confirm('Are you sure?');">
+                                                <input type="hidden" name="id" value="<?= $plan['id'] ?>">
+                                                <button class="table-button" type="submit">
+                                                    <img class="delete-img" src="images/delete.png">
+                                                </button>
+                                            </form>
+                                        </td>
+                                    <?php endif; ?>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
@@ -337,13 +335,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
                 <div class="admin-actions reveal-left" style="margin-top: 20px;">
                     <form action="create.php" method="get" style="display: inline;">
-                        <button class="table-button" type="submit">Create</button>
-                    </form>
-                    <form action="update.php" method="get" style="display: inline;">
-                        <button class="table-button" type="submit">Update</button>
-                    </form>
-                    <form action="delete.php" method="get" style="display: inline;">
-                        <button class="table-button" type="submit">Delete</button>
+                        <button class="table-button-create" type="submit">Create</button>
                     </form>
                 </div>
             <?php endif; ?>
