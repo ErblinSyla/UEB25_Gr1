@@ -312,13 +312,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     </td>
                                     <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
                                         <td>
-                                            <form action="update.php" method="get" style="display:inline;">
+                                            <form action="update-plans.php" method="get" style="display:inline;">
                                                 <input type="hidden" name="id" value="<?= $plan['id'] ?>">
                                                 <button class="table-button" type="submit">
                                                     <img class="update-img" src="images/update.png">
                                                 </button>
                                             </form>
-                                            <form action="delete.php" method="post" style="display:inline;" onsubmit="return confirm('Are you sure?');">
+                                            <form action="delete-plans.php" method="post" style="display:inline;" onsubmit="return confirm('Are you sure?');">
                                                 <input type="hidden" name="id" value="<?= $plan['id'] ?>">
                                                 <button class="table-button" type="submit">
                                                     <img class="delete-img" src="images/delete.png">
@@ -334,7 +334,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
                 <div class="admin-actions reveal-left" style="margin-top: 20px;">
-                    <form action="create.php" method="get" style="display: inline;">
+                    <form action="create-plans.php" method="get" style="display: inline;">
                         <button class="table-button-create" type="submit">Create</button>
                     </form>
                 </div>
