@@ -11,7 +11,7 @@ function validateXSSAttacks($data)
 
     switch (true) {
         case $htmlXSS:
-            if($jsXSS == 1){
+            if($jsXSS == 0){
                 echo "<script>
                         alert('HTML XSS attack in $data'); 
                         console.log('HTML XSS attack in $data');
