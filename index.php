@@ -19,6 +19,7 @@ if (!isset($_SESSION['username'])) {
 
 $currentPage = 'index';
 
+
 require_once 'utils/BaseFormData.php';
 require 'utils/XSSValidator.php';
 
@@ -85,6 +86,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $jsonData = rtrim($jsonData, "]\n") . "\n ," . $newsletter->inherJSONify() . "\n]";
             file_put_contents($jsonPath, $jsonData);
         }
+
+
+
+        require_once('database/db.php'); 
+        $stmt = $conn->prepare("INSERT INTO newsletter (name, email) VALUES (?, ?)");
+        $stmt->bind_param("ss", $name, $email);
+
+        if ($stmt->execute()) {
+            
+        } else {
+            $message .= "\nDatabase error: " . $stmt->error;
+        }
+
+        $stmt->close();
+        $conn->close();
+
     } else {
         $message = implode("\n", $errors);
     }
@@ -94,6 +111,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
 }
+$message = "";
+
+
+
 
 ?>
 
@@ -374,7 +395,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </blockquote>
             </div>
             <div class="form-div reveal">
-                <form id="newsletterForm" autocomplete="on" method="POST">
+                <form id="newsletterForm" action="" autocomplete="on" method="POST">
                     <h3>Sign Up to our Newsletter!</h3>
                     <h4>Enter your Name:</h4>
                     <input type="text" name="name-input" placeholder="Enter your name" required>
