@@ -93,6 +93,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // $successMessage = $review->display();
+        $stmt = $conn->prepare("INSERT INTO review (name, email, phone_number, comment, star) VALUES (?, ?, ?, ?, ?)");
+$stmt->bind_param("ssssi", $name, $email, $phone, $comment, $star);
+
+if ($stmt->execute()) {
+    echo "<script>alert('Review u ruajt me sukses në bazën e të dhënave.');</script>";
+} else {
+    echo "<script>alert('Gabim gjatë ruajtjes në databazë: " . $stmt->error . "');</script>";
+}
+
+$stmt->close();
 
     } else {
         echo "<script>alert('Gabim në plotësim! Kontrolloni të dhënat.');</script>";

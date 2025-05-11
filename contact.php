@@ -128,9 +128,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     $formattedInterests = implode(", ", $interests);
+    $conn = new mysqli("localhost", "root", "", "algoversedb"); 
+
+    if ($conn->connect_error) {
+        die("Lidhja me databazën dështoi: " . $conn->connect_error);
+    }
+
+    require_once('database/db.php'); 
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $gender = $_POST['gender'];
+    $age = intval($_POST['age']);
+    $interests = isset($_POST['interests']) ? implode(", ", $_POST['interests']) : '';
+    $message = $_POST['message'];
+
+    // Prepare & insert
+    $stmt = $conn->prepare("INSERT INTO contact_us (name, email, gender, age, interests, message) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssiss", $name, $email, $gender, $age, $interests, $message);
+
+    if ($stmt->execute()) {
+        echo "<script>alert('Mesazhi u dërgua me sukses!');</script>";
+    } else {
+        echo "<script>alert('Gabim gjatë ruajtjes: " . $stmt->error . "');</script>";
+    }
+
+    $stmt->close();
+    $conn->close();
 
     header("Location: thankyou.html");
     exit();
+
 }
 
 
