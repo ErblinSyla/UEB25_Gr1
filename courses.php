@@ -9,6 +9,7 @@ $currentPage = 'contact';
 require 'navbar.php';
 $jsonPath = 'data/courses_form.json';
 
+
 require_once 'utils/BaseFormData.php';
 require 'utils/XSSValidator.php';
 
@@ -57,30 +58,42 @@ class ApplyCourses extends ParentClass
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $course = $_POST['course'];
+    $targetFilePath = "uploads/default.svg";
+    $fileData = null;
+    $fileName = '';
+    $fileType = '';
+
+    // Validate file upload
+    if (!empty($_FILES['file-upload']['name']) && $_FILES['file-upload']['error'] == UPLOAD_ERR_OK) {
+        $fileName = basename($_FILES["file-upload"]["name"]);
+        $targetFilePath = "uploads/" . $fileName;
+        $fileType = $_FILES["file-upload"]["type"];
+
+        // Validate file
+        if (file_exists($targetFilePath)) {
+            die("Sorry, file already exists.");
+        }
+        
+        // Move uploaded file
+        if (move_uploaded_file($_FILES["file-upload"]["tmp_name"], $targetFilePath)) {
+            $fileData = file_get_contents($targetFilePath);
+            echo "The file " . htmlspecialchars($fileName) . " has been uploaded.";
+        } else {
+            die("Sorry, there was an error uploading your file.");
+        }
+    }
+
+    $name = $_POST['name'] ?? '';
+    $email = $_POST['email'] ?? '';
+    $password = $_POST['password'] ?? '';
+    $course = $_POST['course'] ?? '';
 
     if (validateXSSAttacks($name) || validateXSSAttacks($email) || validateXSSAttacks($password)) {
         exit();
     }
 
-    if (isset($_POST["file-upload"])) {
-        $fileName = basename($_FILES["file-upload"]["name"]);
-        $targetFilePath = "uploads/" . $fileName;
+   
 
-        if (file_exists($targetFilePath)) {
-            die("Sorry, file already exists.");
-        }
-        if (move_uploaded_file($_FILES["file-upload"]["tmp_name"], $targetFilePath)) {
-            echo "The file " . htmlspecialchars($fileName) . " has been uploaded.";
-        } else {
-            echo "Sorry, there was an error uploading your file.";
-        }
-    } else {
-        $targetFilePath = "uploads/default.svg";
-    }
 
     $applyCourses = new ApplyCourses($name, $email, $course, $targetFilePath);
     $applyCourses->setPassword($password);
@@ -94,6 +107,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $jsonData = rtrim($jsonData, "]\n") . "\n ," . $applyCourses->JSONify() . "\n]";
         file_put_contents($jsonPath, $jsonData);
     }
+   
+    require_once('database/db.php');
+    
+    $stmt = $conn->prepare("INSERT INTO course_applications 
+        (name, email, password, course, file_name, file_type, file_data) 
+        VALUES (?, ?, ?, ?, ?, ?, ?)");
+    
+    // Use empty blob if no file uploaded
+    if ($fileData === null) {
+        $fileData = file_get_contents("uploads/default.svg");
+        $fileName = "default.svg";
+        $fileType = "image/svg+xml";
+    }
+
+    $stmt->bind_param("sssssss", $name, $email, $password, $course, $fileName, $fileType, $fileData);
+
+    if ($stmt->execute()) {
+        echo "Application submitted successfully.";
+    } else {
+        echo "Error: " . $stmt->error;
+    }
+
+    $stmt->close();
+    $conn->close();
 }
 ?>
 <!DOCTYPE html>
@@ -226,7 +263,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="apply-modal-content">
                 <span class="close-btn" id="closeModal">&times;</span>
                 <h3>Apply for a Course</h3>
-                <form id="applyForm" autocomplete="on" action="courses.php" method="POST" enctype="multipart/form-data">
+                <form id="applyForm" autocomplete="on" action="" method="POST" enctype="multipart/form-data">
                     <label for="name">Name:</label>
                     <input type="text" id="name" name="name" required autocomplete="name" />
                     <span id="name-error" class="error-message"></span>
@@ -264,6 +301,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </form>
             </div>
         </div>
+        <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const dragDropArea = document.getElementById('drag-drop-area');
+        const fileInput = document.getElementById('file-upload');
+
+        dragDropArea.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        dragDropArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dragDropArea.style.border = '2px dashed #000';
+            dragDropArea.style.backgroundColor = '#f0f0f0';
+        });
+
+        dragDropArea.addEventListener('dragleave', () => {
+            dragDropArea.style.border = '';
+            dragDropArea.style.backgroundColor = '';
+        });
+
+        // Update the drop event listener:
+dragDropArea.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dragDropArea.style.border = '';
+    dragDropArea.style.backgroundColor = '';
+
+    const files = e.dataTransfer.files;
+    if (files.length > 0) {
+        fileInput.files = files;
+        // Trigger the change event to update UI
+        const changeEvent = new Event('change');
+        fileInput.dispatchEvent(changeEvent);
+    }
+});
+fileInput.addEventListener('change', function() {
+        if (this.files && this.files[0]) {
+            dragDropArea.innerHTML = `<p>File selected: ${this.files[0].name}</p>`;
+        } else {
+            dragDropArea.innerHTML = '<p>Drag and drop your file here or click to select a file.</p>';
+        }
+    });
+    });
+</script>
+
         <audio id="success-audio" src="audio/review-published.mp3"></audio>
         <audio id="failure-audio" src="audio/review-cancel.mp3"></audio>
         <style>
