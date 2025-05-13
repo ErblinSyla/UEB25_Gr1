@@ -8,7 +8,6 @@
         </div>
         <div class="col-8">
             <ul class="links" id="nav-links">
-                <li><a href="index.php" <?= ($currentPage == 'homepage') ? 'id="homepage"' : '' ?>>Homepage</a></li>
                 <li><a href="about-us.php" <?= ($currentPage == 'about') ? 'id="about"' : '' ?>>About Us</a></li>
                 <li><a href="courses.php" <?= ($currentPage == 'courses') ? 'id="courses"' : '' ?>>Our Courses</a></li>
                 <li><a href="admission.php" <?= ($currentPage == 'admission') ? 'id="admission"' : '' ?>>Admissions</a></li>
