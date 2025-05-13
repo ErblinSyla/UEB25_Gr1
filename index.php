@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $jsonData = "[" . $newsletter->inherJSONify() . "\n]";
             file_put_contents($jsonPath, $jsonData);
         } else {
-            
+
             $jsonData = file_get_contents($jsonPath);
             $jsonData = rtrim($jsonData, "]\n") . "\n ," . $newsletter->inherJSONify() . "\n]";
             file_put_contents($jsonPath, $jsonData);
@@ -89,19 +89,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
 
-        require_once('database/db.php'); 
-        $stmt = $conn->prepare("INSERT INTO newsletter (name, email) VALUES (?, ?)");
-        $stmt->bind_param("ss", $name, $email);
+        require_once('database/db.php');
+        $checkStmt = $conn->prepare("SELECT id FROM newsletter WHERE email = ?");
+        $checkStmt->bind_param("s", $email);
+        $checkStmt->execute();
+        $checkStmt->store_result();
 
-        if ($stmt->execute()) {
-            
+        if ($checkStmt->num_rows > 0) {
+            $message .= "\nThis email is already subscribed!";
         } else {
-            $message .= "\nDatabase error: " . $stmt->error;
+            $insertStmt = $conn->prepare("INSERT INTO newsletter (name, email) VALUES (?, ?)");
+            $insertStmt->bind_param("ss", $name, $email);
+
+            if ($insertStmt->execute()) {
+                $message .= "\nSubscription successful!";
+            } else {
+                $message .= "\nDatabase error: " . $insertStmt->error;
+            }
+
+            $insertStmt->close();
         }
-
-        $stmt->close();
+        $checkStmt->close();
         $conn->close();
-
     } else {
         $message = implode("\n", $errors);
     }
@@ -248,10 +257,10 @@ $message = "";
                 </div>
             </div>
             <div class="text-admission">
-                <p>What are you waiting for? Hop on to our admissions page and see what you can learn more! </p>
+                <p>What are you waiting for? Sign up for our course today and discover everything you can learn!</p>
                 <audio id="admission-click-audio" src="audio/shift-page.mp3"></audio>
 
-                <a href="admission.php" class="cta-button">Admissions</a>
+                <a href="signup.php" class="cta-button">Sign Up!</a>
             </div>
         </section>
         <script>
