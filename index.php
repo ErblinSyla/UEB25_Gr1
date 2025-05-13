@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $jsonData = "[" . $newsletter->inherJSONify() . "\n]";
             file_put_contents($jsonPath, $jsonData);
         } else {
-            
+
             $jsonData = file_get_contents($jsonPath);
             $jsonData = rtrim($jsonData, "]\n") . "\n ," . $newsletter->inherJSONify() . "\n]";
             file_put_contents($jsonPath, $jsonData);
@@ -89,19 +89,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
 
-        require_once('database/db.php'); 
+        require_once('database/db.php');
         $stmt = $conn->prepare("INSERT INTO newsletter (name, email) VALUES (?, ?)");
         $stmt->bind_param("ss", $name, $email);
 
         if ($stmt->execute()) {
-            
         } else {
             $message .= "\nDatabase error: " . $stmt->error;
         }
 
         $stmt->close();
         $conn->close();
-
     } else {
         $message = implode("\n", $errors);
     }
@@ -405,6 +403,45 @@ $message = "";
                 </form>
             </div>
 
+            <?php
+            if (!is_dir("output")) mkdir("output", 0777, true);
+            if (!is_dir("logs")) mkdir("logs", 0777, true);
+
+            function errorHandler($errno, $errstr, $errfile, $errline)
+            {
+                $logMsg = "[" . date("Y-m-d H:i:s") . "] ERROR: [$errno] $errstr at file $errfile in row $errline\n";
+                file_put_contents("logs/error.log", $logMsg, FILE_APPEND);
+                echo "<p style='color:red;'>Something went wrong. Error is saved to log file.</p>";
+                return true;
+            }
+
+            set_error_handler("errorHandler");
+
+            try {
+                if ($_SERVER["REQUEST_METHOD"] === "POST") {
+                    $emri = htmlspecialchars($_POST["name-input"]);
+                    $email = htmlspecialchars($_POST["email-input"]);
+
+                    if (empty($emri) || empty($email)) {
+                        throw new Exception("All fields are required!");
+                    }
+
+                    $rreshti = "Name: $emri - Email: $email - Timestamp: " . date("Y-m-d H:i:s") . "\n";
+
+                    $result = file_put_contents("output/newsletter.txt", $rreshti, FILE_APPEND);
+                    if ($result === false) {
+                        throw new Exception("Could not save to file!");
+                    }
+
+                    echo "<script>alert('Thank you for signing up $emri');</script>";
+                }
+            } catch (Exception $e) {
+                $logMsg = "[" . date("Y-m-d H:i:s") . "] EXCEPTION: " . $e->getMessage() . "\n";
+                file_put_contents("logs/error.log", $logMsg, FILE_APPEND);
+                echo "<p style='color:red;'>Something went wrong, could not save the info!</p>";
+            }
+            ?>
+
         </section>
     </main>
     <script>
@@ -439,31 +476,31 @@ $message = "";
             }
         });
 */
-        document.getElementById('newsletterForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
+        // document.getElementById('newsletterForm').addEventListener('submit', async (e) => {
+        //     e.preventDefault();
 
-            // Clean name input before submission
-            const nameInput = document.querySelector('[name="name-input"]');
-            nameInput.value = nameInput.value.replace(/[^a-zA-Z\s]/g, '')
-                .replace(/\s+/g, ' ')
-                .trim();
+        //     // Clean name input before submission
+        //     const nameInput = document.querySelector('[name="name-input"]');
+        //     nameInput.value = nameInput.value.replace(/[^a-zA-Z\s]/g, '')
+        //         .replace(/\s+/g, ' ')
+        //         .trim();
 
-            const response = await fetch('', {
-                method: 'POST',
-                body: new FormData(e.target),
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
-                }
-            });
+        //     const response = await fetch('', {
+        //         method: 'POST',
+        //         body: new FormData(e.target),
+        //         headers: {
+        //             'X-Requested-With': 'XMLHttpRequest'
+        //         }
+        //     });
 
-            const result = await response.text();
-            alert(result);
+        //     const result = await response.text();
+        //     alert(result);
 
-            // Clear form if successful
-            if (!result.includes("Invalid")) {
-                e.target.reset();
-            }
-        });
+        //     // Clear form if successful
+        //     if (!result.includes("Invalid")) {
+        //         e.target.reset();
+        //     }
+        // });
 
 
 
