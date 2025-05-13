@@ -1,4 +1,6 @@
 <?php
+require 'database/db.php';
+
 session_start();
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
@@ -190,50 +192,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <section class="courses">
         <h2>Our Courses</h2>
         <?php
-        // Full course data
-        $courseData = [
-            "python" => [
-                "title" => "Python",
-                "image" => "images/pythonlogo.jpg",
-                "alt" => "Course 1",
-                "description" => "Python is a versatile programming language known for its simplicity and readability. Perfect for beginners and widely used in web development, data science, AI, and automation."
-            ],
-            "cpp" => [
-                "title" => "C++",
-                "image" => "images/cpplogo.png",
-                "alt" => "Course 2",
-                "description" => "C++ is a powerful, high-performance language often used for system software, game development, and applications requiring real-time performance."
-            ],
-            "javascript" => [
-                "title" => "JavaScript",
-                "image" => "images/javascriptlogo4.png",
-                "alt" => "Course 3",
-                "description" => "JavaScript is the essential language for web development, enabling interactive and dynamic content on websites. Learn to bring your web pages to life!"
-            ],
-            "html" => [
-                "title" => "HTML",
-                "image" => "images/htmllogo.png",
-                "alt" => "Course 4",
-                "description" => "HTML (HyperText Markup Language) is the backbone of every website. It structures web content, allowing you to create pages with text, images, and links."
-            ],
-            "css" => [
-                "title" => "CSS",
-                "image" => "images/csslogo.png",
-                "alt" => "Course 5",
-                "description" => "CSS (Cascading Style Sheets) controls the styling of web pages. Learn how to design beautiful, responsive websites with layout, colors, and animations."
-            ],
-            "github" => [
-                "title" => "GitHub",
-                "image" => "images/github logo.png",
-                "alt" => "Course 6",
-                "description" => "GitHub is a platform for version control and collaboration. Learn to manage your projects, track changes, and collaborate with other developers efficiently."
-            ]
-        ];
+
+        $query = "SELECT Name , Photo , Description FROM courses";
+        $result = $conn->query($query);
+
+        $courseData = [];
+        while ($row = $result->fetch_assoc()) { // Equivalent to mysql_fetch_assoc()
+            $courseData[] = $row;
+        }
 
         // Separate array for titles
         $courseTitles = [];
         foreach ($courseData as $key => $course) {
-            $courseTitles[$key] = $course['title'];
+            $courseTitles[$key] = $course['Name'];
         }
 
         // Sort by title
@@ -245,9 +216,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <?php $course = $courseData[$key]; ?>
                 <div class="col">
                     <div class="card">
-                        <img src="<?= $course['image'] ?>" alt="<?= $course['alt'] ?>" />
-                        <h3><?= $course['title'] ?></h3>
-                        <p><?= $course['description'] ?></p>
+                        <img src="<?= $course['Photo'] ?>" alt="<?= $course['Name'] ?>" />
+                        <h3><?= $course['Name'] ?></h3>
+                        <p><?= $course['Description'] ?></p>
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -356,52 +327,28 @@ fileInput.addEventListener('change', function() {
     </section>
     <section style="background-color: white">
         <h2>Our Professors</h2>
+
         <?php
-        $professors = [
-            "john_doe" => [
-                "name" => "John Doe",
-                "title" => "Professor",
-                "gender" => "male",
-                "bio" => "John Doe is an expert in HTML, CSS and JavaScript, with over 10 years of experience."
-            ],
-            "alice_smith" => [
-                "name" => "Alice Smith",
-                "title" => "Professor",
-                "gender" => "female",
-                "bio" => "Alice Smith specializes in data structures and algorithms, with a strong background in competitive programming and 8 years of teaching experience."
-            ],
-            "bob_johnson" => [
-                "name" => "Bob Johnson",
-                "title" => "Professor",
-                "gender" => "male",
-                "bio" => "Bob Johnson is a seasoned expert in database systems and SQL, having worked in both academia and industry for over 12 years."
-            ],
-            "carol_nguyen" => [
-                "name" => "Carol Nguyen",
-                "title" => "Professor",
-                "gender" => "female",
-                "bio" => "Carol Nguyen focuses on artificial intelligence and machine learning, and has been publishing research in the field for more than 9 years."
-            ],
-            "david_lee" => [
-                "name" => "David Lee",
-                "title" => "Professor",
-                "gender" => "male",
-                "bio" => "David Lee has deep expertise in cybersecurity and network protocols, with 10 years of experience in both teaching and consulting."
-            ]
-        ];
+        $query = "SELECT Name , Title , Gender , Biography FROM professors";
+        $result = $conn->query($query);
+
+        $professors = [];
+        while ($row = $result->fetch_assoc()) { // Equivalent to mysql_fetch_assoc()
+            $professors[] = $row;
+        }
 
         ksort($professors);
         ?>
         <div class="row-other">
             <?php foreach ($professors as $p):
-                $imageNumber = ($p['gender'] === 'female') ? 2 : 1;
+                $imageNumber = ($p['Gender'] === 'Female') ? 2 : 1;
             ?>
                 <div class="col-other reveal-left">
                     <div class="card">
-                        <img src="images/prof<?= $imageNumber ?>.webp" alt="Professor <?= $p['name'] ?>" />
-                        <h3><?= $p['title'] ?> <?= $p['name'] ?></h3>
+                        <img src="images/prof<?= $imageNumber ?>.webp" alt="Professor <?= $p['Name'] ?>" />
+                        <h3><?= $p['Title'] ?> <?= $p['Name'] ?></h3>
                         <p>
-                            <?= $p['bio'] ?>
+                            <?= $p['Biography'] ?>
                         </p>
                     </div>
                 </div>
