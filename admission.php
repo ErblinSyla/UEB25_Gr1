@@ -15,6 +15,7 @@ $jsonPath = 'data/admission_form.json';
 require_once 'utils/BaseFormData.php';
 require 'utils/XSSValidator.php';
 
+$submited = false;
 class ReviewFormData extends ParentClass
 {
     public $phone;
@@ -49,7 +50,7 @@ class ReviewFormData extends ParentClass
     }
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if (isset($_POST['submit']) && $_POST["submit"] == "POST") {
     $name = trim($_POST["name"]);
     $email = trim($_POST["email"]);
     $comment = trim($_POST["comment"]);
@@ -93,17 +94,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // $successMessage = $review->display();
-        $stmt = $conn->prepare("INSERT INTO review (name, email, phone_number, comment, star) VALUES (?, ?, ?, ?, ?)");
-$stmt->bind_param("ssssi", $name, $email, $phone, $comment, $star);
+        $stmt = $conn->prepare("INSERT INTO review (name, email, phone_number, comment, star , profile_picture , timestamp , response) VALUES (?, ?, ?, ?, ? , ? , ? , ?)");
+        $profile_picture = "images/algoverse-logo.png"; // Default profile picture
+        $timestamp = date("Y-m-d H:i:s");
+        $response = null; // Default response
 
-if ($stmt->execute()) {
-    echo "<script>alert('Review u ruajt me sukses në bazën e të dhënave.');</script>";
-} else {
-    echo "<script>alert('Gabim gjatë ruajtjes në databazë: " . $stmt->error . "');</script>";
-}
+        $stmt->bind_param("ssssisss", $name, $email, $phone, $comment, $star, $profile_picture, $timestamp, $response);
+        $submited = true;
+        if ($stmt->execute()) {
+            echo "<script>alert('Review u ruajt me sukses në bazën e të dhënave.');</script>";
+        } else {
+            echo "<script>alert('Gabim gjatë ruajtjes në databazë: " . $stmt->error . "');</script>";
+        }
 
-$stmt->close();
-
+        $stmt->close();
     } else {
         echo "<script>alert('Gabim në plotësim! Kontrolloni të dhënat.');</script>";
     }
@@ -183,6 +187,7 @@ $stmt->close();
             background-image: url("./images/admissions-wallpaper.jpg");
         }
     </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -270,6 +275,16 @@ $stmt->close();
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 $plans[] = $row;
+            }
+        }
+        $sql = "SELECT id, name, email, phone_number , comment , star , profile_picture , timestamp , response  FROM review ORDER BY star DESC";
+        $result = $conn->query($sql);
+
+        $reviews = [];
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $reviews[] = $row;
             }
         }
 
@@ -414,127 +429,165 @@ $stmt->close();
                 </div>
             </div>
             <div class="row">
-                <div class="col-4">
-                    <div class="review-div reveal">
-                        <div class="row">
-                            <div class="col-3">
-                                <img class="review-img" src="images/faq1.webp">
-                                <p>Emma Brown</p>
-                            </div>
-                            <div class="col-9">
-                                <div class="rating">
-                                    <span data-value="1">&#9733;</span>
-                                    <span data-value="2">&#9733;</span>
-                                    <span data-value="3">&#9733;</span>
-                                    <span data-value="4">&#9733;</span>
-                                    <span data-value="5">&#9733;</span>
+                <?php foreach ($reviews as $review): ?>
+                <?php if($review['response'] == null &&  $review['response'] ==''): ?>
+                    <div class="col-4">
+                        <div class="review-div reveal">
+                            <div class="row">
+                                <div class="col-3">
+                                    <img class="review-img" src="<?= htmlspecialchars($review['profile_picture']) ?>">
+                                    <p><?= htmlspecialchars($review['name']) ?></p>
                                 </div>
-                                <p>The programming academy offered a comprehensive curriculum. Thanks to their hands-on approach and expert instructors, I landed my first development job right after graduation.</p>
+                                <div class="col-9">
+                                    <div class="rating">
+                                        <?php for ($i = 1; $i <= 5; $i++): ?>
+                                            <span data-value="<?= $i ?>"><?= $i <= $review['star'] ? '&#9733;' : '&#9734;' ?></span>
+                                        <?php endfor; ?>
+                                    </div>
+                                    <p><?= htmlspecialchars($review['comment']) ?></p>
+                                </div>
+                            </div>
+<?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+    <div class="row">
+        <div class="col-8">
+            <!-- Textarea with dynamic ID -->
+            <textarea id="myTextarea<?= $review['id'] ?>" name="response"
+                      style="border:2px dashed black; border-radius:5px; margin-right:50px; resize: none;"
+                      rows="6" cols="38"
+                      placeholder="Keep it brief and professional!"></textarea>
+        </div>
+
+        <div class="col-4">
+            <!-- Form with dynamic validation -->
+            <form action="admission.php" method="post">
+                <br>
+                <!-- Submit button -->
+                <input type="submit" name="submit"
+                       style="margin-right:18px; margin-bottom:12px;"
+                       class="table-button-create" value="Submit"
+                    onclick = "document.getElementById('response<?= $review['id']?>').value = document.getElementById('myTextarea<?= $review['id'] ?>').value">
+
+                <!-- Cancel button -->
+                <input type="button"
+                       style="margin-right:18px;"
+                       class="table-button-create" value="Cancel"
+                       onclick="document.getElementById('myTextarea<?= $review['id'] ?>').value = '';">
+
+                <!-- Hidden ID for the review -->
+                <input type="hidden" name="id" value="<?= $review['id'] ?>">
+                <input type="hidden" id = "response<?= $review['id']?>" name="response" value="">
+            </form>
+        </div> 
+    </div>
+    <?php
+    // PHP processing block
+    if (isset($_POST['submit'])) {
+        $response = $_POST['response'];
+        $id = $_POST['id'];
+        $stmt = $conn->prepare("UPDATE review SET response = ? WHERE id = ?");
+        $stmt->bind_param("si", $response, $id);
+        if ($stmt->execute()) {
+        } else {
+            echo "<script>alert('Error updating response: " . $stmt->error . "');</script>";
+        }
+        $stmt->close();
+    }
+    ?>
+<?php endif; ?>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <?php endforeach; ?>
+
+            </div>
+            <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'student' && !$submited): ?>
+                <div class="row">
+                    <div class="col-4"></div>
+                    <div class="col-4">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-div reveal">
+                                    <form method="POST" action="admission.php" id="review-form" enctype="multipart/form-data">
+                                        <h3>Leave a Review</h3>
+                                        <h4>Name:</h4>
+                                        <input type="text" name="name" value="<?= htmlspecialchars($name) ?>">
+                                        <h4>Email</h4>
+                                        <input type="email" name="email" value="<?= htmlspecialchars($email) ?>">
+                                        <h4>Phone Number:</h4>
+                                        <input type="text" name="phone" value="<?= htmlspecialchars($phone ?? '') ?>">
+                                        <h4>Comment:</h4>
+                                        <textarea id="comment-input" name="comment" style="resize:vertical;max-height: 300px;"><?= htmlspecialchars($comment) ?></textarea>
+                                        <h4 class="rating-h4">Rating:</h4>
+                                        <div class="clickable-rating">
+                                            <span data-value="1">★</span>
+                                            <span data-value="2">★</span>
+                                            <span data-value="3">★</span>
+                                            <span data-value="4">★</span>
+                                            <span data-value="5">★</span>
+                                            <input type="hidden" name="star" id="starRating" value="">
+                                        </div>
+                                        <button type="submit" name='submit'>Submit</button>
+                                        <?php if (!empty($errors)) : ?>
+                                            <div style="color: red; margin-top: 10px;">
+                                                <?php foreach ($errors as $error) : ?>
+                                                    <div><?= $error ?></div>
+                                                <?php endforeach; ?>
+                                            </div>
+                                        <?php endif; ?>
+
+                                        <?php if (!empty($successMessage)) : ?>
+                                            <div style="color: green; margin-top: 10px;">
+                                                <?= $successMessage ?>
+                                            </div>
+                                        <?php endif; ?>
+                                    </form>
+                                    <script>
+                                        document.querySelectorAll('.clickable-rating span').forEach(star => {
+                                            star.addEventListener('click', function() {
+                                                document.querySelectorAll('.clickable-rating span').forEach(s => {
+                                                    s.classList.remove('active');
+                                                });
+                                                const rating = this.getAttribute('data-value');
+                                                for (let i = 1; i <= rating; i++) {
+                                                    document.querySelector(`.clickable-rating span[data-value="${i}"]`).classList.add('active');
+                                                }
+                                                document.getElementById('starRating').value = rating;
+                                            });
+                                        });
+                                    </script>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="col-4"></div>
                 </div>
-                <div class="col-4">
-                    <div class="review-div reveal">
-                        <div class="row">
-                            <div class="col-3">
-                                <img class="review-img" src="images/faq2.jpg">
-                                <p>Thomas Taylor</p>
-                            </div>
-                            <div class="col-9">
-                                <div class="rating">
-                                    <span data-value="1">&#9733;</span>
-                                    <span data-value="2">&#9733;</span>
-                                    <span data-value="3">&#9733;</span>
-                                    <span data-value="4">&#9733;</span>
-                                    <span data-value="5" class="fifth-star">&#9733;</span>
-                                </div>
-                                <p>I loved the interactive lessons and the real-world projects that helped me apply what I learned. The support from both instructors and fellow students was invaluable, and much appreciated!</p>
-                            </div>
-                        </div>
+            <?php endif; ?>
+            <div class="row">
+                <?php if ($submited && $review['response'] == null): ?>
+                    <div class="col-4"></div>
+                    <div class="col-4">
+                        <h1 style='text-align: center;'>
+                            Review pending response , please be patient!
+                        </h1>
                     </div>
-                </div>
-                <div class="col-4">
-                    <div class="review-div reveal">
-                        <div class="row">
-                            <div class="col-3">
-                                <img class="review-img" src="images/faq3.png">
-                                <p>Hannah Harris</p>
-                            </div>
-                            <div class="col-9">
-                                <div class="rating">
-                                    <span data-value="1" class="selected">&#9733;</span>
-                                    <span data-value="2" class="selected">&#9733;</span>
-                                    <span data-value="3" class="selected">&#9733;</span>
-                                    <span data-value="4" class="selected">&#9733;</span>
-                                    <span data-value="5" class="half">&#9733;</span>
-                                </div>
-                                <p>The academy's online resources and mentoring program made learning to code an enjoyable and structured experience.I appreciate the career support that helped me transition into the tech industry.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    <div class="col-4"></div>
+                <?php endif; ?>
             </div>
             <div class="row">
-                <div class="col-4"></div>
-                <div class="col-4">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="form-div reveal">
-                                <form method="POST" action="admission.php" id="review-form" enctype="multipart/form-data">
-                                    <h3>Leave a Review</h3>
-                                    <h4>Name:</h4>
-                                    <input type="text" name="name" value="<?= htmlspecialchars($name) ?>">
-                                    <h4>Email</h4>
-                                    <input type="email" name="email" value="<?= htmlspecialchars($email) ?>">
-                                    <h4>Phone Number:</h4>
-                                    <input type="text" name="phone" value="<?= htmlspecialchars($phone ?? '') ?>">
-                                    <h4>Comment:</h4>
-                                    <textarea id="comment-input" name="comment" style="resize:vertical;max-height: 300px;"><?= htmlspecialchars($comment) ?></textarea>
-                                    <h4 class="rating-h4">Rating:</h4>
-                                    <div class="clickable-rating">
-                                        <span data-value="1">★</span>
-                                        <span data-value="2">★</span>
-                                        <span data-value="3">★</span>
-                                        <span data-value="4">★</span>
-                                        <span data-value="5">★</span>
-                                        <input type="hidden" name="star" id="starRating" value="">
-                                    </div>
-                                    <button type="submit">Submit</button>
-                                    <?php if (!empty($errors)) : ?>
-                                        <div style="color: red; margin-top: 10px;">
-                                            <?php foreach ($errors as $error) : ?>
-                                                <div><?= $error ?></div>
-                                            <?php endforeach; ?>
-                                        </div>
-                                    <?php endif; ?>
-
-                                    <?php if (!empty($successMessage)) : ?>
-                                        <div style="color: green; margin-top: 10px;">
-                                            <?= $successMessage ?>
-                                        </div>
-                                    <?php endif; ?>
-                                </form>
-                                <script>
-                                    document.querySelectorAll('.clickable-rating span').forEach(star => {
-                                        star.addEventListener('click', function() {
-                                            document.querySelectorAll('.clickable-rating span').forEach(s => {
-                                                s.classList.remove('active');
-                                            });
-                                            const rating = this.getAttribute('data-value');
-                                            for (let i = 1; i <= rating; i++) {
-                                                document.querySelector(`.clickable-rating span[data-value="${i}"]`).classList.add('active');
-                                            }
-                                            document.getElementById('starRating').value = rating;
-                                        });
-                                    });
-                                </script>
-                            </div>
-                        </div>
+                <?php if ($submited && $review['response'] != null): ?>
+                    <div class="col-4"></div>
+                    <div class="col-4">
+                        <h1>
+                            Comment from admin
+                        </h1>
+                        <textarea>
+                        <?= htmlspecialchars($review['response']); ?>
+                    </textarea>
                     </div>
-                </div>
-                <div class="col-4"></div>
+                    <div class="col-4"></div>
+                <?php endif; ?>
             </div>
+
         </section>
         <section class="faq">
             <div class="row">

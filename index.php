@@ -23,6 +23,7 @@ $currentPage = 'index';
 require_once 'utils/BaseFormData.php';
 require 'utils/XSSValidator.php';
 
+
 class FormData extends ParentClass
 {
     public function inherJSONify()
@@ -88,6 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
 
+<<<<<<< Updated upstream
 
         require_once('database/db.php');
 <<<<<<< HEAD
@@ -99,6 +101,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($checkStmt->num_rows > 0) {
             $message .= "\nThis email is already subscribed!";
 =======
+=======
+        require_once('database/db.php'); 
+>>>>>>> Stashed changes
         $stmt = $conn->prepare("INSERT INTO newsletter (name, email) VALUES (?, ?)");
         $stmt->bind_param("ss", $name, $email);
 
@@ -615,5 +620,8 @@ $message = "";
         document.getElementById('year-month').textContent = `${currentMonth} ${currentYear}`;
     </script>
 </body>
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 </html>
