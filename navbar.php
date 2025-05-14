@@ -4,7 +4,7 @@
             <div class="logo">
                 <img id="logo" src="utils/algoverse_logo.svg" alt="AlgoVerse Academy Logo">
             </div>
-            <h2>AlgoVerse Academy</h2>
+            <h2><a href="index.php" id="algoverse">AlgoVerse Academy</a></h2>
         </div>
         <div class="col-8">
             <ul class="links" id="nav-links">

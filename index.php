@@ -2,6 +2,12 @@
 require_once 'utils/BaseFormData.php';
 require 'utils/XSSValidator.php';
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'PHPMailer-master/src/Exception.php';
+require 'PHPMailer-master/src/PHPMailer.php';
+require 'PHPMailer-master/src/SMTP.php';
 
 class FormData extends ParentClass
 {
@@ -12,9 +18,6 @@ class FormData extends ParentClass
 }
 
 $jsonPath = 'data/homepage_form.json';
-
-?>
-<?php
 
 function cleanName($input)
 {
@@ -27,12 +30,9 @@ function validateEmail($email)
     return preg_match("/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/", $email);
 }
 
-
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = trim($_POST['name-input'] ?? '');
     $email = trim($_POST['email-input'] ?? '');
-
     $errors = [];
 
     if (validateXSSAttacks($name) || validateXSSAttacks($email)) {
@@ -41,14 +41,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $name = cleanName($name);
 
-    // Validon emrin
     if (empty($name)) {
         $errors[] = "Name is required";
     } elseif (preg_match("/[0-9]/", $name)) {
         $errors[] = "Name cannot contain numbers";
     }
 
-    // Validon emailin
     if (!validateEmail($email)) {
         $errors[] = "Invalid email format";
     }
@@ -61,25 +59,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $jsonData = "[" . $newsletter->inherJSONify() . "\n]";
             file_put_contents($jsonPath, $jsonData);
         } else {
-
             $jsonData = file_get_contents($jsonPath);
             $jsonData = rtrim($jsonData, "]\n") . "\n ," . $newsletter->inherJSONify() . "\n]";
             file_put_contents($jsonPath, $jsonData);
         }
-    }
-
-
-    require_once('database/db.php');
-
-    $checkStmt = $conn->prepare("SELECT id FROM newsletter WHERE email = ?");
-    $checkStmt->bind_param("s", $email);
-    $checkStmt->execute();
-    $checkStmt->store_result();
-
-    if ($checkStmt->num_rows > 0) {
-        $message .= "\nThis email is already subscribed!";
 
         require_once('database/db.php');
+
         $checkStmt = $conn->prepare("SELECT id FROM newsletter WHERE email = ?");
         $checkStmt->bind_param("s", $email);
         $checkStmt->execute();
@@ -93,12 +79,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             if ($insertStmt->execute()) {
                 $message .= "\nSubscription successful!";
+
+                // Dërgo email me PHPMailer
+                $mail = new PHPMailer(true);
+                try {
+                    $mail->isSMTP();
+                    $mail->Host       = 'smtp.gmail.com';
+                    $mail->SMTPAuth   = true;
+                    $mail->Username   = 'fatosrama.fr@gmail.com';       // Zëvendëso me emailin tënd
+                    $mail->Password   = 'nxnj adhd dlhn bijj';    // Zëvendëso me fjalëkalimin e aplikacionit
+                    $mail->SMTPSecure = 'tls';
+                    $mail->Port       = 587;
+
+                    $mail->setFrom('fatosrama.fr@gmail.com', 'AlgoVerse Academy');
+                    $mail->addAddress($email, $name);
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Welcome to AlgoVerse Academy!';
+                    $mail->Body    = "<h2>Hello $name,</h2><p>Thanks for subscribing to our newsletter!</p>";
+
+                    $mail->send();
+                    $message .= "\nA welcome email was sent to your address.";
+                } catch (Exception $e) {
+                    $message .= "\nEmail could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                }
             } else {
                 $message .= "\nDatabase error: " . $insertStmt->error;
             }
 
             $insertStmt->close();
         }
+
         $checkStmt->close();
         $conn->close();
     } else {
@@ -110,8 +120,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
 }
+
 $message = "";
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -176,7 +189,7 @@ $message = "";
             </div>
             <div class="col-8">
                 <ul class="links" id="nav-links">
-                    <li><a href="signup.php">Sign Up</a></li>
+                    <li><a href="login.php">Sign Up</a></li>
                     <li><a href="login.php">Login In</a></li>
                     
                 </ul>

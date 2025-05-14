@@ -3,6 +3,14 @@
 /* PROFILE DROPDOWN STYLES */
 /* ==================== */
 
+
+#algoverse{
+       text-decoration: none;
+    color: black;
+    transition: 0.3s ease color;
+}
+
+
 .profile-container {
     position: relative;
     display: inline-block;
