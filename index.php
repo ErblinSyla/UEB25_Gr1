@@ -194,7 +194,7 @@ $message = "";
             <div class="col-8">
                 <ul class="links" id="nav-links">
                     <li><a href="login.php">Sign Up</a></li>
-                    <li><a href="login.php">Login In</a></li>
+                    <li><a href="login.php">Log In</a></li>
                     
                 </ul>
                 <div class="hamburger" id="hamburger">

@@ -24,3 +24,4 @@ Name: Erze Veseli - Email: erze.veseli@student.uni-pr.edu - Timestamp: 2025-05-1
 Name: Tringa Rama - Email: tringa.rama4@student.uni-pr.edu - Timestamp: 2025-05-14 19:41:22
 Name: Fitim Rama - Email: timi-77@hotmail.com - Timestamp: 2025-05-14 19:50:43
 Name: Lindita Rama - Email: linditarama.lr@gmail.com - Timestamp: 2025-05-14 19:51:20
+Name: Fatos Rama - Email: fatos.rama1@student.uni-pr.edu - Timestamp: 2025-05-14 20:25:43
