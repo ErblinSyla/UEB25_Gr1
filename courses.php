@@ -143,6 +143,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Courses and Professors</title>
     <link rel="stylesheet" href="styles/courses.css">
+    <link rel="stylesheet" href="styles/navbar.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="scripts/courses.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">

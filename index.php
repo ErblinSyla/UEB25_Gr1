@@ -1,27 +1,7 @@
 <?php
-
-session_start();
-if (!isset($_SESSION['username'])) {
-    header("Location: login.php");
-    exit();
-}
-
-//thjesht sa per testim
-
-//$role = $_SESSION['role'];
-//if ($role == 'admin') {
-//    echo "Welcome Admin!";
-//} elseif ($role == 'student') {
-//    echo "Welcome Student!";
-//} else {
-//    echo "Welcome, User!";
-//}
-
-$currentPage = 'index';
-
-
 require_once 'utils/BaseFormData.php';
 require 'utils/XSSValidator.php';
+
 
 class FormData extends ParentClass
 {
@@ -86,8 +66,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $jsonData = rtrim($jsonData, "]\n") . "\n ," . $newsletter->inherJSONify() . "\n]";
             file_put_contents($jsonPath, $jsonData);
         }
+    }
 
 
+    require_once('database/db.php');
+
+    $checkStmt = $conn->prepare("SELECT id FROM newsletter WHERE email = ?");
+    $checkStmt->bind_param("s", $email);
+    $checkStmt->execute();
+    $checkStmt->store_result();
+
+    if ($checkStmt->num_rows > 0) {
+        $message .= "\nThis email is already subscribed!";
 
         require_once('database/db.php');
         $checkStmt = $conn->prepare("SELECT id FROM newsletter WHERE email = ?");
@@ -121,12 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 $message = "";
-
-
-
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -179,8 +164,27 @@ $message = "";
 </head>
 
 <body>
-    <!--                                     NAVBAR                                                    -->
-    <?php require 'navbar.php'; ?>
+    <nav>
+
+        <div class="row mobile-row">
+            <div class="col-4 title">
+                <div class="logo">
+                    <img id="logo" src="utils/algoverse_logo.svg" alt="AlgoVerse Academy Logo">
+
+                </div>
+                <h2>AlgoVerse Academy</h2>
+            </div>
+            <div class="col-8">
+                <ul class="links" id="nav-links">
+                    <li><a href="login.php">Sign In</a></li>
+                    <li><a href="signup.php">Sign Up</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <p>&#9776;</p>
+                </div>
+            </div>
+        </div>
+    </nav>
 
     <audio id="nav-hover-audio" src="audio/navbar-hover.mp3"></audio>
     <audio id="nav-click-audio" src="audio/shift-page.mp3"></audio>
