@@ -90,7 +90,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
         require_once('database/db.php');
-<<<<<<< HEAD
         $checkStmt = $conn->prepare("SELECT id FROM newsletter WHERE email = ?");
         $checkStmt->bind_param("s", $email);
         $checkStmt->execute();
@@ -98,12 +97,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($checkStmt->num_rows > 0) {
             $message .= "\nThis email is already subscribed!";
-=======
-        $stmt = $conn->prepare("INSERT INTO newsletter (name, email) VALUES (?, ?)");
-        $stmt->bind_param("ss", $name, $email);
-
-        if ($stmt->execute()) {
->>>>>>> c68d81a55243a2471300c9aacfddc77de740cd4a
         } else {
             $insertStmt = $conn->prepare("INSERT INTO newsletter (name, email) VALUES (?, ?)");
             $insertStmt->bind_param("ss", $name, $email);
