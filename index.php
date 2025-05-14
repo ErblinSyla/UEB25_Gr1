@@ -95,8 +95,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $mail->addAddress($email, $name);
                     $mail->isHTML(true);
                     $mail->Subject = 'Welcome to AlgoVerse Academy!';
-                    $mail->Body    = "<h2>Hello $name,</h2><p>Thanks for subscribing to our newsletter!</p>";
-
+                   
+                    $mail->Body = "<h2>Hello $name, </h2><p>We’re excited to let you know that <strong>registrations for our Summer Courses 2025</strong> are now open! </p>
+                    <p>Thank you for subscribing to our newsletter — you’ll be the first to get updates, early access, and exclusive content about all our upcoming sessions.</p>
+                    <p>Get ready for a summer full of learning, growth, and fun with us. </p>
+                    <p>With warm regards,<br>Your Team </p>";
+                    
                     $mail->send();
                     $message .= "\nA welcome email was sent to your address.";
                 } catch (Exception $e) {
