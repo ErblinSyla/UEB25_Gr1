@@ -125,6 +125,7 @@ if (isset($_POST['submit']) && $_POST["submit"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admissions - AlgoVerse Academy</title>
     <link rel="stylesheet" href="styles/admission.css">
+    <link rel="stylesheet" href="styles/navbar.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
