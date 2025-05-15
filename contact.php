@@ -7,6 +7,7 @@ if (!isset($_SESSION['username'])) {
 
 $currentPage = 'contact';
 require('navbar.php');
+require('database/db.php');
 
 $jsonPath = 'data/contact_form.json';
 require_once 'utils/BaseFormData.php';
@@ -128,37 +129,34 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     $formattedInterests = implode(", ", $interests);
-    $conn = new mysqli("localhost", "root", "", "algoversedb"); 
+    $conn = new mysqli("localhost", "root", "", "algoversedb");
 
     if ($conn->connect_error) {
         die("Lidhja me databazën dështoi: " . $conn->connect_error);
     }
 
-    require_once('database/db.php'); 
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $gender = $_POST['gender'];
-    $age = intval($_POST['age']);
+    require_once('database/db.php');
+    $name = $_POST['name'] ?? '';
+    $email = $_POST['email'] ?? '';
+    $gender = $_POST['gender'] ?? '';
+    $age = isset($_POST['age']) ? intval($_POST['age']) : 0;
+    $message = $_POST['message'] ?? '';
     $interests = isset($_POST['interests']) ? implode(", ", $_POST['interests']) : '';
-    $message = $_POST['message'];
 
-    // Prepare & insert
     $stmt = $conn->prepare("INSERT INTO contact_us (name, email, gender, age, interests, message) VALUES (?, ?, ?, ?, ?, ?)");
     $stmt->bind_param("sssiss", $name, $email, $gender, $age, $interests, $message);
 
-    if ($stmt->execute()) {
-        echo "<script>alert('Mesazhi u dërgua me sukses!');</script>";
-    } else {
-        echo "<script>alert('Gabim gjatë ruajtjes: " . $stmt->error . "');</script>";
-    }
+    $stmt->execute(); 
 
     $stmt->close();
     $conn->close();
 
     header("Location: thankyou.html");
     exit();
-
 }
+
+
+
 
 
 ?>
@@ -345,7 +343,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
             <div class="contactForm">
-                <form autocomplete="on" id="contact-form" action="contact.php" method="POST">
+                <form autocomplete="on" id="contact-form" action="" method="POST">
                     <h2>Send Message</h2>
                     <div class="inputBox">
                         <input type="text" name="name" placeholder="Full Name" required="required" autocomplete="name">

@@ -43,4 +43,40 @@
 		"Interests": ["Back End"],
 		"Message": "I would like more information!"
 	}
+ ,
+	{
+		"Name": "Endri Sojeva",
+		"Age": "20",
+		"Gender": "male",
+		"Email": "sojevaendri@gmail.com",
+		"Interests": ["Back End"],
+		"Message": "Pershendetje Telebingo!"
+	}
+ ,
+	{
+		"Name": "Erblin Syla",
+		"Age": "19",
+		"Gender": "male",
+		"Email": "erblin.sylaa@gmail.com",
+		"Interests": ["Front End","Back End"],
+		"Message": "Hello world hello"
+	}
+ ,
+	{
+		"Name": "Erblin Syla",
+		"Age": "19",
+		"Gender": "male",
+		"Email": "erblin.sylaa@gmail.com",
+		"Interests": ["Front End","Back End"],
+		"Message": "Hello world hello"
+	}
+ ,
+	{
+		"Name": "Bashkim Hashani",
+		"Age": "19",
+		"Gender": "male",
+		"Email": "bashkim@gmail.com",
+		"Interests": ["Front End"],
+		"Message": "Yoyoyoyoyoyoyoyo"
+	}
 ]
