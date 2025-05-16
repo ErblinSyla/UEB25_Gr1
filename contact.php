@@ -129,6 +129,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     $formattedInterests = implode(", ", $interests);
+    try {
+        $line = "Name: $name | Email: $email | Gender: $gender | Age: $age | Interests: $formattedInterests | Message: $message";
+        if ($phone) {
+            $line .= " | Phone: $phone";
+        }
+        $line .= PHP_EOL;
+
+        file_put_contents(__DIR__ . '/output/contact_us.txt', $line, FILE_APPEND | LOCK_EX);
+    } catch (Exception $e) {
+        showAlertAndGoBack("Failed to save form data. Please try again.");
+    }
     $conn = new mysqli("localhost", "root", "", "algoversedb");
 
     if ($conn->connect_error) {
