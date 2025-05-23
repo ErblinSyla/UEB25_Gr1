@@ -18,6 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (password_verify($password, $user['password'])) {
             $_SESSION['username'] = $user['username'];
             $_SESSION['role'] = $user['role'];
+            $_SESSION['name'] = $user['name'];
+            $_SESSION['surname'] = $user['surname'];
 
             header("Location: about-us.php");
             exit();
