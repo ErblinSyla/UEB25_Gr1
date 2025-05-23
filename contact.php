@@ -166,15 +166,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     exit();
 }
 
-
-
-
-
 ?>
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="UTF-8">
     <title>Contact Us - AlgoVerse Academy</title>
@@ -220,7 +215,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     </style>
 </head>
-
 <body>
     <!--
     <nav>
@@ -259,8 +253,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </script>
     <audio id="nav-hover-audio" src="audio/navbar-hover.mp3"></audio>
     <audio id="nav-click-audio" src="audio/shift-page.mp3"></audio>
-
-
     <script>
         function addHoverAudioEffectToLinks(linkSelector, audioId) {
             const links = document.querySelectorAll(linkSelector);
@@ -517,5 +509,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         document.getElementById('year-month').textContent = `${currentMonth} ${currentYear}`;
     </script>
 </body>
-
 </html>

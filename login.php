@@ -42,7 +42,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <meta charset="UTF-8">
@@ -64,7 +63,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <script src="scripts/javascript.js"></script>
 </head>
-
 <body>
     <section class="log-in-section">
     <div class="row">
@@ -93,5 +91,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     </section>
 </body>
-
 </html>

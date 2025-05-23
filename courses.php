@@ -11,10 +11,8 @@ $currentPage = 'contact';
 require 'navbar.php';
 $jsonPath = 'data/courses_form.json';
 
-
 require_once 'utils/BaseFormData.php';
 require 'utils/XSSValidator.php';
-
 
 class ApplyCourses extends ParentClass
 {
@@ -56,8 +54,6 @@ class ApplyCourses extends ParentClass
     }
 }
 
-
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $targetFilePath = "uploads/default.svg";
@@ -93,9 +89,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (validateXSSAttacks($name) || validateXSSAttacks($email) || validateXSSAttacks($password)) {
         exit();
     }
-
-   
-
 
     $applyCourses = new ApplyCourses($name, $email, $course, $targetFilePath);
     $applyCourses->setPassword($password);
@@ -135,9 +128,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // $conn->close(); e kam shkru qeto ne rreshtin 342
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -161,7 +154,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="scripts/javascript.js"></script>
 
 </head>
-
 <body>
 
     <!-- <nav>
@@ -724,5 +716,4 @@ fileInput.addEventListener('change', function() {
         document.getElementById('year-month').textContent = `${currentMonth} ${currentYear}`;
     </script>
 </body>
-
 </html>

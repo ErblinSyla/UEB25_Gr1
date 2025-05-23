@@ -448,53 +448,49 @@ if (isset($_POST['submit']) && $_POST["submit"] == "POST") {
                                     <p><?= htmlspecialchars($review['comment']) ?></p>
                                 </div>
                             </div>
-<?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
-    <div class="row">
-        <div class="col-8">
-            <!-- Textarea with dynamic ID -->
-            <textarea id="myTextarea<?= $review['id'] ?>" name="response"
-                      style="border:2px dashed black; border-radius:5px; margin-right:50px; resize: none;"
-                      rows="6" cols="38"
-                      placeholder="Keep it brief and professional!"></textarea>
-        </div>
-
-        <div class="col-4">
-            <!-- Form with dynamic validation -->
-            <form action="admission.php" method="post">
-                <br>
-                <!-- Submit button -->
-                <input type="submit" name="submit"
-                       style="margin-right:18px; margin-bottom:12px;"
-                       class="table-button-create" value="Submit"
-                    onclick = "document.getElementById('response<?= $review['id']?>').value = document.getElementById('myTextarea<?= $review['id'] ?>').value">
-
-                <!-- Cancel button -->
-                <input type="button"
-                       style="margin-right:18px;"
-                       class="table-button-create" value="Cancel"
-                       onclick="document.getElementById('myTextarea<?= $review['id'] ?>').value = '';">
-
-                <!-- Hidden ID for the review -->
-                <input type="hidden" name="id" value="<?= $review['id'] ?>">
-                <input type="hidden" id = "response<?= $review['id']?>" name="response" value="">
-            </form>
-        </div> 
-    </div>
-    <?php
-    // PHP processing block
-    if (isset($_POST['submit'])) {
-        $response = $_POST['response'];
-        $id = $_POST['id'];
-        $stmt = $conn->prepare("UPDATE review SET response = ? WHERE id = ?");
-        $stmt->bind_param("si", $response, $id);
-        if ($stmt->execute()) {
-        } else {
-            echo "<script>alert('Error updating response: " . $stmt->error . "');</script>";
-        }
-        $stmt->close();
-    }
-    ?>
-<?php endif; ?>
+                            <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                                <div class="row">
+                                    <div class="col-8">
+                                        <!-- Textarea with dynamic ID -->
+                                        <textarea id="myTextarea<?= $review['id'] ?>" name="response" style="border:2px dashed black; border-radius:5px; margin-right:50px; resize: none;" rows="6" cols="38" placeholder="Keep it brief and professional!"></textarea>
+                                    </div>
+                                    <div class="col-4">
+                                        <!-- Form with dynamic validation -->
+                                        <form action="admission.php" method="post">
+                                            <br>
+                                            <!-- Submit button -->
+                                            <input type="submit" name="submit"
+                                                   style="margin-right:18px; margin-bottom:12px;"
+                                                   class="table-button-create" value="Submit"
+                                                onclick = "document.getElementById('response<?= $review['id']?>').value = document.getElementById('myTextarea<?= $review['id'] ?>').value">
+                            
+                                            <!-- Cancel button -->
+                                            <input type="button"
+                                                   style="margin-right:18px;"
+                                                   class="table-button-create" value="Cancel"
+                                                   onclick="document.getElementById('myTextarea<?= $review['id'] ?>').value = '';">
+                            
+                                            <!-- Hidden ID for the review -->
+                                            <input type="hidden" name="id" value="<?= $review['id'] ?>">
+                                            <input type="hidden" id = "response<?= $review['id']?>" name="response" value="">
+                                        </form>
+                                    </div> 
+                                </div>
+                                <?php
+                                // PHP processing block
+                                if (isset($_POST['submit'])) {
+                                    $response = $_POST['response'];
+                                    $id = $_POST['id'];
+                                    $stmt = $conn->prepare("UPDATE review SET response = ? WHERE id = ?");
+                                    $stmt->bind_param("si", $response, $id);
+                                    if ($stmt->execute()) {
+                                    } else {
+                                        echo "<script>alert('Error updating response: " . $stmt->error . "');</script>";
+                                    }
+                                    $stmt->close();
+                                }
+                                ?>
+                            <?php endif; ?>
                         </div>
                     </div>
                 <?php endif; ?>
@@ -635,7 +631,6 @@ if (isset($_POST['submit']) && $_POST["submit"] == "POST") {
                     <div class="col-4"></div>
                 <?php endif; ?>
             </div>
-
         </section>
         <section class="faq">
             <div class="row">
@@ -914,5 +909,4 @@ if (isset($_POST['submit']) && $_POST["submit"] == "POST") {
         });
     </script>
 </body>
-
 </html>

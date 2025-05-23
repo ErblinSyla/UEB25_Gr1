@@ -132,7 +132,6 @@ $message = "";
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <meta charset="UTF-8">
@@ -179,7 +178,6 @@ $message = "";
         }
     </style>
 </head>
-
 <body>
     <nav>
 
@@ -630,5 +628,4 @@ $message = "";
         document.getElementById('year-month').textContent = `${currentMonth} ${currentYear}`;
     </script>
 </body>
-
 </html>

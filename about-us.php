@@ -12,7 +12,6 @@ require_once('database/db.php');
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <meta charset="UTF-8">
@@ -56,7 +55,6 @@ require_once('database/db.php');
         }
     </style>
 </head>
-
 <body>
     <!--
     <nav>
@@ -97,8 +95,6 @@ require_once('database/db.php');
     </script>
     <audio id="nav-hover-audio" src="audio/navbar-hover.mp3"></audio>
     <audio id="nav-click-audio" src="audio/shift-page.mp3"></audio>
-
-
     <script>
         function addHoverAudioEffectToLinks(linkSelector, audioId) {
             const links = document.querySelectorAll(linkSelector);
@@ -121,7 +117,6 @@ require_once('database/db.php');
         document.addEventListener('DOMContentLoaded', () => {
             addHoverAudioEffectToLinks('.links a', 'nav-hover-audio');
         });
-
 
         function addClickAudioEffectToLinks(linkSelector, audioId) {
             const links = document.querySelectorAll(linkSelector);
@@ -231,7 +226,6 @@ require_once('database/db.php');
                     <div class="col-1"></div>
                     <div class="col-5 reveal-left">
                         <audio id="iframe-hover-audio" src="audio/div-hover.mp3"></audio>
-
                         <iframe width="560" height="315" src="https://www.youtube.com/embed/shN0HNnvaoM?si=ltvzHnQG9OmIn-Uq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     </div>
                     <div class="col-5">
@@ -428,5 +422,4 @@ require_once('database/db.php');
         });
     </script>
 </body>
-
 </html>
