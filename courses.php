@@ -132,7 +132,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     $stmt->close();
-    $conn->close();
+    // $conn->close(); e kam shkru qeto ne rreshtin 342
 }
 ?>
 <!DOCTYPE html>
@@ -339,6 +339,7 @@ fileInput.addEventListener('change', function() {
         }
 
         ksort($professors);
+        $conn->close();
         ?>
         <div class="row-other">
             <?php foreach ($professors as $p):

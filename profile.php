@@ -1,9 +1,40 @@
 <?php
 $currentPage = 'profile';
+require_once('database/db.php');
 
 require 'navbar.php';
 session_start();
 
+$user_name = isset($_SESSION['name']) ? $_SESSION['name'] : null;
+
+
+//if (!$user_name) {
+//   header("Location: login.php");
+//    exit();
+//}
+
+try {
+    $query = "
+        SELECT DISTINCT c.Name, c.Description
+        FROM courses c 
+        JOIN course_applications ca 
+        ON c.Name = ca.course
+        WHERE ca.name = ?
+    ";
+    $stmt = $conn->prepare($query);
+    if (!$stmt) {
+        throw new Exception("Prepare failed: " . $conn->error);
+    }
+    $stmt->bind_param("s", $user_name);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $courses = $result->fetch_all(MYSQLI_ASSOC);
+
+    $stmt->close();
+} catch (Exception $e) {
+    echo "Error fetching courses: " . $e->getMessage();
+    exit();
+}
 
 ?>
 
@@ -44,28 +75,24 @@ session_start();
             </div>
         </div>
         <div class="courses-section">
-            <h2>Enrolled Courses</h2>
-            <div class="row">
+    <h2>Enrolled Courses</h2>
+    <div class="row">
+        <?php if ($courses): ?>
+            <?php foreach ($courses as $course): ?>
                 <div class="col-4">
                     <div class="course-card">
-                        <h3>Introduction to Python</h3>
-                        <p>Learn the basics of Python programming.</p>
+                        <h3><?php echo htmlspecialchars($course['Name']); ?></h3>
+                        <p><?php echo htmlspecialchars($course['Description']); ?></p>
                     </div>
                 </div>
-                <div class="col-4">
-                    <div class="course-card">
-                        <h3>Web Development</h3>
-                        <p>Build modern websites with HTML, CSS, and JS.</p>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="course-card">
-                        <h3>Data Science Basics</h3>
-                        <p>Explore data analysis and visualization techniques.</p>
-                    </div>
-                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <div class="col-12">
+                <p>No courses enrolled or user not found.</p>
             </div>
-        </div>
+        <?php endif; ?>
+    </div>
+</div>
     </section>
 </body>
 </html>
