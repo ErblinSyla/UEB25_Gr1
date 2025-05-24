@@ -139,7 +139,6 @@ try {
                             <th>Name</th>
                             <th>Email</th>
                             <th>Phone Number</th>
-                            <th>Comment</th>
                             <th>Formatted Comment</th>
                             <th>Rating</th>
                             <th>Response</th>
@@ -149,7 +148,6 @@ try {
                                 <td><?php echo htmlspecialchars($review['name']); ?></td>
                                 <td><?php echo htmlspecialchars($review['email']); ?></td>
                                 <td><?php echo htmlspecialchars($review['phone_number']); ?></td>
-                                <td><?php echo isset($review['comment']) ? htmlspecialchars($review['comment']) : 'N/A'; ?></td>
                                 <td><?php echo htmlspecialchars($review['formatted_comment']); ?></td>
                                 <td><?php echo htmlspecialchars($review['star']); ?></td>
                                 <td><?php echo htmlspecialchars($review['response']); ?></td>
