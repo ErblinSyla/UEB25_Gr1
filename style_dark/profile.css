@@ -297,3 +297,7 @@ ul {
         max-width: 400px;
     }
 }
+a {
+    color: #00aaff; /* Bright accent for links */
+    text-decoration: none;
+}

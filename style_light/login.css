@@ -152,3 +152,6 @@ body {
     font-family: 'MyFontItalic';
     src: url(../fonts/Rubik/Rubik-Italic-VariableFont_wght.ttf); 
 }
+a {
+    text-decoration: none;
+}

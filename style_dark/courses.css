@@ -465,3 +465,7 @@ section {
     padding: 40px 0;
     background-color: #2d3436; /* Dark background */
 }
+a {
+    color: #00aaff; /* Bright accent for links */
+    text-decoration: none;
+}
