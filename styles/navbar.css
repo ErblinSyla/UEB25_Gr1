@@ -14,7 +14,7 @@
 .profile-container {
     position: relative;
     display: inline-block;
-    margin-left: 35px; /* Match your nav link spacing */
+    margin-left: -35px; /* Match your nav link spacing */
     height: 40px;
     vertical-align: middle;
 }
