@@ -3,6 +3,8 @@ body {
     padding: 0;
     line-height: 1;
     font-family: sans-serif, serif;
+    background-color: #2d3436; /* Dark background for the body */
+    color: #f0f0f0; /* Light text for readability */
 }
 
 section {
@@ -23,56 +25,21 @@ section {
     content: "";
 }
 
-.col-1 {
-    width: 8.33%;
-}
-
-.col-2 {
-    width: 16.66%;
-}
-
-.col-3 {
-    width: 25%;
-}
-
-.col-4 {
-    width: 33.33%;
-}
-
-.col-5 {
-    width: 41.66%;
-}
-
-.col-6 {
-    width: 50%;
-}
-
-.col-7 {
-    width: 58.33%;
-}
-
-.col-8 {
-    width: 66.66%;
-}
-
-.col-9 {
-    width: 75%;
-}
-
-.col-10 {
-    width: 83.33%;
-}
-
-.col-11 {
-    width: 91.66%;
-}
-
-.col-12 {
-    width: 100%;
-}
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
 
 .navbar-container {
-    background: linear-gradient(45deg, #4CC9FE, #0D92F4);
+    background: linear-gradient(45deg, #1a2529, #0a3d62); /* Darker gradient */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -80,7 +47,7 @@ section {
 }
 
 nav {
-    background: linear-gradient(45deg, #4CC9FE, #0D92F4);
+    background: linear-gradient(45deg, #1a2529, #0a3d62); /* Darker gradient */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -100,12 +67,12 @@ nav {
 
 .links li a {
     text-decoration: none;
-    color: black;
+    color: #f0f0f0; /* Light text */
     transition: 0.3s ease color;
 }
 
 .links li a:hover {
-    color: blue;
+    color: #00aaff; /* Bright accent for hover */
 }
 
 #logo {
@@ -117,7 +84,7 @@ nav {
 .profile-section {
     padding: 40px;
     text-align: center;
-    background: #FFF1DB;
+    background: #3d4548; /* Slightly lighter dark background */
     min-height: 100vh;
 }
 
@@ -127,23 +94,23 @@ nav {
     border-radius: 50%;
     object-fit: cover;
     margin: 20px auto;
-    box-shadow: 0 4px 10px rgba(50, 50, 50, 0.7);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Darker shadow */
     transition: box-shadow 0.3s ease;
 }
 
 .profile-picture:hover {
-    box-shadow: 1px 1px 7px #0D92F4;
+    box-shadow: 1px 1px 7px #00aaff; /* Bright accent shadow */
 }
 
 .profile-name {
     font-size: 2rem;
     margin: 10px 0;
-    color: #0D92F4;
+    color: #00aaff; /* Bright accent */
 }
 
 .profile-username {
     font-size: 1.2rem;
-    color: #333;
+    color: #b0b0b0; /* Lighter gray */
     margin-bottom: 40px;
 }
 
@@ -154,40 +121,39 @@ nav {
 .courses-section h2 {
     font-size: 1.5rem;
     margin-bottom: 20px;
+    color: #f0f0f0; /* Light text */
 }
 
 .course-card {
-    background: #eaeaea;
+    background: #2d3436; /* Darker card background */
     width: 300px;
     padding: 20px;
     margin: 10px;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(50, 50, 50, 0.7);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Darker shadow */
     transition: box-shadow 0.3s ease, transform 0.3s ease;
     text-align: left;
 }
 
 .course-card:hover {
-    box-shadow: 1px 1px 7px #0D92F4;
+    box-shadow: 1px 1px 7px #00aaff; /* Bright accent shadow */
     transform: scale(1.05);
 }
 
 .course-card h3 {
     margin: 0 0 10px;
     font-size: 1.2rem;
-    color: #0D92F4;
+    color: #00aaff; /* Bright accent */
 }
 
 .course-card p {
     margin: 0;
     font-size: 1rem;
-    color: #333;
+    color: #b0b0b0; /* Lighter gray */
 }
 
 @media (max-width: 810px) {
-
-    .col-4,
-    .col-6 {
+    .col-4, .col-6 {
         width: 90%;
         margin: auto;
     }

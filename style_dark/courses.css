@@ -2,8 +2,8 @@ body {
     margin: 0;
     line-height: 1;
     font-family: sans-serif, serif;
-    background-color: #121212;
-    color: #e0e0e0;
+    background-color: #2d3436; /* Dark background for the body */
+    color: #f0f0f0; /* Light text for readability */
 }
 
 html {
@@ -37,7 +37,7 @@ html {
 .col-12 {width: 100%;}
 
 nav {
-    background: linear-gradient(45deg, #2a5d84, #0a4b7a);
+    background: linear-gradient(45deg, #1a2529, #0a3d62); /* Darker gradient */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -46,20 +46,22 @@ nav {
 }
 
 .navbar-container {
-    background: linear-gradient(45deg, #2a5d84, #0a4b7a);
+    background: linear-gradient(45deg, #1a2529, #0a3d62); /* Darker gradient */
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
 }
+
 #logo {
     width: 60px;
     height: 56px;
     object-fit: contain;
-    margin-top:2px;
+    margin-top: 2px;
 }
+
 .title h2 {
-    margin-top:-40px;
+    margin-top: -40px;
     margin-left: 100px;
 }
 
@@ -76,19 +78,21 @@ ul {
 .links li {
     margin-left: 35px;
 }
+
 .links li a.active {
-    color: #4CC9FE;
+    color: #00aaff; /* Bright accent for active link */
 }
+
 .links li a {
     text-decoration: none;
-    color: #e0e0e0;
+    color: #f0f0f0; /* Light text */
     transition: 0.3s ease color;
     font-family: "Cinzel", serif;
     font-weight: bold;
 }
 
 .links li a:hover {
-    color: #4CC9FE;
+    color: #00aaff; /* Bright accent for hover */
 }
 
 .title-main {
@@ -96,18 +100,18 @@ ul {
     margin: 60px 0;
     font-family: "Changa", sans-serif;
     font-size: 29px;
-    text-shadow: 1px 1px 4px rgba(255,255,255,0.1);
-    color: #e0e0e0;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5); /* Darker shadow */
+    color: #f0f0f0; /* Light text */
 }
 
 .hamburger {
     display: none;
     font-size: 1.5rem;
     cursor: pointer;
-    color: #e0e0e0;
+    color: #f0f0f0; /* Light text */
     transition: background-color 0.2s ease, box-shadow 0.2s ease;
     padding: 8px 20px;
-    border: 2px solid #e0e0e0;
+    border: 2px solid #4a5b63; /* Darker border */
     border-radius: 8px;
     margin-right: 20px;
     float: right;
@@ -115,15 +119,15 @@ ul {
 
 .hamburger:active,
 .hamburger.active {
-    background-color: #0A7FD1;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+    background-color: #0a5d9c; /* Darker active state */
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.6); /* Darker shadow */
 }
 
 nav .title h2 {
     font-family: "Spicy Rice", serif;
     font-size: 1.5em;
     margin-left: -100px;
-    color: #e0e0e0;
+    color: #f0f0f0; /* Light text */
 }
 
 @media (max-width: 1010px) {
@@ -150,7 +154,7 @@ nav .title h2 {
         top: 50px;
         right: -45px;
         border-bottom-left-radius: 8px;
-        background: linear-gradient(45deg, #2a5d84, #0a4b7a);
+        background: linear-gradient(45deg, #1a2529, #0a3d62); /* Darker gradient */
         padding: 15px;
         z-index: 1;
         width: 35%;
@@ -179,24 +183,25 @@ nav .title h2 {
 
 section {
     padding: 40px 0;
-    background-color: #121212;
+    background-color: #2d3436; /* Dark background */
 }
 
 h2 {
     font-size: 2em;
     margin-bottom: 20px;
     text-align: center;
-    color: #e0e0e0;
+    color: #f0f0f0; /* Light text */
 }
 
 .courses {
-    background-color: #1a1a1a;
+    background-color: #3d4548; /* Slightly lighter dark background */
 }
 
 .courses h2 {
     opacity: 0;
     animation: fadeIn 1.5s ease-out forwards;
     animation-delay: 0.3s;
+    color: #f0f0f0; /* Light text */
 }
 
 .row-other {
@@ -209,9 +214,9 @@ h2 {
 .col {
     width: 30%;
     max-width: 300px;
-    background-color: #1e1e1e;
+    background-color: #3d4548; /* Darker card background */
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Darker shadow */
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     text-align: center;
@@ -219,30 +224,28 @@ h2 {
     opacity: 0;
     animation: fadeIn 1.5s ease-out forwards;
     animation-delay: 0.5s;
-    color: #e0e0e0;
 }
 
 .col-other {
     width: 30%;
     max-width: 300px;
-    background-color: #1e1e1e;
+    background-color: #3d4548; /* Darker card background */
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Darker shadow */
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     text-align: center;
     padding: 20px;
-    color: #e0e0e0;
 }
 
 .col-other:hover {
     transform: translateY(-10px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5); /* Darker hover shadow */
 }
 
 .col:hover {
     transform: translateY(-10px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5); /* Darker hover shadow */
 }
 
 .card img {
@@ -254,13 +257,13 @@ h2 {
 .card h3 {
     margin-top: 15px;
     font-size: 1.3em;
-    color: #e0e0e0;
+    color: #f0f0f0; /* Light text */
 }
 
 .card p {
     margin-top: 10px;
     font-size: 1em;
-    color: #b0b0b0;
+    color: #b0b0b0; /* Lighter gray for secondary text */
 }
 
 @media (max-width: 768px) {
@@ -317,8 +320,8 @@ h2 {
 footer {
     text-align: center;
     padding: 20px;
-    background: linear-gradient(45deg, #2a5d84, #0a4b7a);
-    color: #e0e0e0;
+    background: linear-gradient(45deg, #1a2529, #0a3d62); /* Darker gradient */
+    color: #f0f0f0; /* Light text */
 }
 
 .apply-container {
@@ -327,8 +330,8 @@ footer {
 }
 
 #applyButton {
-    background-color: #0a4b7a;
-    color: white;
+    background-color: #0a5d9c; /* Darker button background */
+    color: #f0f0f0; /* Light text */
     padding: 15px 30px;
     border: none;
     border-radius: 5px;
@@ -338,7 +341,7 @@ footer {
 }
 
 #applyButton:hover {
-    background-color: #0950b7;
+    background-color: #083a7a; /* Even darker hover state */
 }
 
 .apply-modal {
@@ -350,24 +353,23 @@ footer {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0, 0, 0, 0.7); 
+    background-color: rgba(0, 0, 0, 0.7); /* Darker overlay */
 }
 
 .apply-modal-content {
-    background-color: #1e1e1e;
+    background-color: #3d4548; /* Dark modal background */
     margin: 10% auto;
     padding: 20px;
     border-radius: 8px;
     width: 400px;
     position: relative;
-    color: #e0e0e0;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    color: #f0f0f0; /* Light text */
 }
 
 .apply-modal-content h3 {
     text-align: center;
     margin-bottom: 20px;
-    color: #e0e0e0;
+    color: #f0f0f0; /* Light text */
 }
 
 .apply-modal-content form {
@@ -382,44 +384,44 @@ footer {
     padding: 10px;
     font-size: 1em;
     border-radius: 5px;
-    border: 1px solid #333;
-    background-color: #2a2a2a;
-    color: #e0e0e0;
+    border: 1px solid #4a5b63; /* Darker border */
+    background-color: #2d3436; /* Dark input background */
+    color: #f0f0f0; /* Light text */
 }
 
 .apply-modal-content button {
-    background-color: #0a4b7a;
-    color: white;
+    background-color: #0a5d9c; /* Dark button background */
+    color: #f0f0f0;
     cursor: pointer;
 }
 
 .apply-modal-content button:hover {
-    background-color: #0950b7;
+    background-color: #083a7a; /* Darker hover state */
 }
 
 .drag-drop-area {
-    border: 2px dashed #0a4b7a;
+    border: 2px dashed #0a5d9c; /* Darker dashed border */
     padding: 20px;
     text-align: center;
-    background-color: #2a2a2a;
+    background-color: #2d3436; /* Dark background */
     cursor: pointer;
     border-radius: 5px;
     margin-bottom: 20px;
-    color: #e0e0e0;
+    color: #f0f0f0; /* Light text */
 }
-  
+
 .drag-drop-area p {
     margin: 0;
 }
-  
+
 .drag-drop-area:hover {
-    background-color: #333;
+    background-color: #3d4548; /* Slightly lighter dark hover */
 }
-  
+
 #file-upload {
     display: none;
 }
-  
+
 #file-upload:focus {
     outline: none;
 }
@@ -431,11 +433,11 @@ footer {
     right: 20px;
     font-size: 1.5em;
     cursor: pointer;
-    color: #e0e0e0;
+    color: #f0f0f0; /* Light text */
 }
 
 .close-btn:hover {
-    color: #4CC9FE;
+    color: #00aaff; /* Bright accent for hover */
 }
 
 @font-face {

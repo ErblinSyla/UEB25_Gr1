@@ -3,8 +3,8 @@ body {
     line-height: 1;
     font-family: sans-serif, serif;
     overflow-x: hidden;
-    background-color: #121212;
-    color: #e0e0e0;
+    background-color: #2d3436; /* Dark background for the body */
+    color: #f0f0f0; /* Light text for readability */
 }
 
 .row {
@@ -34,7 +34,7 @@ body {
 .col-12 {width: 100%;}
 
 nav {
-    background: linear-gradient(45deg, #4CC9FE, #0D92F4);
+    background: linear-gradient(45deg, #1a2529, #0a3d62); /* Darker gradient */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -43,7 +43,7 @@ nav {
 }
 
 .navbar-container {
-    background: linear-gradient(45deg, #4CC9FE, #0D92F4);
+    background: linear-gradient(45deg, #1a2529, #0a3d62); /* Darker gradient */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -54,12 +54,13 @@ nav {
     width: 60px;
     height: 56px;
     object-fit: contain;
-    margin-top:2px;
+    margin-top: 2px;
 }
+
 .title h2 {
-    margin-top:-40px;
+    margin-top: -40px;
     margin-left: 100px;
-    color: #e0e0e0;
+    color: #f0f0f0; /* Light text */
 }
 
 nav ul {
@@ -75,34 +76,35 @@ nav ul {
 .links li {
     margin-left: 35px;
 }
+
 .links li a.active {
-    color: #4CC9FE;
-    font-weight: bold;
+    color: #00aaff; /* Bright accent for active link */
 }
+
 .links li a {
     text-decoration: none;
-    color: #e0e0e0;
+    color: #f0f0f0; /* Light text */
     transition: 0.3s ease color;
 }
 
 .links li a:hover {
-    color: #ffffff;
+    color: #00aaff; /* Bright accent for hover */
 }
 
 .title-main {
     text-align: center;
     margin: 60px 0;
-    color: #e0e0e0;
+    color: #f0f0f0; /* Light text */
 }
 
 .hamburger {
     display: none;
     font-size: 1.5rem;
     cursor: pointer;
-    color: #fff;
+    color: #f0f0f0; /* Light text */
     transition: background-color 0.2s ease, box-shadow 0.2s ease;
     padding: 8px 20px;
-    border: 2px solid #e0e0e0;
+    border: 2px solid #4a5b63; /* Darker border */
     border-radius: 8px;
     margin-right: 20px;
     float: right;
@@ -110,8 +112,8 @@ nav ul {
 
 .hamburger:active,
 .hamburger.active {
-    background-color: #0A7FD1;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+    background-color: #0a5d9c; /* Darker active state */
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.6); /* Darker shadow */
 }
 
 @media (max-width: 1010px) {
@@ -138,7 +140,7 @@ nav ul {
         top: 50px;
         right: -45px;
         border-bottom-left-radius: 8px;
-        background: linear-gradient(45deg, #4CC9FE, #0D92F4);
+        background: linear-gradient(45deg, #1a2529, #0a3d62); /* Darker gradient */
         padding: 15px;
         z-index: 1;
         width: 35%;
@@ -165,30 +167,31 @@ nav ul {
     }
 }
 
-#google-map{
-    text-decoration:none;
-    max-width:100%;
-    width:500px;
-    height:500px;
-    border-radius:10px;
-    overflow:hidden;
-    border:1px solid #444;
-    box-shadow:0 0 10px rgba(0,0,0,0.7);
+#google-map {
+    text-decoration: none;
+    max-width: 100%;
+    width: 500px;
+    height: 500px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #4a5b63; /* Darker border */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Darker shadow */
     transition: 0.5s;
     position: relative;
     right: 80px !important;
 }
-#google-map:hover{
+
+#google-map:hover {
     transition: 0.5s;
-    border:1px solid #4CC9FE;
-    box-shadow:0 0 10px #4CC9FE;
+    border: 1px solid #00aaff; /* Bright accent */
+    box-shadow: 0 0 10px #00aaff; /* Bright accent shadow */
 }
 
-#google-maps-canvas img{
-    max-width:none!important;
-    background:none!important;
+#google-maps-canvas img {
+    max-width: none !important;
+    background: none !important;
     font-size: inherit;
-    font-weight:inherit;  
+    font-weight: inherit;
 }
 
 /* CONTACT */
@@ -201,7 +204,7 @@ nav ul {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: #1e1e1e;
+    background-color: #3d4548; /* Slightly lighter dark background */
     background-size: cover;
 }
 
@@ -211,17 +214,18 @@ nav ul {
     opacity: 0;
     animation: fadeIn 1.5s ease-out forwards;
     animation-delay: 0.3s;
+    color: #f0f0f0; /* Light text */
 }
 
 .contact .content h2 {
     font-size: 36px;
     font-weight: 500;
-    color: #e0e0e0;
+    color: #f0f0f0; /* Light text */
 }
 
 .contact .content p {
     font-weight: 300;
-    color: #aaaaaa;
+    color: #b0b0b0; /* Lighter gray */
 }
 
 .container {
@@ -261,54 +265,56 @@ nav ul {
 .container .contactInfo .box .icon {
     min-width: 60px;
     height: 60px;
-    background: #252525;
+    background: #3d4548; /* Dark background */
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
     font-size: 22px;
-    box-shadow: 1px 1px 7px rgba(0,0,0,0.5);
+    box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.5); /* Darker shadow */
     transition: 0.3s ease box-shadow;
-    color: #4CC9FE;
+    color: #f0f0f0; /* Light text */
 }
 
 .container .contactInfo .box .icon:hover {
-    box-shadow: 1px 1px 7px #4CC9FE;
+    box-shadow: 1px 1px 7px #00aaff; /* Bright accent shadow */
 }
 
 .container .contactInfo .box .text {
     display: flex;
     margin-left: 20px;
     font-size: 16px;
-    color: #e0e0e0;
+    color: #b0b0b0; /* Lighter gray */
     flex-direction: column;
     font-weight: 300;
 }
 
 .container .contactInfo .box .text h3 {
     font-weight: 500;
-    color: #4CC9FE;
+    color: #00aaff; /* Bright accent */
 }
 
 .contactForm {
     width: 40%;
     padding: 40px;
-    background: #252525;
+    background: #3d4548; /* Dark background */
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Darker shadow */
+    box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.5);
     transition: 0.3s ease box-shadow;
     opacity: 0;
     animation: fadeIn 1.5s ease-out forwards;
     animation-delay: 0.6s;
+    color: #f0f0f0; /* Light text */
 }
 
 .contactForm:hover {
-    box-shadow: 0 5px 15px rgba(76, 201, 254, 0.3);
+    box-shadow: 1px 1px 7px #00aaff; /* Bright accent shadow */
 }
 
 .contactForm h2 {
     font-size: 30px;
-    color: #e0e0e0;
+    color: #f0f0f0; /* Light text */
     font-weight: 500;
 }
 
@@ -325,10 +331,10 @@ nav ul {
     font-size: 16px;
     margin: 10px 0;
     border: none;
-    border-bottom: 2px solid #444;
+    border-bottom: 2px solid #4a5b63; /* Darker border */
     outline: none;
     background: transparent;
-    color: #e0e0e0;
+    color: #f0f0f0; /* Light text */
 }
 
 .contactForm .inputBox span {
@@ -339,12 +345,12 @@ nav ul {
     margin: 10px 0;
     pointer-events: none;
     transition: 0.5s;
-    color: #aaaaaa;
+    color: #b0b0b0; /* Lighter gray */
 }
 
 .contactForm .inputBox label {
     font-size: 16px;
-    color: #aaaaaa;
+    color: #b0b0b0; /* Lighter gray */
     font-weight: 300;
 }
 
@@ -358,7 +364,7 @@ nav ul {
     margin-left: 5px;
     margin-right: 15px;
     font-size: 16px;
-    color: #aaaaaa;
+    color: #b0b0b0; /* Lighter gray */
 }
 
 .contactForm .inputBox input[type="radio"] {
@@ -371,29 +377,27 @@ nav ul {
     font-size: 16px;
     margin: 10px 0;
     border: none;
-    border-bottom: 2px solid #444;
+    border-bottom: 2px solid #4a5b63; /* Darker border */
     outline: none;
     background: transparent;
-    color: #e0e0e0;
+    color: #f0f0f0; /* Light text */
 }
 
 .contactForm .inputBox input[type="submit"] {
-    background: #4CC9FE;
-    color: #121212;
+    background: #0a5d9c; /* Darker button background */
+    color: #f0f0f0; /* Light text */
     border: none;
     padding: 10px 20px;
     cursor: pointer;
     transition: 0.3s;
-    font-weight: bold;
 }
 
 .contactForm .inputBox input[type="submit"]:hover {
-    background: #0D92F4;
-    color: #e0e0e0;
+    background: #1a2529; /* Even darker hover */
 }
 
 .error-message {
-    color: #ff6b6b;
+    color: #ff5555; /* Brighter red for errors */
     font-size: 10px;
     display: none;
     margin-top: 5px;
@@ -404,15 +408,15 @@ nav ul {
     margin-bottom: 30px;
 }
 
-.inputBox input, .inputBox textarea {
+.inputBox input,
+.inputBox textarea {
     width: 100%;
     padding: 10px;
     margin-top: 5px;
     box-sizing: border-box;
-    background: #333;
-    border: 1px solid #444;
-    border-radius: 4px;
-    color: #e0e0e0;
+    border: 1px solid #4a5b63; /* Darker border */
+    background: #2d3436; /* Dark input background */
+    color: #f0f0f0; /* Light text */
 }
 
 .inputBox textarea {
@@ -423,10 +427,10 @@ nav ul {
 /* FOOTER */
 
 footer {
-    background: linear-gradient(45deg, #4CC9FE, #0D92F4);
+    background: linear-gradient(45deg, #1a2529, #0a3d62); /* Darker gradient */
     text-align: center;
     font-size: 15px;
-    color: white;
+    color: #f0f0f0; /* Light text */
 }
 
 .reveal {
@@ -470,17 +474,17 @@ footer {
 
 @keyframes float-up {
     to {
-      opacity: 1;
-      transform: translateX(0);
+        opacity: 1;
+        transform: translateX(0);
     }
 }
 
 @font-face {
     font-family: 'MyFont';
-    src: url(../fonts/Rubik/Rubik-VariableFont_wght.ttf); 
+    src: url(../fonts/Rubik/Rubik-VariableFont_wght.ttf);
 }
 
 @font-face {
     font-family: 'MyFontItalic';
-    src: url(../fonts/Rubik/Rubik-Italic-VariableFont_wght.ttf); 
+    src: url(../fonts/Rubik/Rubik-Italic-VariableFont_wght.ttf);
 }

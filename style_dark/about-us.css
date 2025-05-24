@@ -3,8 +3,8 @@ body {
     line-height: 1;
     font-family: sans-serif, serif;
     overflow-x: hidden;
-    background-color: #121212;
-    color: #e0e0e0;
+    background-color: #2d3436; /* Dark background for the body */
+    color: #f0f0f0; /* Light text for readability */
 }
 
 .row {
@@ -34,7 +34,7 @@ body {
 .col-12 {width: 100%;}
 
 nav {
-    background: linear-gradient(45deg, #4CC9FE, #0D92F4);
+    background: linear-gradient(45deg, #1a2529, #0a3d62); /* Darker gradient */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -43,7 +43,7 @@ nav {
 }
 
 .navbar-container {
-    background: linear-gradient(45deg, #4CC9FE, #0D92F4);
+    background: linear-gradient(45deg, #1a2529, #0a3d62); /* Darker gradient */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -54,12 +54,13 @@ nav {
     width: 60px;
     height: 56px;
     object-fit: contain;
-    margin-top:2px;
+    margin-top: 2px;
 }
+
 .title h2 {
-    margin-top:-40px;
+    margin-top: -40px;
     margin-left: 100px;
-    color: #e0e0e0;
+    color: #f0f0f0; /* Light text */
 }
 
 nav ul {
@@ -75,34 +76,35 @@ nav ul {
 .links li {
     margin-left: 35px;
 }
+
 .links li a.active {
-    color: #ffffff;
-    font-weight: bold;
+    color: #00aaff; /* Bright accent for active link */
 }
+
 .links li a {
     text-decoration: none;
-    color: #e0e0e0;
+    color: #f0f0f0; /* Light text */
     transition: 0.3s ease color;
 }
 
 .links li a:hover {
-    color: #ffffff;
+    color: #00aaff; /* Bright accent for hover */
 }
 
 .title-main {
     text-align: center;
     margin: 60px 0;
-    color: #e0e0e0;
+    color: #f0f0f0; /* Light text */
 }
 
 .hamburger {
     display: none;
     font-size: 1.5rem;
     cursor: pointer;
-    color: #e0e0e0;
+    color: #f0f0f0; /* Light text */
     transition: background-color 0.2s ease, box-shadow 0.2s ease;
     padding: 8px 20px;
-    border: 2px solid #e0e0e0;
+    border: 2px solid #4a5b63; /* Darker border */
     border-radius: 8px;
     margin-right: 20px;
     float: right;
@@ -110,8 +112,8 @@ nav ul {
 
 .hamburger:active,
 .hamburger.active {
-    background-color: #0A7FD1;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+    background-color: #0a5d9c; /* Darker active state */
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.6); /* Darker shadow */
 }
 
 @media (max-width: 1010px) {
@@ -138,7 +140,7 @@ nav ul {
         top: 50px;
         right: -45px;
         border-bottom-left-radius: 8px;
-        background: linear-gradient(45deg, #4CC9FE, #0D92F4);
+        background: linear-gradient(45deg, #1a2529, #0a3d62); /* Darker gradient */
         padding: 15px;
         z-index: 1;
         width: 35%;
@@ -169,6 +171,7 @@ nav ul {
 
 .main-section {
     min-height: 100vh;
+    background-color: #2d3436; /* Dark background */
 }
 
 .canvas-text {
@@ -181,13 +184,14 @@ nav ul {
 .canvas-text div {
     text-align: center;
     opacity: 0;
-    animation: fadeIn 2s ease-in-out forwards; 
+    animation: fadeIn 2s ease-in-out forwards;
+    color: #f0f0f0; /* Light text */
 }
 
 .canvas-text div h2 {
     font-size: 40px;
     line-height: 1.5;
-    color: #e0e0e0;
+    color: #f0f0f0; /* Light text */
 }
 
 /* ABOUT US */
@@ -195,19 +199,20 @@ nav ul {
 .why-algoverse p {
     font-size: 21px;
     font-family: 'MyFont', Arial, Helvetica, sans-serif;
-    color: #e0e0e0;
+    color: #b0b0b0; /* Lighter gray for secondary text */
 }
+
 .why-algoverse h4 {
     font-family: "Cinzel", serif;
     font-size: 27px;
-    color: #e0e0e0;
+    color: #f0f0f0; /* Light text */
 }
 
 .why-algoverse ul li {
     font-size: 21px;
     font-family: 'MyFont', Arial, Helvetica, sans-serif;
     line-height: 1.45;
-    color: #e0e0e0;
+    color: #b0b0b0; /* Lighter gray */
 }
 
 .why-algoverse ul li ul {
@@ -220,18 +225,19 @@ nav ul {
 
 .why-algoverse {
     padding: 0 60px 60px 60px;
+    background-color: #2d3436; /* Dark background */
 }
 
 /* EASY LEARNING */
 
 .easy-learning {
-    background-color: #1e1e1e;
+    background-color: #3d4548; /* Slightly lighter dark background */
     padding-bottom: 80px;
 }
 
 .easy-learning iframe {
     max-width: 500px;
-    box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.5);
+    box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.5); /* Darker shadow */
     transition: 0.3s ease box-shadow;
     border-radius: 10px;
 }
@@ -241,17 +247,18 @@ nav ul {
     font-family: 'MyFont', Arial, Helvetica, sans-serif;
     line-height: 1.45;
     text-align: justify;
-    color: #e0e0e0;
+    color: #b0b0b0; /* Lighter gray */
 }
 
 .easy-learning iframe:hover {
-    box-shadow: 1px 1px 7px #0D92F4;
+    box-shadow: 1px 1px 7px #00aaff; /* Bright accent for hover */
 }
 
 /* DEMOGRAPHICS */
 
 .demographics {
     padding-bottom: 80px;
+    background-color: #2d3436; /* Dark background */
 }
 
 table {
@@ -259,34 +266,34 @@ table {
     margin: 20px auto;
     border-collapse: collapse;
     font-family: 'MyFont', Arial, Helvetica, sans-serif;
-    box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.5);
+    box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.5); /* Darker shadow */
     transition: 0.3s ease box-shadow;
+    background-color: #3d4548; /* Dark table background */
 }
 
 thead tr {
-    background-color: #4CC9FE;
-    color: white;
+    background-color: #0a3d62; /* Darker header background */
+    color: #f0f0f0; /* Light text */
     transition: 0.3s ease background-color;
 }
 
 th, td {
     padding: 15px;
     text-align: center;
-    border: 2px solid #444;
-    color: #e0e0e0;
+    border: 2px solid #4a5b63; /* Darker border */
 }
 
 tbody tr:nth-child(odd) {
-    background-color: #2d2d2d;
+    background-color: #2d3436; /* Darker odd rows */
 }
 
 tbody tr:nth-child(even) {
-    background-color: #252525;
+    background-color: #3d4548; /* Slightly lighter even rows */
     transition: 0.3s ease background-color;
 }
 
 tbody tr:hover {
-    background-color: #3a3a3a;
+    background-color: #4a5b63; /* Darker hover state */
 }
 
 th {
@@ -296,6 +303,7 @@ th {
 
 td {
     font-size: 16px;
+    color: #b0b0b0; /* Lighter gray for data */
 }
 
 table th:nth-child(5),
@@ -312,15 +320,15 @@ table td:nth-child(5) {
     font-size: 15px;
     font-family: 'MyFont', Arial, Helvetica, sans-serif;
     border-radius: 5px;
-    background-color: #0d92f4;
+    background-color: #0a5d9c; /* Darker button background */
     transition: 0.3s ease background-color;
     margin-left: 30px;
-    color: white;
+    color: #f0f0f0; /* Light text */
 }
 
 .table-button-create:hover {
     cursor: pointer;
-    background-color: #0b7cd1;
+    background-color: #083a7a; /* Even darker hover */
 }
 
 .table-button {
@@ -328,24 +336,25 @@ table td:nth-child(5) {
     padding: 10px;
     font-family: 'MyFont', Arial, Helvetica, sans-serif;
     border-radius: 50%;
-    background-color: #0d92f4;
+    background-color: #0a5d9c; /* Darker button background */
     transition: 0.3s ease background-color;
     margin: 0 5px;
-    color: white;
+    color: #f0f0f0; /* Light text */
 }
 
 .table-button img {
     width: 25px;
     height: 25px;
+    filter: brightness(0) invert(1); /* Invert image for dark theme */
 }
 
 /* FOOTER */
 
 footer {
-    background: linear-gradient(45deg, #4CC9FE, #0D92F4);
+    background: linear-gradient(45deg, #1a2529, #0a3d62); /* Darker gradient */
     text-align: center;
     font-size: 15px;
-    color: white;
+    color: #f0f0f0; /* Light text */
 }
 
 .reveal {

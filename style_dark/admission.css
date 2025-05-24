@@ -2,8 +2,8 @@ body {
     margin: 0;
     line-height: 1;
     font-family: sans-serif, serif;
-    background-color: #121212;
-    color: #e0e0e0;
+    background-color: #2d3436; /* Dark background for the body */
+    color: #f0f0f0; /* Light text for readability */
 }
 
 .row {
@@ -33,7 +33,7 @@ body {
 .col-12 {width: 100%;}
 
 nav {
-    background: linear-gradient(45deg, #4CC9FE, #0D92F4);
+    background: linear-gradient(45deg, #1a2529, #0a3d62); /* Darker gradient */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -42,22 +42,24 @@ nav {
 }
 
 .navbar-container {
-    background: linear-gradient(45deg, #4CC9FE, #0D92F4);
+    background: linear-gradient(45deg, #1a2529, #0a3d62); /* Darker gradient */
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
 }
+
 #logo {
     width: 60px;
     height: 56px;
     object-fit: contain;
-    margin-top:2px;
+    margin-top: 2px;
 }
+
 .title h2 {
-    margin-top:-40px;
+    margin-top: -40px;
     margin-left: 100px;
-    color: #e0e0e0;
+    color: #f0f0f0; /* Light text */
 }
 
 ul {
@@ -73,34 +75,35 @@ ul {
 .links li {
     margin-left: 35px;
 }
+
 .links li a.active {
-    color: #4CC9FE;
-    font-weight: bold;
+    color: #00aaff; /* Bright accent for active link */
 }
+
 .links li a {
     text-decoration: none;
-    color: #e0e0e0;
+    color: #f0f0f0; /* Light text */
     transition: 0.3s ease color;
 }
 
 .links li a:hover {
-    color: #ffffff;
+    color: #00aaff; /* Bright accent for hover */
 }
 
 .title-main {
     text-align: center;
     margin: 60px 0;
-    color: #e0e0e0;
+    color: #f0f0f0; /* Light text */
 }
 
 .hamburger {
     display: none;
     font-size: 1.5rem;
     cursor: pointer;
-    color: #fff;
+    color: #f0f0f0; /* Light text */
     transition: background-color 0.2s ease, box-shadow 0.2s ease;
     padding: 8px 20px;
-    border: 2px solid #e0e0e0;
+    border: 2px solid #4a5b63; /* Darker border */
     border-radius: 8px;
     margin-right: 20px;
     float: right;
@@ -108,8 +111,8 @@ ul {
 
 .hamburger:active,
 .hamburger.active {
-    background-color: #0A7FD1;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+    background-color: #0a5d9c; /* Darker active state */
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.6); /* Darker shadow */
 }
 
 @media (max-width: 1010px) {
@@ -136,7 +139,7 @@ ul {
         top: 50px;
         right: -45px;
         border-bottom-left-radius: 8px;
-        background: linear-gradient(45deg, #4CC9FE, #0D92F4);
+        background: linear-gradient(45deg, #1a2529, #0a3d62); /* Darker gradient */
         padding: 15px;
         z-index: 1;
         width: 35%;
@@ -192,6 +195,7 @@ ul {
         line-height: 2.2;
         font-size: 18px;
         width: 400px;
+        color: #f0f0f0; /* Light text */
     }
 }
 
@@ -199,6 +203,7 @@ ul {
 
 .main-section {
     min-height: 100vh;
+    background-color: #2d3436; /* Dark background */
 }
 
 .wallpaper {
@@ -215,8 +220,8 @@ ul {
 }
 
 .wall-text {
-    border-right: 3px solid #4CC9FE;
-    box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+    border-right: 3px solid #0a5d9c; /* Darker border */
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5); /* Darker shadow */
     text-align: right;
     padding-right: 20px;
     line-height: 2;
@@ -231,7 +236,7 @@ ul {
 
 .wall-text h1 {
     font-size: 28px;
-    color: #e0e0e0;
+    color: #f0f0f0; /* Light text */
 }
 
 .wall-button {
@@ -246,28 +251,27 @@ ul {
 
 .wall-button p {
     font-size: 18px;
-    color: #4CC9FE;
+    color: #00aaff; /* Bright accent */
 }
 
 .wall-button a {
     padding: 9px 17px;
-    color: #e0e0e0;
+    color: #f0f0f0; /* Light text */
     border-radius: 4px;
     text-decoration: none;
-    border: 2px solid #4CC9FE;
-    background-color: #0D92F4;
-    transition: 0.3s ease all;
+    border: 2px solid #4a5b63; /* Darker border */
+    background-color: #0a5d9c; /* Darker button background */
+    transition: 0.3s ease background-color;
 }
 
 .wall-button a:hover {
-    background-color: #4CC9FE;
-    color: #121212;
+    background-color: #1a2529; /* Even darker hover */
 }
 
 /* WHY JOIN US */
 
 .why-join-us {
-    background-color: #1e1e1e;
+    background-color: #3d4548; /* Slightly lighter dark background */
     padding-bottom: 80px;
 }
 
@@ -280,7 +284,7 @@ ul {
     text-align: center;
     font-size: 21px;
     font-family: 'MyFont', Arial, Helvetica, sans-serif;
-    color: #e0e0e0;
+    color: #b0b0b0; /* Lighter gray for text */
 }
 
 .join-img {
@@ -288,23 +292,24 @@ ul {
     border-radius: 10px;
     height: 250px;
     transition: 0.3s ease box-shadow;
-    box-shadow: 1px 1px 7px rgba(0,0,0,0.5);
+    box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.5); /* Darker shadow */
 }
 
 .join-text {
     height: 60px;
+    color: #f0f0f0; /* Light text */
 }
 
 /* ENROLLING PROCESS */
 
 .enroll {
     padding-bottom: 80px;
-    background-color: #121212;
+    background-color: #2d3436; /* Dark background */
 }
 
 .enroll img {
     width: 300px;
-    box-shadow: 1px 1px 7px rgba(0,0,0,0.5);
+    box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.5); /* Darker shadow */
     border-radius: 50%;
     display: block;
     margin: auto;
@@ -320,18 +325,18 @@ ul {
     font-size: 22px;
     line-height: 3.5;
     font-family: 'MyFont', Arial, Helvetica, sans-serif;
-    color: #e0e0e0;
+    color: #b0b0b0; /* Lighter gray */
 }
 
 .enroll ul li a {
     text-decoration: none;
-    color: #4CC9FE;
+    color: #00aaff; /* Bright accent */
 }
 
 /* PRICING PLANS */
 
 .pricing-plans {
-    background-color: #1e1e1e;
+    background-color: #3d4548; /* Slightly lighter dark background */
     padding-bottom: 80px;
 }
 
@@ -340,34 +345,33 @@ table {
     margin: 20px auto;
     border-collapse: collapse;
     font-family: 'MyFont', Arial, Helvetica, sans-serif;
-    box-shadow: 1px 1px 7px rgba(0,0,0,0.5);
-    transition: 0.3s ease box-shadow;
+    box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.5); /* Darker shadow */
+    background-color: #3d4548; /* Dark table background */
 }
 
 thead tr {
-    background-color: #4CC9FE;
-    color: white;
+    background-color: #0a3d62; /* Darker header background */
+    color: #f0f0f0; /* Light text */
     transition: 0.3s ease background-color;
 }
 
 th, td {
     padding: 15px;
     text-align: center;
-    border: 2px solid #444;
-    color: #e0e0e0;
+    border: 2px solid #4a5b63; /* Darker border */
 }
 
 tbody tr:nth-child(odd) {
-    background-color: #2d2d2d;
+    background-color: #2d3436; /* Darker odd rows */
 }
 
 tbody tr:nth-child(even) {
-    background-color: #252525;
+    background-color: #3d4548; /* Slightly lighter even rows */
     transition: 0.3s ease background-color;
 }
 
 tbody tr:hover {
-    background-color: #3a3a3a;
+    background-color: #4a5b63; /* Darker hover state */
 }
 
 th {
@@ -377,6 +381,7 @@ th {
 
 td {
     font-size: 16px;
+    color: #b0b0b0; /* Lighter gray for data */
 }
 
 table th:nth-child(5),
@@ -393,15 +398,15 @@ table td:nth-child(5) {
     font-size: 15px;
     font-family: 'MyFont', Arial, Helvetica, sans-serif;
     border-radius: 5px;
-    background-color: #0d92f4;
+    background-color: #0a5d9c; /* Darker button background */
     transition: 0.3s ease background-color;
     margin-left: 30px;
-    color: white;
+    color: #f0f0f0; /* Light text */
 }
 
 .table-button-create:hover {
     cursor: pointer;
-    background-color: #0b7cd1;
+    background-color: #083a7a; /* Even darker hover */
 }
 
 .table-button {
@@ -409,22 +414,22 @@ table td:nth-child(5) {
     padding: 10px;
     font-family: 'MyFont', Arial, Helvetica, sans-serif;
     border-radius: 50%;
-    background-color: #0d92f4;
+    background-color: #0a5d9c; /* Darker button background */
     transition: 0.3s ease background-color;
     margin: 0 5px;
-    color: white;
 }
 
 .table-button img {
     width: 25px;
     height: 25px;
+    filter: brightness(0) invert(1); /* Invert image for dark theme */
 }
 
 /* PAYMENT */
 
 .payment {
     padding-bottom: 80px;
-    background-color: #121212;
+    background-color: #2d3436; /* Dark background */
 }
 
 .payment-col {
@@ -434,7 +439,7 @@ table td:nth-child(5) {
 .payment-col p {
     font-size: 21px;
     font-family: 'MyFont', Arial, Helvetica, sans-serif;
-    color: #e0e0e0;
+    color: #b0b0b0; /* Lighter gray */
 }
 
 .pay-img {
@@ -443,31 +448,30 @@ table td:nth-child(5) {
     border-radius: 10px;
     display: block;
     margin: auto;
-    box-shadow: 1px 1px 7px rgba(0,0,0,0.5);
+    box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.5); /* Darker shadow */
     transition: 0.3s ease box-shadow;
 }
 
 .payment-col button {
     padding: 9px 17px;
-    color: #e0e0e0;
+    color: #f0f0f0; /* Light text */
     border-radius: 4px;
     text-decoration: none;
-    border: 2px solid #4CC9FE;
-    background-color: #0D92F4;
-    transition: 0.3s ease all;
+    border: 2px solid #4a5b63; /* Darker border */
+    background-color: #0a5d9c; /* Darker button background */
+    transition: 0.3s ease background-color;
     margin-top: 25px;
 }
 
 .payment-col button:hover {
     cursor: pointer;
-    background-color: #4CC9FE;
-    color: #121212;
+    background-color: #1a2529; /* Even darker hover */
 }
 
 /* REVIEWS */
 
 .reviews {
-    background-color: #1e1e1e;
+    background-color: #3d4548; /* Slightly lighter dark background */
     padding-bottom: 80px;
 }
 
@@ -476,11 +480,11 @@ table td:nth-child(5) {
     cursor: pointer;
     font-size: 2rem;
 }
-  
+
 .rating span {
-    color: gold;
+    color: gold; /* Keep gold for visibility */
 }
-  
+
 .rating span.hover {
     color: darkgoldenrod;
 }
@@ -501,7 +505,7 @@ table td:nth-child(5) {
 
 .rating span.half {
     position: relative;
-    color: #555;
+    color: #666; /* Darker gray for unselected stars */
 }
 
 .rating span.hover,
@@ -514,7 +518,7 @@ table td:nth-child(5) {
 }
 
 .rating span.fifth-star {
-    color: #555;
+    color: #666; /* Darker gray */
 }
 
 .rating span.fifth-star:hover {
@@ -523,7 +527,7 @@ table td:nth-child(5) {
 
 .clickable-rating span {
     font-size: 2rem;
-    color: #555;
+    color: #666; /* Darker gray for unselected stars */
     cursor: pointer;
 }
 
@@ -538,12 +542,13 @@ table td:nth-child(5) {
 
 .clickable-rating span.locked {
     cursor: not-allowed;
-    color: #333;
+    color: #4a5b63; /* Darker gray for locked stars */
 }
+
 .review-img {
     border-radius: 50%;
     max-width: 80px;
-    box-shadow: 1px 1px 7px rgba(0,0,0,0.5);
+    box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.5); /* Darker shadow */
     transition: 0.3s ease box-shadow;
 }
 
@@ -552,16 +557,16 @@ table td:nth-child(5) {
     margin: 20px;
     border-radius: 10px;
     min-height: 150px;
-    box-shadow: 1px 1px 7px rgba(0,0,0,0.5);
+    box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.5); /* Darker shadow */
     transition: 0.3s ease box-shadow;
-    background-color: #252525;
+    background-color: #3d4548; /* Dark background */
 }
 
 .review-div .col-9 p {
     margin-left: 12px;
     text-align: justify;
     line-height: 1.2;
-    color: #e0e0e0;
+    color: #b0b0b0; /* Lighter gray */
 }
 
 .form-div {
@@ -569,11 +574,11 @@ table td:nth-child(5) {
     margin: 40px;
     border-radius: 10px;
     min-height: 150px;
-    box-shadow: 1px 1px 7px rgba(0,0,0,0.5);
+    box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.5); /* Darker shadow */
     transition: 0.3s ease box-shadow;
     padding: 20px;
     margin: 40px 0;
-    background-color: #252525;
+    background-color: #3d4548; /* Dark background */
 }
 
 .form-div .clickable-rating {
@@ -582,65 +587,64 @@ table td:nth-child(5) {
 
 .form-div h3 {
     text-align: center;
-    color: #e0e0e0;
+    color: #f0f0f0; /* Light text */
 }
 
 .form-div .rating-h4 {
     text-align: center;
     margin-bottom: 6px;
-    color: #e0e0e0;
+    color: #f0f0f0; /* Light text */
 }
 
-.form-div input{
+.form-div input {
     width: 100%;
     border-radius: 7px;
-    border: 2px solid #444;
+    border: 2px solid #4a5b63; /* Darker border */
     min-height: 27px;
-    background-color: #333;
-    color: #e0e0e0;
+    background-color: #2d3436; /* Dark input background */
+    color: #f0f0f0; /* Light text */
 }
 
 .form-div input:focus {
-    border: 2px solid #4CC9FE;
+    border: 2px solid #ff5555; /* Slightly brighter red for focus */
 }
 
-.form-div textarea{
+.form-div textarea {
     width: 100%;
     min-height: 120px;
     border-radius: 7px;
-    border: 2px solid #444;
-    background-color: #333;
-    color: #e0e0e0;
+    border: 2px solid #4a5b63; /* Darker border */
+    background-color: #2d3436; /* Dark input background */
+    color: #f0f0f0; /* Light text */
 }
 
 .form-div textarea:focus {
-    border: 2px solid #4CC9FE;
+    border: 2px solid #ff5555; /* Slightly brighter red for focus */
 }
 
 .form-div button {
     display: block;
     margin: auto;
     padding: 9px 17px;
-    color: #e0e0e0;
+    color: #f0f0f0; /* Light text */
     border-radius: 4px;
     text-decoration: none;
-    border: 2px solid #4CC9FE;
-    background-color: #0D92F4;
-    transition: 0.3s ease all;
+    border: 2px solid #4a5b63; /* Darker border */
+    background-color: #0a5d9c; /* Darker button background */
+    transition: 0.3s ease background-color;
     margin-top: 25px;
 }
 
 .form-div button:hover {
     cursor: pointer;
-    background-color: #4CC9FE;
-    color: #121212;
+    background-color: #1a2529; /* Even darker hover */
 }
 
 /* FAQ */
 
 .faq {
     padding-bottom: 80px;
-    background-color: #121212;
+    background-color: #2d3436; /* Dark background */
 }
 
 dl {
@@ -655,7 +659,7 @@ dt {
     margin-top: 20px;
     cursor: pointer;
     transition: 0.3s ease color;
-    color: #e0e0e0;
+    color: #f0f0f0; /* Light text */
 }
 
 dd {
@@ -666,7 +670,7 @@ dd {
     max-height: 0;
     overflow: hidden;
     transition: opacity 0.3s ease, max-height 0.3s ease;
-    color: #aaaaaa;
+    color: #b0b0b0; /* Lighter gray */
 }
 
 dd.visible {
@@ -675,16 +679,16 @@ dd.visible {
 }
 
 dt:hover {
-    color: #4CC9FE;
+    color: #00aaff; /* Bright accent for hover */
 }
 
 /* FOOTER */
 
 footer {
-    background: linear-gradient(45deg, #4CC9FE, #0D92F4);
+    background: linear-gradient(45deg, #1a2529, #0a3d62); /* Darker gradient */
     text-align: center;
     font-size: 15px;
-    color: white;
+    color: #f0f0f0; /* Light text */
 }
 
 .reveal {
@@ -728,8 +732,8 @@ footer {
 
 @keyframes float-up {
     to {
-      opacity: 1;
-      transform: translateX(0);
+        opacity: 1;
+        transform: translateX(0);
     }
 }
 
