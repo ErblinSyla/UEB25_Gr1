@@ -7,7 +7,7 @@ require_once('database/db.php');
 require_once 'config.php';
 $currentPage = basename($_SERVER['PHP_SELF'], '.php');
 
-require 'navbar.php';
+// require 'navbar.php';
 
 $user_name = isset($_SESSION['name']) ? $_SESSION['name'] : null;
 
@@ -53,7 +53,6 @@ try {
     <title>User Profile</title>
 
     <link rel="stylesheet" href="<?php echo htmlspecialchars(getStylesheetPath('profile.css')); ?>">
-    <link rel="stylesheet" href="<?php echo htmlspecialchars(getStylesheetPath('navbar.css')); ?>">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
