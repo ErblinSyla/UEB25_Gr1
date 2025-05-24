@@ -1,14 +1,29 @@
 <?php
+session_start();
 require 'database/db.php';
 
-session_start();
+
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
     exit();
 }
 
+// Initialize session-based course application counts from database
+if (!isset($_SESSION['course_counts'])) {
+    $countQuery = "SELECT course, COUNT(*) as count FROM course_applications GROUP BY course";
+    $countResult = $conn->query($countQuery);
+    $_SESSION['course_counts'] = [];
+    while ($row = $countResult->fetch_assoc()) {
+        $_SESSION['course_counts'][$row['course']] = $row['count'];
+    }
+     
+}
+
+
+
+
 $currentPage = 'contact';
-require 'navbar.php';
+
 $jsonPath = 'data/courses_form.json';
 
 require_once 'utils/BaseFormData.php';
@@ -122,7 +137,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("sssssss", $name, $email, $password, $course, $fileName, $fileType, $fileData);
 
     if ($stmt->execute()) {
-        echo "Application submitted successfully.";
+        // Refresh session counts from the database after submission
+    $countQuery = "SELECT course, COUNT(*) as count FROM course_applications GROUP BY course";
+    $countResult = $conn->query($countQuery);
+    $_SESSION['course_counts'] = []; // Reset session counts
+    while ($row = $countResult->fetch_assoc()) {
+        $_SESSION['course_counts'][$row['course']] = $row['count'];
+    }
+   
+    $_SESSION['success_message'] = "Application submitted successfully.";
+    $stmt->close();
+    header("Location: courses.php");
+    exit();
     } else {
         echo "Error: " . $stmt->error;
     }
@@ -130,6 +156,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->close();
     // $conn->close(); e kam shkru qeto ne rreshtin 342
 }
+require 'navbar.php';
 ?>
 
 <!DOCTYPE html>
@@ -209,14 +236,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         asort($courseTitles);
         ?>
 
-        <div class="row-other">
+     <div class="row-other">
             <?php foreach ($courseTitles as $key => $title): ?>
                 <?php $course = $courseData[$key]; ?>
                 <div class="col">
                     <div class="card">
-                        <img src="<?= $course['Photo'] ?>" alt="<?= $course['Name'] ?>" />
-                        <h3><?= $course['Name'] ?></h3>
-                        <p><?= $course['Description'] ?></p>
+                        <img src="<?= htmlspecialchars($course['Photo']) ?>" alt="<?= htmlspecialchars($course['Name']) ?>" />
+                        <h3><?= htmlspecialchars($course['Name']) ?></h3>
+                        <p><?= htmlspecialchars($course['Description']) ?></p>
+                        <p><strong>Applications:</strong> <?php echo isset($_SESSION['course_counts'][$course['Name']]) ? $_SESSION['course_counts'][$course['Name']] : 0; ?></p>
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -257,6 +285,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <option value="HTML">
                         <option value="CSS">
                         <option value="JavaScript">
+                        <option value="PHP">
                     </datalist>
                     <span id="course-error" class="error-message"></span>
                     <label for="file-upload">Upload your file (e.g., resume or profile picture):</label>
@@ -455,54 +484,7 @@ fileInput.addEventListener('change', function() {
             }
         });
 
-        document.addEventListener("DOMContentLoaded", function() {
-            const modal = document.getElementById("applyModal");
-            const applyButton = document.getElementById("applyButton");
-            const closeModal = document.getElementById("closeModal");
-
-            applyButton.onclick = function() {
-                modal.style.display = "block";
-            };
-
-            closeModal.onclick = function() {
-                modal.style.display = "none";
-            };
-
-            window.onclick = function(event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
-            };
-
-            const applyForm = document.getElementById("applyForm");
-            applyForm.onsubmit = function(event) {
-                event.preventDefault();
-
-                const name = document.getElementById("name").value;
-                const email = document.getElementById("email").value;
-                const course = document.getElementById("course").value;
-
-                const successAudio = document.getElementById("success-audio");
-                const failureAudio = document.getElementById("failure-audio");
-
-                if (name && email && course) {
-                    successAudio.currentTime = 0;
-                    successAudio.play().catch(error => {
-                        console.error('Audio playback failed:', error);
-                    });
-
-                    alert("Application submitted successfully!");
-                    modal.style.display = "none";
-                } else {
-                    failureAudio.currentTime = 0;
-                    failureAudio.play().catch(error => {
-                        console.error('Audio playback failed:', error);
-                    });
-
-                    alert("Please fill in all the fields.");
-                }
-            };
-        });
+        
         document.addEventListener("DOMContentLoaded", function() {
             const modal = document.getElementById("applyModal");
             const applyButton = document.getElementById("applyButton");
