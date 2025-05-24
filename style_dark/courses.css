@@ -461,3 +461,7 @@ footer {
         transform: translateY(0);
     }
 }
+section {
+    padding: 40px 0;
+    background-color: #2d3436; /* Dark background */
+}

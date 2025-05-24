@@ -323,7 +323,7 @@ fileInput.addEventListener('change', function() {
             }
         </style>
     </section>
-    <section style="background-color: white">
+    <section>
         <h2>Our Professors</h2>
 
         <?php
