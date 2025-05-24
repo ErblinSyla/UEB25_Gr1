@@ -171,17 +171,6 @@ ul {
     .hamburger p {
         margin: 10px 0;
     }
-
-    .enroll img.enroll-img {
-        display: block;
-        margin: auto;
-    }
-
-    .enroll ul.ul-list {
-        display: block;
-        margin: auto;
-        margin회의: 50px;
-    }
 }
 
 @media (max-width: 810px) {
