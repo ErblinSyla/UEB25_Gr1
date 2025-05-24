@@ -180,7 +180,7 @@ ul {
     .enroll ul.ul-list {
         display: block;
         margin: auto;
-        margin회의: 50px;
+        margin-top: 50px;
     }
 }
 
@@ -208,7 +208,7 @@ ul {
 .profile-section {
     padding: 40px;
     text-align: center;
-    background: #FFF1DB;
+    background: #3d4548;
     min-height: 100vh;
 }
 
@@ -296,4 +296,8 @@ ul {
         width: 100%;
         max-width: 400px;
     }
+}
+a {
+    color: #00aaff; /* Bright accent for links */
+    text-decoration: none;
 }

@@ -415,3 +415,7 @@ footer {
         opacity: 1;
     }
 }
+a {
+    color: #00aaff; /* Bright accent for links */
+    text-decoration: none;
+}

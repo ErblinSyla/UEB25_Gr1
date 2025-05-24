@@ -747,3 +747,7 @@ footer {
     font-family: 'MyFontItalic';
     src: url(../fonts/Rubik/Rubik-Italic-VariableFont_wght.ttf); 
 }
+a {
+    color: #00aaff; /* Bright accent for links */
+    text-decoration: none;
+}
