@@ -19,6 +19,7 @@ try {
     $result_reviews = $stmt_reviews->get_result();
     $reviews = $result_reviews->fetch_all(MYSQLI_ASSOC);
     $stmt_reviews->close();
+    
 
     $query_applications = "SELECT * FROM course_applications";
     $stmt_applications = $conn->prepare($query_applications);
