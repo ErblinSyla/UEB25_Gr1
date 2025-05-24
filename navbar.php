@@ -6,6 +6,8 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
 $username = isset($_SESSION['username']) ? $_SESSION['username'] : null;
 $darkmode_cookie_name = $username ? "darkmode_" . $username : null;
 $dark_mode = $username && isset($_COOKIE[$darkmode_cookie_name]) && $_COOKIE[$darkmode_cookie_name] === 'on' ? 'on' : 'off';
+
+$profile_link = (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') ? 'profile-admin.php' : 'profile.php';
 ?>
 
 <nav>
@@ -29,8 +31,8 @@ $dark_mode = $username && isset($_COOKIE[$darkmode_cookie_name]) && $_COOKIE[$da
                             <span><?= strtoupper(substr($_SESSION['username'], 0, 2)) ?></span>
                         </div>
                         <div class="profile-dropdown">
-                            <!-- Profile Link -->
-                            <a href="profile.php" class="dropdown-item">
+                            <!-- Profile Link with dynamic href based on role -->
+                            <a href="<?= htmlspecialchars($profile_link) ?>" class="dropdown-item">
                                 <i class="icon-user"></i> My Profile
                             </a>
 
