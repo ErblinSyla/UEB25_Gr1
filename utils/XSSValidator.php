@@ -2,7 +2,6 @@
 
 function validateXSSAttacks($data)
 {
-
     $jsXSS = preg_match("/<\/?script>/", $data);
     $htmlXSS = preg_match("/<\/?\w+>/", $data);
     $xmlXSS = preg_match("/<\?xml.*?\?>/", $data);

@@ -2,6 +2,9 @@
 require_once 'utils/BaseFormData.php';
 require 'utils/XSSValidator.php';
 
+require_once 'config.php';
+$currentPage = basename($_SERVER['PHP_SELF'], '.php');
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -132,13 +135,15 @@ $message = "";
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AlgoVerse Academy</title>
-    <link rel="stylesheet" href="styles/homepage.css">
+    
+    <!--<link rel="stylesheet" href="style_light/homepage.css"> -->
+    <link rel="stylesheet" href="<?php echo htmlspecialchars(getStylesheetPath('homepage.css')); ?>">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Rubik:ital,wght@0,300..900;1,300..900&family=Spicy+Rice&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
@@ -179,7 +184,6 @@ $message = "";
         }
     </style>
 </head>
-
 <body>
     <nav>
 
@@ -630,5 +634,4 @@ $message = "";
         document.getElementById('year-month').textContent = `${currentMonth} ${currentYear}`;
     </script>
 </body>
-
 </html>

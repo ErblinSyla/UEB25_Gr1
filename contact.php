@@ -13,6 +13,9 @@ $jsonPath = 'data/contact_form.json';
 require_once 'utils/BaseFormData.php';
 require 'utils/XSSValidator.php';
 
+require_once 'config.php';
+$currentPage = basename($_SERVER['PHP_SELF'], '.php');
+
 class ContactFormData extends ParentClass
 {
     public $gender;
@@ -129,6 +132,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     $formattedInterests = implode(", ", $interests);
+    try {
+        $line = "Name: $name | Email: $email | Gender: $gender | Age: $age | Interests: $formattedInterests | Message: $message";
+        if ($phone) {
+            $line .= " | Phone: $phone";
+        }
+        $line .= PHP_EOL;
+
+        file_put_contents(__DIR__ . '/output/contact_us.txt', $line, FILE_APPEND | LOCK_EX);
+    } catch (Exception $e) {
+        showAlertAndGoBack("Failed to save form data. Please try again.");
+    }
     $conn = new mysqli("localhost", "root", "", "algoversedb");
 
     if ($conn->connect_error) {
@@ -155,21 +169,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     exit();
 }
 
-
-
-
-
 ?>
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="UTF-8">
     <title>Contact Us - AlgoVerse Academy</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="styles/contact.css">
-    <link rel="stylesheet" href="styles/navbar.css">
+
+    <link rel="stylesheet" href="<?php echo htmlspecialchars(getStylesheetPath('contact.css')); ?>">
+    <link rel="stylesheet" href="<?php echo htmlspecialchars(getStylesheetPath('navbar.css')); ?>">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -209,7 +219,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     </style>
 </head>
-
 <body>
     <!--
     <nav>
@@ -248,8 +257,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </script>
     <audio id="nav-hover-audio" src="audio/navbar-hover.mp3"></audio>
     <audio id="nav-click-audio" src="audio/shift-page.mp3"></audio>
-
-
     <script>
         function addHoverAudioEffectToLinks(linkSelector, audioId) {
             const links = document.querySelectorAll(linkSelector);
@@ -506,5 +513,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         document.getElementById('year-month').textContent = `${currentMonth} ${currentYear}`;
     </script>
 </body>
-
 </html>

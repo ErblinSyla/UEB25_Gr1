@@ -15,6 +15,9 @@ $jsonPath = 'data/admission_form.json';
 require_once 'utils/BaseFormData.php';
 require 'utils/XSSValidator.php';
 
+require_once 'config.php';
+$currentPage = basename($_SERVER['PHP_SELF'], '.php');
+
 $submited = false;
 class ReviewFormData extends ParentClass
 {
@@ -124,8 +127,8 @@ if (isset($_POST['submit']) && $_POST["submit"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admissions - AlgoVerse Academy</title>
-    <link rel="stylesheet" href="styles/admission.css">
-    <link rel="stylesheet" href="styles/navbar.css">
+    <link rel="stylesheet" href="<?php echo htmlspecialchars(getStylesheetPath('admission.css')); ?>">
+    <link rel="stylesheet" href="<?php echo htmlspecialchars(getStylesheetPath('navbar.css')); ?>">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -448,53 +451,49 @@ if (isset($_POST['submit']) && $_POST["submit"] == "POST") {
                                     <p><?= htmlspecialchars($review['comment']) ?></p>
                                 </div>
                             </div>
-<?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
-    <div class="row">
-        <div class="col-8">
-            <!-- Textarea with dynamic ID -->
-            <textarea id="myTextarea<?= $review['id'] ?>" name="response"
-                      style="border:2px dashed black; border-radius:5px; margin-right:50px; resize: none;"
-                      rows="6" cols="38"
-                      placeholder="Keep it brief and professional!"></textarea>
-        </div>
-
-        <div class="col-4">
-            <!-- Form with dynamic validation -->
-            <form action="admission.php" method="post">
-                <br>
-                <!-- Submit button -->
-                <input type="submit" name="submit"
-                       style="margin-right:18px; margin-bottom:12px;"
-                       class="table-button-create" value="Submit"
-                    onclick = "document.getElementById('response<?= $review['id']?>').value = document.getElementById('myTextarea<?= $review['id'] ?>').value">
-
-                <!-- Cancel button -->
-                <input type="button"
-                       style="margin-right:18px;"
-                       class="table-button-create" value="Cancel"
-                       onclick="document.getElementById('myTextarea<?= $review['id'] ?>').value = '';">
-
-                <!-- Hidden ID for the review -->
-                <input type="hidden" name="id" value="<?= $review['id'] ?>">
-                <input type="hidden" id = "response<?= $review['id']?>" name="response" value="">
-            </form>
-        </div> 
-    </div>
-    <?php
-    // PHP processing block
-    if (isset($_POST['submit'])) {
-        $response = $_POST['response'];
-        $id = $_POST['id'];
-        $stmt = $conn->prepare("UPDATE review SET response = ? WHERE id = ?");
-        $stmt->bind_param("si", $response, $id);
-        if ($stmt->execute()) {
-        } else {
-            echo "<script>alert('Error updating response: " . $stmt->error . "');</script>";
-        }
-        $stmt->close();
-    }
-    ?>
-<?php endif; ?>
+                            <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                                <div class="row">
+                                    <div class="col-8">
+                                        <!-- Textarea with dynamic ID -->
+                                        <textarea id="myTextarea<?= $review['id'] ?>" name="response" style="border:2px dashed black; border-radius:5px; margin-right:50px; resize: none;" rows="6" cols="38" placeholder="Keep it brief and professional!"></textarea>
+                                    </div>
+                                    <div class="col-4">
+                                        <!-- Form with dynamic validation -->
+                                        <form action="admission.php" method="post">
+                                            <br>
+                                            <!-- Submit button -->
+                                            <input type="submit" name="submit"
+                                                   style="margin-right:18px; margin-bottom:12px;"
+                                                   class="table-button-create" value="Submit"
+                                                onclick = "document.getElementById('response<?= $review['id']?>').value = document.getElementById('myTextarea<?= $review['id'] ?>').value">
+                            
+                                            <!-- Cancel button -->
+                                            <input type="button"
+                                                   style="margin-right:18px;"
+                                                   class="table-button-create" value="Cancel"
+                                                   onclick="document.getElementById('myTextarea<?= $review['id'] ?>').value = '';">
+                            
+                                            <!-- Hidden ID for the review -->
+                                            <input type="hidden" name="id" value="<?= $review['id'] ?>">
+                                            <input type="hidden" id = "response<?= $review['id']?>" name="response" value="">
+                                        </form>
+                                    </div> 
+                                </div>
+                                <?php
+                                // PHP processing block
+                                if (isset($_POST['submit'])) {
+                                    $response = $_POST['response'];
+                                    $id = $_POST['id'];
+                                    $stmt = $conn->prepare("UPDATE review SET response = ? WHERE id = ?");
+                                    $stmt->bind_param("si", $response, $id);
+                                    if ($stmt->execute()) {
+                                    } else {
+                                        echo "<script>alert('Error updating response: " . $stmt->error . "');</script>";
+                                    }
+                                    $stmt->close();
+                                }
+                                ?>
+                            <?php endif; ?>
                         </div>
                     </div>
                 <?php endif; ?>
@@ -542,6 +541,53 @@ if (isset($_POST['submit']) && $_POST["submit"] == "POST") {
                                             </div>
                                         <?php endif; ?>
                                     </form>
+
+                                    <?php
+                                    if (!is_dir("output")) mkdir("output", 0777, true);
+                                    if (!is_dir("logs")) mkdir("logs", 0777, true);
+
+                                    function errorHandler($errno, $errstr, $errfile, $errline)
+                                    {
+                                        $logMsg = "[" . date("Y-m-d H:i:s") . "] ERROR: [$errno] $errstr at $errfile:$errline\n";
+                                        file_put_contents("logs/error.log", $logMsg, FILE_APPEND);
+                                        echo "<p style='color:red;'>Something went wrong. Error is saved to log file.</p>";
+                                        return true;
+                                    }
+                                    set_error_handler("errorHandler");
+
+                                    $errors = [];
+                                    $successMessage = '';
+                                    $name = $email = $phone = $comment = $star = '';
+
+                                    try {
+                                        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+                                            $name = htmlspecialchars($_POST["name"] ?? '');
+                                            $email = htmlspecialchars($_POST["email"] ?? '');
+                                            $phone = htmlspecialchars($_POST["phone"] ?? '');
+                                            $comment = htmlspecialchars($_POST["comment"] ?? '');
+                                            $star = htmlspecialchars($_POST["star"] ?? '');
+
+                                            if (empty($name) || empty($email) || empty($comment)) {
+                                                throw new Exception("Name, Email, and Comment are required!");
+                                            }
+
+                                            $line = "Name: $name | Email: $email | Phone: $phone | Rating: $star | Comment: $comment | Time: " . date("Y-m-d H:i:s") . "\n";
+
+                                            $result = file_put_contents("output/reviews.txt", $line, FILE_APPEND);
+                                            if ($result === false) {
+                                                throw new Exception("Could not write review to file!");
+                                            }
+
+                                            $successMessage = "Thank you for your review, $name!";
+                                            $name = $email = $phone = $comment = $star = '';
+                                        }
+                                    } catch (Exception $e) {
+                                        file_put_contents("logs/error.log", "[" . date("Y-m-d H:i:s") . "] EXCEPTION: " . $e->getMessage() . "\n", FILE_APPEND);
+                                        $errors[] = "Something went wrong. Could not save your review.";
+                                    }
+                                    ?>
+
+
                                     <script>
                                         document.querySelectorAll('.clickable-rating span').forEach(star => {
                                             star.addEventListener('click', function() {
@@ -588,7 +634,6 @@ if (isset($_POST['submit']) && $_POST["submit"] == "POST") {
                     <div class="col-4"></div>
                 <?php endif; ?>
             </div>
-
         </section>
         <section class="faq">
             <div class="row">
@@ -867,5 +912,4 @@ if (isset($_POST['submit']) && $_POST["submit"] == "POST") {
         });
     </script>
 </body>
-
 </html>

@@ -11,10 +11,11 @@ $currentPage = 'contact';
 require 'navbar.php';
 $jsonPath = 'data/courses_form.json';
 
-
 require_once 'utils/BaseFormData.php';
 require 'utils/XSSValidator.php';
 
+require_once 'config.php';
+$currentPage = basename($_SERVER['PHP_SELF'], '.php');
 
 class ApplyCourses extends ParentClass
 {
@@ -56,8 +57,6 @@ class ApplyCourses extends ParentClass
     }
 }
 
-
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $targetFilePath = "uploads/default.svg";
@@ -94,9 +93,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-   
-
-
     $applyCourses = new ApplyCourses($name, $email, $course, $targetFilePath);
     $applyCourses->setPassword($password);
 
@@ -132,18 +128,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     $stmt->close();
-    $conn->close();
+    // $conn->close(); e kam shkru qeto ne rreshtin 342
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Courses and Professors</title>
-    <link rel="stylesheet" href="styles/courses.css">
-    <link rel="stylesheet" href="styles/navbar.css">
+
+    <link rel="stylesheet" href="<?php echo htmlspecialchars(getStylesheetPath('courses.css')); ?>">
+    <link rel="stylesheet" href="<?php echo htmlspecialchars(getStylesheetPath('navbar.css')); ?>">  
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="scripts/courses.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -161,7 +159,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="scripts/javascript.js"></script>
 
 </head>
-
 <body>
 
     <!-- <nav>
@@ -339,6 +336,7 @@ fileInput.addEventListener('change', function() {
         }
 
         ksort($professors);
+        $conn->close();
         ?>
         <div class="row-other">
             <?php foreach ($professors as $p):
@@ -723,5 +721,4 @@ fileInput.addEventListener('change', function() {
         document.getElementById('year-month').textContent = `${currentMonth} ${currentYear}`;
     </script>
 </body>
-
 </html>

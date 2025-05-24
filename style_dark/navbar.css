@@ -1,20 +1,17 @@
-
 /* ==================== */
-/* PROFILE DROPDOWN STYLES */
+/* PROFILE DROPDOWN STYLES - DARK THEME */
 /* ==================== */
 
-
-#algoverse{
-       text-decoration: none;
-    color: black;
+#algoverse {
+    text-decoration: none;
+    color: #e0e0e0; /* Changed from black to light gray */
     transition: 0.3s ease color;
 }
-
 
 .profile-container {
     position: relative;
     display: inline-block;
-    margin-left: -35px; /* Match your nav link spacing */
+    margin-left: 35px; /* Match your nav link spacing */
     height: 40px;
     vertical-align: middle;
 }
@@ -32,13 +29,13 @@
     font-weight: bold;
     font-size: 16px;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3); /* Darkened shadow */
     border: 2px solid rgba(255,255,255,0.3);
 }
 
 .profile-icon:hover {
     transform: scale(1.05);
-    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.4); /* Darkened shadow */
     background: linear-gradient(45deg, #0D92F4, #0A7FD1);
 }
 
@@ -46,16 +43,16 @@
     position: absolute;
     top: 50px;
     right: 0;
-    background-color: white;
+    background-color: #1e1e1e; /* Changed from white to dark gray */
     border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* Darkened shadow */
     width: 180px;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-10px);
     transition: all 0.3s ease;
     z-index: 100;
-    border: 1px solid #eee;
+    border: 1px solid #444; /* Changed from #eee to dark gray */
 }
 
 /* Creates a safe hover zone between icon and dropdown */
@@ -72,11 +69,11 @@
 .profile-dropdown a {
     display: block;
     padding: 12px 15px;
-    color: #333;
+    color: #e0e0e0; /* Changed from #333 to light gray */
     text-decoration: none;
     transition: all 0.2s ease;
     font-size: 15px;
-    border-bottom: 1px solid #f5f5f5;
+    border-bottom: 1px solid #444; /* Changed from #f5f5f5 to dark gray */
 }
 
 .profile-dropdown a:last-child {
@@ -84,8 +81,8 @@
 }
 
 .profile-dropdown a:hover {
-    background-color: #f8f8f8;
-    color: #0D92F4;
+    background-color: #2d2d2d; /* Changed from #f8f8f8 to darker gray */
+    color: #4CC9FE; /* Changed accent color */
     padding-left: 20px;
 }
 
@@ -118,18 +115,18 @@
         width: 100%;
         margin-top: 10px;
         display: none;
-        background: rgba(255,255,255,0.1);
-        border: 1px solid rgba(255,255,255,0.2);
+        background: rgba(30, 30, 30, 0.9); /* Dark semi-transparent */
+        border: 1px solid rgba(68, 68, 68, 0.5); /* Dark border */
     }
     
     .profile-dropdown a {
-        color: white;
-        border-bottom-color: rgba(255,255,255,0.1);
+        color: #e0e0e0; /* Light text */
+        border-bottom-color: rgba(68, 68, 68, 0.5); /* Dark border */
     }
     
     .profile-dropdown a:hover {
-        background: rgba(255,255,255,0.2);
-        color: white;
+        background: rgba(45, 45, 45, 0.7); /* Darker background */
+        color: #4CC9FE; /* Accent color */
     }
     
     .profile-container.active .profile-dropdown {

@@ -18,6 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (password_verify($password, $user['password'])) {
             $_SESSION['username'] = $user['username'];
             $_SESSION['role'] = $user['role'];
+            $_SESSION['name'] = $user['name'];
+            $_SESSION['surname'] = $user['surname'];
 
             header("Location: about-us.php");
             exit();
@@ -40,13 +42,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log In - AlgoVerse Academy</title>
-    <link rel="stylesheet" href="styles/login.css">
+    <link rel="stylesheet" href="style_light/login.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -62,7 +63,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <script src="scripts/javascript.js"></script>
 </head>
-
 <body>
     <section class="log-in-section">
     <div class="row">
@@ -91,5 +91,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     </section>
 </body>
-
 </html>
