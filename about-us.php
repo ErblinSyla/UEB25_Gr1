@@ -8,6 +8,10 @@ if (!isset($_SESSION['username'])) {
 $currentPage = 'about-us';
 require('navbar.php');
 require_once('database/db.php');
+
+require_once 'config.php';
+$currentPage = basename($_SERVER['PHP_SELF'], '.php');
+
 ?>
 
 <!DOCTYPE html>
@@ -17,8 +21,9 @@ require_once('database/db.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - AlgoVerse Academy</title>
-    <link rel="stylesheet" href="styles/about-us.css">
-    <link rel="stylesheet" href="styles/navbar.css">
+    <!-- STYLE -->
+    <link rel="stylesheet" href="<?php echo htmlspecialchars(getStylesheetPath('about-us.css')); ?>">
+    <link rel="stylesheet" href="<?php echo htmlspecialchars(getStylesheetPath('navbar.css')); ?>">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
