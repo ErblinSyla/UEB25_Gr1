@@ -9,7 +9,30 @@ if (!isset($_SESSION['username'])) {
 require_once 'config.php';
 $currentPage = basename($_SERVER['PHP_SELF'], '.php');
 
+// Funksion për modifikimin e vargut me referencë
+function formatReviews(&$reviews) {
+    foreach ($reviews as &$review) {
+        // Vendosja e referencave në mes të anëtarëve të vargut
+        $review['formatted_comment'] = substr($review['comment'], 0, 50) . '...';
+        // Demonstrimi i largimit përmes referencës
+        if (empty($review['comment'])) {
+            unset($review['comment']); // Largimi i komenteve bosh
+        }
+    }
+    unset($review); // Pastrimi i referencës për të shmangur probleme
+}
+
+// Funksion që kthen një referencë të një variabli globale
+function &getGlobalConfig() {
+    global $globalConfig;
+    if (!isset($globalConfig)) {
+        $globalConfig = ['max_reviews' => 100, 'max_comment_length' => 500];
+    }
+    return $globalConfig;
+}
+
 try {
+    // Fetch reviews
     $query_reviews = "SELECT * FROM review";
     $stmt_reviews = $conn->prepare($query_reviews);
     if (!$stmt_reviews) {
@@ -19,8 +42,11 @@ try {
     $result_reviews = $stmt_reviews->get_result();
     $reviews = $result_reviews->fetch_all(MYSQLI_ASSOC);
     $stmt_reviews->close();
-    
 
+    // Përdorimi i referencave për të modifikuar vargun $reviews
+    formatReviews($reviews);
+
+    // Fetch course applications
     $query_applications = "SELECT * FROM course_applications";
     $stmt_applications = $conn->prepare($query_applications);
     if (!$stmt_applications) {
@@ -31,6 +57,7 @@ try {
     $applications = $result_applications->fetch_all(MYSQLI_ASSOC);
     $stmt_applications->close();
 
+    // Fetch newsletter subscriptions
     $query_newsletter = "SELECT * FROM newsletter";
     $stmt_newsletter = $conn->prepare($query_newsletter);
     if (!$stmt_newsletter) {
@@ -40,6 +67,11 @@ try {
     $result_newsletter = $stmt_newsletter->get_result();
     $newsletter = $result_newsletter->fetch_all(MYSQLI_ASSOC);
     $stmt_newsletter->close();
+
+    // Demonstrimi i kthimit përmes referencës
+    $config = &getGlobalConfig();
+    $config['last_updated'] = date('Y-m-d H:i:s'); // Modifikimi i variablës globale përmes referencës
+
 } catch (Exception $e) {
     echo "Error fetching data: " . $e->getMessage();
     exit();
@@ -85,7 +117,7 @@ try {
                     <li><a href="logout.php">Log Out</a></li>
                 </ul>
                 <div class="hamburger" id="hamburger">
-                    <p>&#9776;</p>
+                    <p>☰</p>
                 </div>
             </div>
         </div>
@@ -108,6 +140,7 @@ try {
                             <th>Email</th>
                             <th>Phone Number</th>
                             <th>Comment</th>
+                            <th>Formatted Comment</th>
                             <th>Rating</th>
                             <th>Response</th>
                         </tr>
@@ -116,7 +149,8 @@ try {
                                 <td><?php echo htmlspecialchars($review['name']); ?></td>
                                 <td><?php echo htmlspecialchars($review['email']); ?></td>
                                 <td><?php echo htmlspecialchars($review['phone_number']); ?></td>
-                                <td><?php echo htmlspecialchars($review['comment']); ?></td>
+                                <td><?php echo isset($review['comment']) ? htmlspecialchars($review['comment']) : 'N/A'; ?></td>
+                                <td><?php echo htmlspecialchars($review['formatted_comment']); ?></td>
                                 <td><?php echo htmlspecialchars($review['star']); ?></td>
                                 <td><?php echo htmlspecialchars($review['response']); ?></td>
                             </tr>
@@ -168,6 +202,11 @@ try {
                     <p>No newsletter subscriptions found.</p>
                 <?php endif; ?>
             </div>
+
+            <h2>Configuration</h2>
+            <p>Last Updated: <?php echo htmlspecialchars($config['last_updated']); ?></p>
+            <p>Max Reviews: <?php echo htmlspecialchars($config['max_reviews']); ?></p>
+            <p>Max Comment Length: <?php echo htmlspecialchars($config['max_comment_length']); ?></p>
         </div>
     </section>
 </body>
