@@ -1,13 +1,10 @@
 <?php
 session_start();
 
-$currentPage = 'profile';
 require_once('database/db.php');
 
 require_once 'config.php';
 $currentPage = basename($_SERVER['PHP_SELF'], '.php');
-
-require 'navbar.php';
 
 $user_name = isset($_SESSION['name']) ? $_SESSION['name'] : null;
 
@@ -71,7 +68,28 @@ try {
 
 </head>
 <body>
-
+    <nav>
+        <div class="row mobile-row">
+            <div class="col-4 title">
+                <div class="logo">
+                    <img id="logo" src="utils/algoverse_logo.svg" alt="AlgoVerse Academy Logo">
+                </div>
+                <h2>AlgoVerse Academy</h2>
+            </div>
+            <div class="col-8">
+                <ul class="links" id="nav-links">
+                    <li><a href="about-us.php">About Us</a></li>
+                    <li><a href="courses.php">Our Courses</a></li>
+                    <li><a href="admission.php">Admissions</a></li>
+                    <li><a href="contact.php">Contact Us</a></li>
+                    <li><a href="logout.php">Log Out</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <p>&#9776;</p>
+                </div>
+            </div>
+        </div>
+    </nav>
     <section class="profile-section">
         <div class="row">
             <div class="col-12">
