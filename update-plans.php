@@ -1,6 +1,11 @@
 <?php
 require_once('database/db.php');
 
+session_start();
+
+require_once 'config.php';
+$currentPage = basename($_SERVER['PHP_SELF'], '.php');
+
 $id = $_GET['id'] ?? $_POST['id'] ?? null;
 
 if (!$id) {
@@ -39,7 +44,8 @@ $plan = $result->fetch_assoc();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add a new row - AlgoVerse Academy</title>
-    <link rel="stylesheet" href="style_light/crud.css">
+
+    <link rel="stylesheet" href="<?php echo htmlspecialchars(getStylesheetPath('crud.css')); ?>">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

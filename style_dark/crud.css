@@ -2,8 +2,8 @@ body {
     margin: 0;
     line-height: 1;
     font-family: sans-serif, serif;
-    background-color: #2d3436; /* Dark background for the body */
-    color: #f0f0f0; /* Light text for readability */
+    background-color: #1C2526; /* Dark background for the body */
+    color: #E0E0E0; /* Light text color */
 }
 
 .row {
@@ -36,7 +36,7 @@ body {
 
 .create-section {
     min-height: 100vh;
-    background-color: #3d4548; /* Slightly lighter dark background */
+    background-color: #2A2F33; /* Darker section background */
 }
 
 .form-div {
@@ -47,23 +47,22 @@ body {
     padding: 50px 50px 0;
     text-align: center;
     border-radius: 10px;
-    background-color: #2d3436; /* Darker form background */
-    box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.5); /* Darker shadow */
+    background-color: #3A4044; /* Darker form background */
+    box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.5); /* Adjusted shadow for dark theme */
     transition: 0.3s ease box-shadow;
-    color: #f0f0f0; /* Light text */
 }
 
 .form-div h1 {
     font-family: "Changa", sans-serif;
     font-size: 26px;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5); /* Darker shadow */
-    color: #f0f0f0; /* Light text */
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+    color: #F5F5F5; /* Light heading color */
 }
 
 .form-div .inner-form p {
     font-size: 18px;
     font-family: 'MyFont', Arial, Helvetica, sans-serif;
-    color: #b0b0b0; /* Lighter gray */
+    color: #D0D0D0; /* Light paragraph text */
 }
 
 .form-div .inner-form {
@@ -76,17 +75,17 @@ body {
     width: 100%;
     padding: 10px;
     font-size: 16px;
-    border: 1px solid #4a5b63; /* Darker border */
+    border: 1px solid #555; /* Darker border */
     border-radius: 5px;
-    background-color: #2d3436; /* Dark background */
+    background-color: #4A5055; /* Dark input background */
+    color: #E0E0E0; /* Light text in select */
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='10'%3E%3Cpolygon points='0,0 12,0 6,10' fill='%23b0b0b0'/%3E%3C/svg%3E"); /* Lighter gray arrow */
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='10'%3E%3Cpolygon points='0,0 12,0 6,10' fill='%23BBB'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 10px center;
     background-size: 10px;
-    color: #f0f0f0; /* Light text */
 }
 
 .form-div .inner-form input {
@@ -94,10 +93,10 @@ body {
     height: 27px;
     border: none;
     outline: none;
-    border-bottom: 2px solid #4a5b63; /* Darker border */
+    border-bottom: 2px solid #4A90E2; /* Lighter blue for accent */
     background-color: transparent;
     box-shadow: none;
-    color: #f0f0f0; /* Light text */
+    color: #E0E0E0; /* Light input text */
 }
 
 .form-div .inner-form textarea {
@@ -105,24 +104,24 @@ body {
     height: 70px;
     border: none;
     outline: none;
-    border-bottom: 2px solid #4a5b63; /* Darker border */
+    border-bottom: 2px solid #4A90E2; /* Lighter blue for accent */
     background-color: transparent;
     box-shadow: none;
-    color: #f0f0f0; /* Light text */
+    color: #E0E0E0; /* Light textarea text */
 }
 
 .form-div .inner-form input:focus {
     border: none;
     outline: none;
     box-shadow: none;
-    border-bottom: 2px solid #00aaff; /* Bright accent for focus */
+    border-bottom: 2px solid #4A90E2;
 }
 
 .form-div .inner-form textarea:focus {
     border: none;
     outline: none;
     box-shadow: none;
-    border-bottom: 2px solid #00aaff; /* Bright accent for focus */
+    border-bottom: 2px solid #4A90E2;
 }
 
 .form-div .inner-form .create-button-div {
@@ -135,14 +134,15 @@ body {
     font-size: 15px;
     font-family: 'MyFont', Arial, Helvetica, sans-serif;
     border-radius: 5px;
-    background-color: #0a5d9c; /* Darker button background */
+    background-color: #4A90E2; /* Blue button for contrast */
+    color: #FFFFFF; /* White text on button */
+    border: none;
     transition: 0.3s ease background-color;
-    color: #f0f0f0; /* Light text */
 }
 
 .form-div .inner-form .create-button-div button:hover {
     cursor: pointer;
-    background-color: #1a2529; /* Even darker hover */
+    background-color: #357ABD; /* Darker blue on hover */
 }
 
 @media (max-width: 1300px) {
@@ -177,14 +177,10 @@ body {
 
 @font-face {
     font-family: 'MyFont';
-    src: url(../fonts/Rubik/Rubik-VariableFont_wght.ttf);
+    src: url(../fonts/Rubik/Rubik-VariableFont_wght.ttf); 
 }
 
 @font-face {
     font-family: 'MyFontItalic';
-    src: url(../fonts/Rubik/Rubik-Italic-VariableFont_wght.ttf);
-}
-a {
-    color: #00aaff; /* Bright accent for links */
-    text-decoration: none;
+    src: url(../fonts/Rubik/Rubik-Italic-VariableFont_wght.ttf); 
 }
