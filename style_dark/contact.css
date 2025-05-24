@@ -75,6 +75,7 @@ nav ul {
 
 .links li {
     margin-left: 35px;
+    margin-top: 12px;
 }
 
 .links li a.active {

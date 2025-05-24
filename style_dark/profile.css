@@ -1,15 +1,8 @@
 body {
     margin: 0;
-    padding: 0;
     line-height: 1;
     font-family: sans-serif, serif;
-    background-color: #2d3436; /* Dark background for the body */
-    color: #f0f0f0; /* Light text for readability */
-}
-
-section {
-    margin: 0;
-    padding: 0;
+    background-color: #2d3436;
 }
 
 .row {
@@ -38,21 +31,38 @@ section {
 .col-11 {width: 91.66%;}
 .col-12 {width: 100%;}
 
+nav {
+    background: linear-gradient(45deg, #1a2529, #0a3d62);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    height: 67.83px;
+}
+
 .navbar-container {
-    background: linear-gradient(45deg, #1a2529, #0a3d62); /* Darker gradient */
+    background: linear-gradient(45deg, #1a2529, #0a3d62);
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
 }
 
-nav {
-    background: linear-gradient(45deg, #1a2529, #0a3d62); /* Darker gradient */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    height: 67.83px;
+#logo {
+    width: 60px;
+    height: 56px;
+    object-fit: contain;
+    margin-top: 2px;
+}
+
+.title h2 {
+    margin-top: -40px;
+    margin-left: 100px;
+    font-family: "Spicy Rice", serif;
+}
+
+ul {
+    float: right;
 }
 
 .links {
@@ -65,26 +75,140 @@ nav {
     margin-left: 35px;
 }
 
+.links li a.active {
+    color: #00aaff;
+}
+
+.title h2 {
+    margin-top: -40px;
+    margin-left: 100px;
+    font-family: "Spicy Rice", serif;
+    color: #f0f0f0; /* Light text */
+}
+
 .links li a {
     text-decoration: none;
-    color: #f0f0f0; /* Light text */
+    color: #f0f0f0;
     transition: 0.3s ease color;
+    font-family: "Cinzel", serif;
+    font-weight: bold;
 }
 
 .links li a:hover {
-    color: #00aaff; /* Bright accent for hover */
+    color: #00aaff;
 }
 
-#logo {
-    width: 60px;
-    height: 56px;
-    object-fit: contain;
+.title-main {
+    text-align: center;
+    margin: 60px 0;
+}
+
+.hamburger {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #f0f0f0;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    padding: 8px 20px;
+    border: 2px solid black;
+    border-radius: 8px;
+    margin-right: 20px;
+    float: right;
+}
+
+.hamburger:active,
+.hamburger.active {
+    background-color: #0a3d62;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 1010px) {
+    .mobile-row .col-4 {
+        flex: 0 0 83.3333%;
+        max-width: 83.3333%;
+    }
+
+    .mobile-row .col-8 {
+        flex: 0 0 16.6667%;
+        max-width: 16.6667%;
+    }
+
+    .col-3, .col-4, .col-5, .col-6 {
+        display: block;
+        margin: auto;
+        width: 60%;
+    }
+
+    .links {
+        flex-direction: column;
+        gap: 20px;
+        position: absolute;
+        top: 50px;
+        right: -45px;
+        border-bottom-left-radius: 8px;
+        background: linear-gradient(45deg, #1a2529, #0a3d62);
+        padding: 15px;
+        z-index: 1;
+        width: 35%;
+        font-size: 18px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-20px);
+        transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.3s;
+    }
+
+    .links.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .hamburger p {
+        margin: 10px 0;
+    }
+
+    .enroll img.enroll-img {
+        display: block;
+        margin: auto;
+    }
+
+    .enroll ul.ul-list {
+        display: block;
+        margin: auto;
+        margin회의: 50px;
+    }
+}
+
+@media (max-width: 810px) {
+    .col-3, .col-4, .col-5, .col-6 {
+        display: block;
+        margin: auto;
+        width: 86%;
+    }
+
+    .enroll ul.ul-list {
+        display: block;
+        margin: auto;
+        margin-top: 50px;
+        width: 200px;
+    }
+
+    ul.ul-list .list {
+        line-height: 2.2;
+        font-size: 18px;
+        width: 400px;
+    }
 }
 
 .profile-section {
     padding: 40px;
     text-align: center;
-    background: #3d4548; /* Slightly lighter dark background */
+    background: #FFF1DB;
     min-height: 100vh;
 }
 
@@ -94,24 +218,34 @@ nav {
     border-radius: 50%;
     object-fit: cover;
     margin: 20px auto;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Darker shadow */
+    box-shadow: 0 4px 10px rgba(50, 50, 50, 0.7);
     transition: box-shadow 0.3s ease;
 }
 
 .profile-picture:hover {
-    box-shadow: 1px 1px 7px #00aaff; /* Bright accent shadow */
+    box-shadow: 1px 1px 7px #0D92F4;
 }
 
 .profile-name {
     font-size: 2rem;
     margin: 10px 0;
-    color: #00aaff; /* Bright accent */
+    color: #0D92F4;
 }
 
 .profile-username {
     font-size: 1.2rem;
-    color: #b0b0b0; /* Lighter gray */
+    color: #333;
     margin-bottom: 40px;
+}
+
+@font-face {
+    font-family: 'MyFont';
+    src: url(../fonts/Rubik/Rubik-VariableFont_wght.ttf); 
+}
+
+@font-face {
+    font-family: 'MyFontItalic';
+    src: url(../fonts/Rubik/Rubik-Italic-VariableFont_wght.ttf); 
 }
 
 .courses-section {
@@ -121,39 +255,39 @@ nav {
 .courses-section h2 {
     font-size: 1.5rem;
     margin-bottom: 20px;
-    color: #f0f0f0; /* Light text */
 }
 
 .course-card {
-    background: #2d3436; /* Darker card background */
+    background: #eaeaea;
     width: 300px;
     padding: 20px;
     margin: 10px;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Darker shadow */
+    box-shadow: 0 4px 10px rgba(50, 50, 50, 0.7);
     transition: box-shadow 0.3s ease, transform 0.3s ease;
     text-align: left;
 }
 
 .course-card:hover {
-    box-shadow: 1px 1px 7px #00aaff; /* Bright accent shadow */
+    box-shadow: 1px 1px 7px #0D92F4;
     transform: scale(1.05);
 }
 
 .course-card h3 {
     margin: 0 0 10px;
     font-size: 1.2rem;
-    color: #00aaff; /* Bright accent */
+    color: #0D92F4;
 }
 
 .course-card p {
     margin: 0;
     font-size: 1rem;
-    color: #b0b0b0; /* Lighter gray */
+    color: #333;
 }
 
 @media (max-width: 810px) {
-    .col-4, .col-6 {
+    .col-4,
+    .col-6 {
         width: 90%;
         margin: auto;
     }
