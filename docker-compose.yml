@@ -5,8 +5,8 @@ services:
     image: mysql:8.0
     restart: unless-stopped
     environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"   # Allow root user with empty password
-      MYSQL_DATABASE: algoversedb          # Create initial DB
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"   
+      MYSQL_DATABASE: algoversedb          
     ports:
       - "3306:3306"
     volumes:

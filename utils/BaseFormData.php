@@ -1,6 +1,5 @@
 <?php
-// Parent Class
-// This class is used to create a form data object with name and email properties
+
 class ParentClass
 {
     public $name;

@@ -4,7 +4,7 @@ body {
 }
 
 nav {
-    background: linear-gradient(45deg, #1a2529, #0a3d62); /* Darker gradient */
+    background: linear-gradient(45deg, #1a2529, #0a3d62); 
 }
 
 .navbar-container {

@@ -64,32 +64,7 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
     </style>
 </head>
 <body>
-    <!--
-    <nav>
-
-        <div class="row mobile-row">
-            <div class="col-4 title">
-                <div class="logo">
-                    <img id="logo" src="utils/algoverse_logo.svg" alt="AlgoVerse Academy Logo">
-
-                </div>
-                <h2>AlgoVerse Academy</h2>
-            </div>
-            <div class="col-8">
-                <ul class="links" id="nav-links">
-                    <li><a href="index.php">Homepage</a></li>
-                    <li><a id="about" href="about-us.php">About Us</a></li>
-                    <li><a href="courses.php">Our Courses</a></li>
-                    <li><a href="admission.php">Admissions</a></li>
-                    <li><a href="contact.php">Contact</a></li>
-                </ul>
-                <div class="hamburger" id="hamburger">
-                    <p>&#9776;</p>
-                </div>
-            </div>
-        </div>
-    </nav>
-    -->
+   
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const currentPage = window.location.href;
@@ -376,13 +351,7 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
             </script>
         </section>
     </main>
-    <!-- <footer>
-        <div class="row">
-            <div class="col-12">
-                <p>&copy; <span><?php echo date("Y-m-d"); ?></span> <em>AlgoVerse Academy. All rights reserved.</em></p>
-            </div>
-        </div>
-    </footer> -->
+   
     <?php
     require('footer.php');
     ?>

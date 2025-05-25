@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 [{"name":"Fatos Rama","email":"fatosrama.fr@gmail.com","course":"Python","file":"uploads\/default.svg"}
  ,{"name":"Fatos Rama","email":"fatosrama.fr@gmail.com","course":"Python","file":"uploads\/default.svg"}
  ,{"name":"Fatos Rama","email":"fatosrama.fr@gmail.com","course":"Python","file":"uploads\/default.svg"}
@@ -13,9 +12,8 @@
  ,{"name":"Bashkim","email":"bashkim.hashani@student.uni-pr.edu","course":"GitHub","file":"uploads\/default.svg"}
  ,{"name":"Bashkim","email":"bashkim.hashani@student.uni-pr.edu","course":"Python","file":"uploads\/default.svg"}
  ,{"name":"Bashkim","email":"bashkim.hashani@student.uni-pr.edu","course":"GitHub","file":"uploads\/default.svg"}
-]
-=======
->>>>>>> Stashed changes
+
+
  ,{"name":"Erblin Syla","email":"erblin2005@gmail.com","course":"C++","file":"Uploads\/default.svg"}
  ,{"name":"Erblin Syla","email":"erblin2005@gmail.com","course":"C++","file":"Uploads\/default.svg"}
  ,{"name":"Erblin Syla","email":"erblin2005@gmail.com","course":"C++","file":"Uploads\/default.svg"}
@@ -36,10 +34,5 @@
  ,{"name":"Fatos Rama","email":"fatosrama.fr@gmail.com","course":"HTML","file":"uploads\/default.svg"}
  ,{"name":"Erblin Syla","email":"erblin2005@gmail.com","course":"CSS","file":"uploads\/default.svg"}
  ,{"name":"Erblin Syla","email":"erblin2005@gmail.com","course":"C++","file":"uploads\/default.svg"}
-<<<<<<< HEAD
  ,{"name":"Mentor Rama","email":"toli.xerox@gmail.com","course":"Python","file":"uploads\/default.svg"}
-=======
- ,{"name":"Bashkim","email":"bashkim.hashani@student.uni-pr.edu","course":"CSS","file":"uploads\/default.svg"}
- ,{"name":"Bashkim","email":"bashkim.hashani@student.uni-pr.edu","course":"JavaScript","file":"uploads\/default.svg"}
->>>>>>> 297108856ac16b05ebb76c8f3375c579dd1cbebc
 ]

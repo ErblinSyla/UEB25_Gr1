@@ -7,7 +7,7 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
-// Default role to 'user' if not set
+
 $_SESSION['role'] = $_SESSION['role'] ?? 'user';
 
 if (!isset($_SESSION['course_counts'])) {
@@ -506,7 +506,7 @@ require 'navbar.php';
 $(document).ready(function() {
     console.log('jQuery version:', $.fn.jquery);
 
-    // Reveal animation function
+    
     function checkReveal() {
         const revealElements = document.querySelectorAll('.reveal-left');
         const windowHeight = window.innerHeight;

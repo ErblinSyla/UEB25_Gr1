@@ -1,8 +1,6 @@
 <?php
-// Determine the current page for navigation highlighting
 $currentPage = basename($_SERVER['PHP_SELF'], '.php');
 
-// Get the user's dark mode preference from the cookie
 $username = isset($_SESSION['username']) ? $_SESSION['username'] : null;
 $darkmode_cookie_name = $username ? "darkmode_" . $username : null;
 $dark_mode = $username && isset($_COOKIE[$darkmode_cookie_name]) && $_COOKIE[$darkmode_cookie_name] === 'on' ? 'on' : 'off';
@@ -31,12 +29,10 @@ $profile_link = (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') ? 'p
                             <span><?= strtoupper(substr($_SESSION['username'], 0, 2)) ?></span>
                         </div>
                         <div class="profile-dropdown">
-                            <!-- Profile Link with dynamic href based on role -->
                             <a href="<?= htmlspecialchars($profile_link) ?>" class="dropdown-item">
                                 <i class="icon-user"></i> My Profile
                             </a>
 
-                            <!-- Dark Mode Toggle -->
                             <div class="toggle-item">
                                 <span>Dark Mode</span>
                                 <label class="theme-switch">
@@ -45,10 +41,8 @@ $profile_link = (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') ? 'p
                                 </label>
                             </div>
 
-                            <!-- Divider -->
                             <div class="dropdown-divider"></div>
 
-                            <!-- Log Out Link -->
                             <a href="logout.php" class="dropdown-item logout">
                                 <i class="icon-logout"></i> Log Out
                             </a>
@@ -69,7 +63,7 @@ $profile_link = (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') ? 'p
 <script>
     document.getElementById('themeToggle').addEventListener('change', function() {
         const isDarkMode = this.checked ? 'on' : 'off';
-        const username = '<?php echo addslashes($username); ?>'; // Escape username for JS
+        const username = '<?php echo addslashes($username); ?>'; 
         const darkmodeCookieName = username ? "darkmode_" + username : null;
 
         if (darkmodeCookieName) {
@@ -78,7 +72,6 @@ $profile_link = (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') ? 'p
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
-                    // Reload the page to apply the new stylesheet
                     window.location.reload();
                 }
             };
@@ -88,7 +81,6 @@ $profile_link = (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') ? 'p
 </script>
 
 <style>
-    /* Dropdown Container */
     .profile-dropdown {
         position: absolute;
         right: 0;
@@ -103,12 +95,10 @@ $profile_link = (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') ? 'p
         font-family: 'Inter', sans-serif;
     }
 
-    /* Show dropdown on hover */
     .profile-container:hover .profile-dropdown {
         display: block;
     }
 
-    /* Dropdown Items */
     .dropdown-item {
         display: flex;
         align-items: center;
@@ -131,14 +121,12 @@ $profile_link = (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') ? 'p
         width: 18px;
     }
 
-    /* Divider Line */
     .dropdown-divider {
         height: 1px;
         background: #eee;
         margin: 6px 0;
     }
 
-    /* Toggle Switch */
     .toggle-item {
         display: flex;
         justify-content: space-between;
@@ -191,7 +179,6 @@ $profile_link = (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') ? 'p
         transform: translateX(20px);
     }
 
-    /* Dark Mode Preview (optional) */
     body.dark-mode .profile-dropdown {
         background: #2d3436;
         box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);

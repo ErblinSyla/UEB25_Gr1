@@ -9,10 +9,7 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
 $user_name = isset($_SESSION['name']) ? $_SESSION['name'] : null;
 
 
-//if (!$user_name) {
-//   header("Location: login.php");
-//    exit();
-//}
+
 
 try {
     $query = "

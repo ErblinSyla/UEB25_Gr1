@@ -34,8 +34,8 @@ function validateEmail($email)
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $name = trim($_POST['name-input'] ?? '');
-    $email = trim($_POST['email-input'] ?? '');
+    $name = filter_var(trim($_POST['name-input'] ?? ''), FILTER_SANITIZE_STRING);
+    $email = filter_var(trim($_POST['email-input'] ?? ''), FILTER_SANITIZE_EMAIL);
     $errors = [];
 
     if (validateXSSAttacks($name) || validateXSSAttacks($email)) {
@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $errors[] = "Name cannot contain numbers";
     }
 
-    if (!validateEmail($email)) {
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors[] = "Invalid email format";
     }
 
@@ -83,14 +83,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($insertStmt->execute()) {
                 $message .= "\nSubscription successful!";
 
-                // Dërgo email me PHPMailer
+                
                 $mail = new PHPMailer(true);
                 try {
                     $mail->isSMTP();
                     $mail->Host       = 'smtp.gmail.com';
                     $mail->SMTPAuth   = true;
-                    $mail->Username   = 'fatosrama.fr@gmail.com';       // Zëvendëso me emailin tënd
-                    $mail->Password   = 'nxnj adhd dlhn bijj';    // Zëvendëso me fjalëkalimin e aplikacionit
+                    $mail->Username   = 'fatosrama.fr@gmail.com';       
+                    $mail->Password   = 'nxnj adhd dlhn bijj';    
                     $mail->SMTPSecure = 'tls';
                     $mail->Port       = 587;
 
@@ -267,7 +267,7 @@ $message = "";
 
     <script src="scripts/homepage.js"></script>
     <main class="main-section">
-        <!--                                               MAIN SECTION                                          -->
+        
         <section class="main-wallpaper">
             <div class="header-text">
                 <h1>Master Coding Today!</h1>
@@ -326,12 +326,12 @@ $message = "";
                 }, 1000);
             });
         </script>
-        <!---                                          EXPERT INSTRUCTORS SECTION                                   -->
+      
         <section class="instructors">
             <h2 id="instructors-title">Expert Instructors</h2>
             <p><strong>Learn from industry professionals with years of experience.</strong></p>
             <div class="instructor-1">
-                <!--                             INSTRUCTOR 1                            -->
+              
                 <audio id="audio1" src="audio/div-hover.mp3"></audio>
                 <img id="instructor1_image" src="images/instructor-1.png">
                 <h1 id="instructor1-name">Dhuratë Hyseni</h1>
@@ -344,7 +344,6 @@ $message = "";
                     including optimization, security, and accessibility.</p>
             </div>
             <div class="instructor-2">
-                <!--                            INSTRUCTOR 2                            -->
                 <audio id="audio2" src="audio/div-hover.mp3"></audio>
                 <img id="instructor2_image" src="images/instructor-2.png">
                 <h1 id="instructor2-name">Hussein Hussein</h1>
@@ -352,7 +351,6 @@ $message = "";
                 <p id="instructor2-description">Dr. Hussein Hussein is an expert instructor with a PhD in Computer Science from Northeastern University, specializing in databases, web servers, and web security. He brings a wealth of knowledge in managing and optimizing databases like MySQL and PostgreSQL, as well as configuring and securing web servers like Apache and Nginx. With a focus on real-world applications, Dr. Hussein teaches students how to design secure, scalable web architectures, ensuring that they are well-equipped to handle web security challenges such as SQL injection and cross-site scripting (XSS). His courses combine in-depth theory with hands-on experience, preparing students for successful careers in backend development and system security.</p>
             </div>
             <div class="instructor-3">
-                <!--                             INSTRUCTOR 3                           -->
                 <audio id="audio3" src="audio/div-hover.mp3"></audio>
                 <img id="instructor3_image" src="images/instructor-3.png">
                 <h1 id="instructor3-name">Ethan Williams</h1>
@@ -361,7 +359,6 @@ $message = "";
             </div>
 
         </section>
-        <!--                                       HANDS-ON-PROJECTS SECTION                                         -->
         <section class="hands-on-projects">
             <div class="projects-main">
                 <h2 id="hands-title">Hands-On Projects</h2>
@@ -409,7 +406,6 @@ $message = "";
                 </div>
             </div>
         </section>
-        <!--                                                 FLEXIBLE LEARNING SECTION                                   -->
         <section class="flexible-learning">
             <div class="flexible-title">
                 <h2 id="flexible-title">Flexible Learning</h2>
@@ -483,64 +479,7 @@ $message = "";
         </section>
     </main>
     <script>
-        /* document.getElementById('newsletterForm').addEventListener('submit', function(event) {
-            const nameInput = document.getElementById('name-input');
-            const nameError = document.getElementById('name-error');
-
-            if (isNaN(nameInput.value) === false || nameInput.value.trim() === "") {
-                event.preventDefault();
-                nameError.style.display = "block"; 
-            } else {
-                nameError.style.display = "none";
-            }
-        });
-        document.getElementById('newsletterForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            const nameInputField = document.getElementById('name-input');
-            const emailInputField = document.getElementById('email-input');
-
-            const formFields = [
-                nameInputField.value,
-                emailInputField.value
-            ];
-
-            const filledFields = formFields.filter(field => field.trim() !== "");
-
-            if (filledFields.length === formFields.length) {
-                alert("Thank you for signing up to our newsletter!");
-            } else {
-                alert("Please fill in all the fields.");
-            }
-        });
-*/
-        // document.getElementById('newsletterForm').addEventListener('submit', async (e) => {
-        //     e.preventDefault();
-
-        //     // Clean name input before submission
-        //     const nameInput = document.querySelector('[name="name-input"]');
-        //     nameInput.value = nameInput.value.replace(/[^a-zA-Z\s]/g, '')
-        //         .replace(/\s+/g, ' ')
-        //         .trim();
-
-        //     const response = await fetch('', {
-        //         method: 'POST',
-        //         body: new FormData(e.target),
-        //         headers: {
-        //             'X-Requested-With': 'XMLHttpRequest'
-        //         }
-        //     });
-
-        //     const result = await response.text();
-        //     alert(result);
-
-        //     // Clear form if successful
-        //     if (!result.includes("Invalid")) {
-        //         e.target.reset();
-        //     }
-        // });
-
-
+    
 
 
         function addHoverAudioEffect(instructorSelector, audioId) {
@@ -614,14 +553,7 @@ $message = "";
             nameInput.value = nameInput.value.replace(/\s+/g, ' ').trim();
         });
     </script>
-    <!--                                                    COPYRIGHT                                                -->
-    <!-- <footer>
-        <div class="row">
-            <div class="col-12">
-                <p>&copy; <span><?php echo date("Y-m-d"); ?></span> <em>AlgoVerse Academy. All rights reserved.</em></p>
-            </div>
-        </div>
-    </footer> -->
+  
     <?php
     require('footer.php');
     ?>

@@ -1,10 +1,10 @@
 <?php
-// Prevent any output before JSON
+
 ob_start();
 require 'database/db.php';
 header('Content-Type: application/json; charset=UTF-8');
 
-// Clear any output buffer to avoid stray content
+
 ob_clean();
 
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;

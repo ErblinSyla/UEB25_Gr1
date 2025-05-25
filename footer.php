@@ -34,7 +34,7 @@ async function fetchJoke() {
     }
 }
 
-// Fetch immediately on load
+
 fetchJoke();
 
 

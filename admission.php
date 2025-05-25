@@ -96,11 +96,11 @@ if (isset($_POST['submit']) && $_POST["submit"] == "POST") {
             file_put_contents($jsonPath, $jsonData);
         }
 
-        // $successMessage = $review->display();
+        
         $stmt = $conn->prepare("INSERT INTO review (name, email, phone_number, comment, star , profile_picture , timestamp , response) VALUES (?, ?, ?, ?, ? , ? , ? , ?)");
-        $profile_picture = "images/algoverse-logo.png"; // Default profile picture
+        $profile_picture = "images/algoverse-logo.png"; 
         $timestamp = date("Y-m-d H:i:s");
-        $response = null; // Default response
+        $response = null; 
 
         $stmt->bind_param("ssssisss", $name, $email, $phone, $comment, $star, $profile_picture, $timestamp, $response);
         $submited = true;
@@ -296,9 +296,7 @@ if (isset($_POST['submit']) && $_POST["submit"] == "POST") {
             }
         }
 
-        // ob_start();
-        // var_dump($plans);
-        // file_put_contents('debug.log', ob_get_clean(), FILE_APPEND);
+    
 
         function formatedPrice($price)
         {
@@ -458,33 +456,33 @@ if (isset($_POST['submit']) && $_POST["submit"] == "POST") {
                             <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
                                 <div class="row">
                                     <div class="col-8">
-                                        <!-- Textarea with dynamic ID -->
+                                        
                                         <textarea id="myTextarea<?= $review['id'] ?>" name="response" style="border:2px dashed black; border-radius:5px; margin-right:50px; resize: none;" rows="6" cols="38" placeholder="Keep it brief and professional!"></textarea>
                                     </div>
                                     <div class="col-4">
-                                        <!-- Form with dynamic validation -->
+                                        
                                         <form action="admission.php" method="post">
                                             <br>
-                                            <!-- Submit button -->
+                                           
                                             <input type="submit" name="submit"
                                                    style="margin-right:18px; margin-bottom:12px;"
                                                    class="table-button-create" value="Submit"
                                                 onclick = "document.getElementById('response<?= $review['id']?>').value = document.getElementById('myTextarea<?= $review['id'] ?>').value">
                             
-                                            <!-- Cancel button -->
+                                           
                                             <input type="button"
                                                    style="margin-right:18px;"
                                                    class="table-button-create" value="Cancel"
                                                    onclick="document.getElementById('myTextarea<?= $review['id'] ?>').value = '';">
                             
-                                            <!-- Hidden ID for the review -->
+                                           
                                             <input type="hidden" name="id" value="<?= $review['id'] ?>">
                                             <input type="hidden" id = "response<?= $review['id']?>" name="response" value="">
                                         </form>
                                     </div> 
                                 </div>
                                 <?php
-                                // PHP processing block
+                                
                                 if (isset($_POST['submit'])) {
                                     $response = $_POST['response'];
                                     $id = $_POST['id'];

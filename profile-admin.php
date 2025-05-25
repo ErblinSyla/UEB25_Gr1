@@ -9,20 +9,16 @@ if (!isset($_SESSION['username'])) {
 require_once 'config.php';
 $currentPage = basename($_SERVER['PHP_SELF'], '.php');
 
-// Funksion për modifikimin e vargut me referencë
 function formatReviews(&$reviews) {
     foreach ($reviews as &$review) {
-        // Vendosja e referencave në mes të anëtarëve të vargut
         $review['formatted_comment'] = substr($review['comment'], 0, 50) . '...';
-        // Demonstrimi i largimit përmes referencës
         if (empty($review['comment'])) {
-            unset($review['comment']); // Largimi i komenteve bosh
+            unset($review['comment']); 
         }
     }
-    unset($review); // Pastrimi i referencës për të shmangur probleme
+    unset($review); 
 }
 
-// Funksion që kthen një referencë të një variabli globale
 function &getGlobalConfig() {
     global $globalConfig;
     if (!isset($globalConfig)) {
@@ -32,7 +28,6 @@ function &getGlobalConfig() {
 }
 
 try {
-    // Fetch reviews
     $query_reviews = "SELECT * FROM review";
     $stmt_reviews = $conn->prepare($query_reviews);
     if (!$stmt_reviews) {
@@ -43,10 +38,8 @@ try {
     $reviews = $result_reviews->fetch_all(MYSQLI_ASSOC);
     $stmt_reviews->close();
 
-    // Përdorimi i referencave për të modifikuar vargun $reviews
     formatReviews($reviews);
 
-    // Fetch course applications
     $query_applications = "SELECT * FROM course_applications";
     $stmt_applications = $conn->prepare($query_applications);
     if (!$stmt_applications) {
@@ -57,7 +50,6 @@ try {
     $applications = $result_applications->fetch_all(MYSQLI_ASSOC);
     $stmt_applications->close();
 
-    // Fetch newsletter subscriptions
     $query_newsletter = "SELECT * FROM newsletter";
     $stmt_newsletter = $conn->prepare($query_newsletter);
     if (!$stmt_newsletter) {
@@ -68,9 +60,8 @@ try {
     $newsletter = $result_newsletter->fetch_all(MYSQLI_ASSOC);
     $stmt_newsletter->close();
 
-    // Demonstrimi i kthimit përmes referencës
     $config = &getGlobalConfig();
-    $config['last_updated'] = date('Y-m-d H:i:s'); // Modifikimi i variablës globale përmes referencës
+    $config['last_updated'] = date('Y-m-d H:i:s'); 
 
 } catch (Exception $e) {
     echo "Error fetching data: " . $e->getMessage();

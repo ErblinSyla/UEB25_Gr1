@@ -155,7 +155,7 @@ footer {
 }
 
 .close-btn:hover {
-    color: #00aaff; /* Bright accent for hover */
+    color: #00aaff; 
 }
 
 a {
@@ -195,7 +195,7 @@ html {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     text-align: center;
     padding: 20px;
-    min-height: 400px; /* Ensure enough height for content */
+    min-height: 400px; 
 }
 
 body.light-mode .col, body.light-mode .col-other {
@@ -221,7 +221,7 @@ body.light-mode .col:hover, body.light-mode .col-other:hover {
     height: auto;
     border-radius: 8px;
     object-fit: contain;
-    max-height: 150px; /* Prevent image from oversized */
+    max-height: 150px; 
 }
 
 .card h3 {
@@ -244,7 +244,7 @@ body.light-mode .card p {
     color: #666666;
 }
 
-/* Remaining styles unchanged */
+
 .reveal-left {
     position: relative;
     transform: translateX(-50px);
@@ -257,7 +257,7 @@ body.light-mode .card p {
     opacity: 1;
 }
 
-/* Modal and other styles unchanged */
+
 .modal {
     display: none;
     position: fixed;
@@ -273,7 +273,6 @@ body.light-mode .modal {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-/* Add remaining modal, button, and other styles from original courses.css */
 body.dark-mode .modal-content {
     background-color: #3d4548;
     color: #f0f0f0;

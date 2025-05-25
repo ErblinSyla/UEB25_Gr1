@@ -32,11 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 
-// Kemi testuar lidhjen me databaze, funksionon
 
-//if($conn) {
-//    echo "Connection successful";
-//}
 
 ?>
 
