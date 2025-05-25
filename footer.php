@@ -25,7 +25,7 @@
 <script>
 async function fetchJoke() {
     try {
-        const response = await fetch('/get-joke.php');
+        const response = await fetch('get-joke.php');
         if (!response.ok) throw new Error('Network error');
         const data = await response.json();
         document.getElementById('programming-joke').textContent = "💡 Joke of the moment: " + data.joke;
@@ -37,7 +37,7 @@ async function fetchJoke() {
 // Fetch immediately on load
 fetchJoke();
 
-// Then fetch every 5 seconds (5000 ms)
-setInterval(fetchJoke, 5000);
+
+setInterval(fetchJoke, 10000);
 </script>
 
