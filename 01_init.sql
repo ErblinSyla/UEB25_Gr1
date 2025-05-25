@@ -59,7 +59,7 @@ CREATE TABLE `contact_us` (
   `name` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `gender` enum('male','female','other','prefer_not_to_say') DEFAULT NULL,
-  `age` int(100) DEFAULT NULL,
+  `age` int DEFAULT NULL,
   `interests` text DEFAULT NULL,
   `message` text NOT NULL,
   `submitted_at` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -91,6 +91,8 @@ DROP TABLE IF EXISTS `course_applications`;
 CREATE TABLE `course_applications` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `course_id` int(11) NOT NULL,
   `file_name` varchar(255) DEFAULT NULL,
   `file_type` varchar(100) DEFAULT NULL,

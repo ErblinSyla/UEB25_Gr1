@@ -11,7 +11,11 @@ if (!isset($_SESSION['username'])) {
 $_SESSION['role'] = $_SESSION['role'] ?? 'user';
 
 if (!isset($_SESSION['course_counts'])) {
-    $countQuery = "SELECT course, COUNT(*) as count FROM course_applications GROUP BY course";
+    $countQuery = "SELECT c.Name AS course, COUNT(*) AS count
+FROM course_applications ca
+JOIN courses c ON ca.course_id = c.ID
+GROUP BY ca.course_id, c.Name;
+";
     $countResult = $conn->query($countQuery);
     $_SESSION['course_counts'] = [];
     while ($row = $countResult->fetch_assoc()) {
@@ -648,8 +652,10 @@ $(document).ready(function() {
                 $('#success-audio').get(0).play();
             },
             error: function(xhr, status, error) {
-                console.error('AJAX error:', xhr.responseText, status, error);
-                alert('Error saving course: ' + (xhr.responseText || error));
+              console.error('Status:', status);
+              console.error('Error:', error);
+              console.error('Response text:', xhr.responseText);
+              alert('Error saving course: ' + xhr.responseText);
             }
         });
     });
