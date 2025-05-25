@@ -285,7 +285,10 @@ if (isset($_POST['submit']) && $_POST["submit"] == "POST") {
                 $plans[] = $row;
             }
         }
-        $sql = "SELECT id, name, email, phone_number , comment , star , profile_picture , timestamp , response  FROM review ORDER BY star DESC";
+        $sql = "SELECT r.id, r.comment, r.rating, r.created_at, r.response, u.name, u.profile_picture_path 
+                FROM review r 
+                JOIN users u ON r.user_id = u.id 
+                ORDER BY r.rating DESC";
         $result = $conn->query($sql);
 
         $reviews = [];
@@ -436,18 +439,18 @@ if (isset($_POST['submit']) && $_POST["submit"] == "POST") {
             </div>
             <div class="row">
                 <?php foreach ($reviews as $review): ?>
-                <?php if($review['response'] == null &&  $review['response'] ==''): ?>
+                <?php if($review['response'] == null ||  $review['response'] ==''): ?>
                     <div class="col-4">
                         <div class="review-div reveal">
                             <div class="row">
                                 <div class="col-3">
-                                    <img class="review-img" src="<?= htmlspecialchars($review['profile_picture']) ?>">
+                                    <img class="review-img" src="<?= htmlspecialchars($review['profile_picture_path']) ?>">
                                     <p><?= htmlspecialchars($review['name']) ?></p>
                                 </div>
                                 <div class="col-9">
                                     <div class="rating">
                                         <?php for ($i = 1; $i <= 5; $i++): ?>
-                                            <span data-value="<?= $i ?>"><?= $i <= $review['star'] ? '&#9733;' : '&#9734;' ?></span>
+                                            <span data-value="<?= $i ?>"><?= $i <= $review['rating'] ? '&#9733;' : '&#9734;' ?></span>
                                         <?php endfor; ?>
                                     </div>
                                     <p><?= htmlspecialchars($review['comment']) ?></p>
