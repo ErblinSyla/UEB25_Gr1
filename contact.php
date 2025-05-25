@@ -143,7 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } catch (Exception $e) {
         showAlertAndGoBack("Failed to save form data. Please try again.");
     }
-    $conn = new mysqli("localhost", "root", "", "algoversedb");
+    $conn = new mysqli("127.0.0.1", "root", "", "algoversedb");
 
     if ($conn->connect_error) {
         die("Lidhja me databazën dështoi: " . $conn->connect_error);
@@ -165,7 +165,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->close();
     $conn->close();
 
-    header("Location: thankyou.html");
+    echo '<script>window.location.href = "thankyou.html";</script>';
     exit();
 }
 
@@ -339,6 +339,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <div class="inputBox">
                         <input type="text" name="email" placeholder="Email" required="required" autocomplete="email">
                         <span id="email-error" class="error-message"></span>
+                    </div>
+                    <div class="inputBox">
+                        <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" name="phone" placeholder="Phone Number" required="required" autocomplete="phone">
+                        <span id="phone-error" class="error-message"></span>
                     </div>
                     <div class="inputBox">
                         <div class="gender-group">
