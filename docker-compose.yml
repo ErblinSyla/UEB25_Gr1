@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  db:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"   # Allow root user with empty password
+      MYSQL_DATABASE: algoversedb          # Create initial DB
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
