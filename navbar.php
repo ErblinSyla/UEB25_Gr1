@@ -48,7 +48,7 @@ $profile_link = (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') ? 'p
                                 </label>
                             </div>
                             <div class="toggle-item">
-                                <span>Dyslexia sup.</span>
+                                <span>Dyslexia </span>
                                 <label class="theme-switch">
                                     <input type="checkbox" id="dyslexiaToggle" <?= isset($_COOKIE['dyslexia_' . $username]) && $_COOKIE['dyslexia_' . $username] === 'on' ? 'checked' : '' ?>>
                                     <span class="slider"></span>
@@ -257,27 +257,14 @@ document.addEventListener('DOMContentLoaded', function() {
         transform: translateX(20px);
     }
 
-    body.dark-mode .profile-dropdown {
-        background: #2d3436;
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-    }
-
-    body.dark-mode .dropdown-item {
-        color: #f0f0f0;
-    }
-
-    body.dark-mode .dropdown-item:hover {
-        background: #3d4548;
-    }
-
-    body.dark-mode .dropdown-divider {
-        background: #3d4548;
-    }
     .toggle-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 16px;
+    }
+span {
+    color: black;
 }
 .theme-switch {
     position: relative;
