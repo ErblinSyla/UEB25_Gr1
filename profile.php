@@ -49,6 +49,9 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
 
+    <link rel="stylesheet" href="style/profile.css">
+    <link rel="stylesheet" href="style/navbar.css">
+
     <link rel="stylesheet" href="<?php echo htmlspecialchars(getStylesheetPath('profile.css')); ?>">
     <link rel="stylesheet" href="<?php echo htmlspecialchars(getStylesheetPath('navbar.css')); ?>">
 

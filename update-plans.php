@@ -45,6 +45,8 @@ $plan = $result->fetch_assoc();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add a new row - AlgoVerse Academy</title>
 
+    <link rel="stylesheet" href="style/crud.css">
+
     <link rel="stylesheet" href="<?php echo htmlspecialchars(getStylesheetPath('crud.css')); ?>">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">

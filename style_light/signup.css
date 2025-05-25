@@ -1,173 +1,35 @@
-body {
-    margin: 0;
-    line-height: 1;
-    font-family: sans-serif, serif;
-}
-
-.row {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-}
-
-.row::after {
-    display: table;
-    clear: both;
-    content: "";
-}
-
-.col-1 {width: 8.33%;}
-.col-2 {width: 16.66%;}
-.col-3 {width: 25%;}
-.col-4 {width: 33.33%;}
-.col-5 {width: 41.66%;}
-.col-6 {width: 50%;}
-.col-7 {width: 58.33%;}
-.col-8 {width: 66.66%;}
-.col-9 {width: 75%;}
-.col-10 {width: 83.33%;}
-.col-11 {width: 91.66%;}
-.col-12 {width: 100%;}
-
-/* FORM */
-
 .sign-up-section {
-    min-height: 100vh;
     background-color: #FFF1DB;
 }
 
 .form-div {
-    width: 45%;
-    height: 85vh;
-    margin: auto;
-    margin-top: 5vh;
-    padding: 50px 50px 0;
-    text-align: center;
-    border-radius: 10px;
     background-color: #FFE0B8;
     box-shadow: 1px 1px 7px;
-    transition: 0.3s ease box-shadow;
-}
-
-.form-div h1 {
-    font-family: "Changa", sans-serif;
-    font-size: 26px;
-    text-shadow: 1px 1px 4px;
-}
-
-.form-div .inner-form p {
-    font-size: 18px;
-    font-family: 'MyFont', Arial, Helvetica, sans-serif;
-}
-
-.form-div .inner-form {
-    height: 60%;
-    padding: 25px 70px;
-    text-align: left;
 }
 
 .form-div .inner-form .form-field select {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
     border: 1px solid #ccc;
-    border-radius: 5px;
     background-color: #fff;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
     background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='10'%3E%3Cpolygon points='0,0 12,0 6,10' fill='%23999'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-    background-size: 10px;
 }
 
 .form-div .inner-form input {
-    width: 100%;
-    height: 27px;
-    border: none;
-    outline: none;
     border-bottom: 2px solid #27548A;
     background-color: transparent;
-    box-shadow: none;
 }
 
 .form-div .inner-form input:focus {
-    border: none;
-    outline: none;
-    box-shadow: none;
     border-bottom: 2px solid #27548A;
 }
 
-.form-div .inner-form .sign-up-button-div {
-    text-align: center;
-    margin-top: 70px;
-}
-
-.form-div .inner-form .sign-up-button-div h5 {
-    font-family: 'MyFontItalic', Arial, Helvetica, sans-serif;
-}
-
 .form-div .inner-form .sign-up-button-div a {
-    text-decoration: none;
     color: #0b7cd1;
-    font-family: 'MyFontItalic', Arial, Helvetica, sans-serif;
 }
 
 .form-div .inner-form .sign-up-button-div button {
-    padding: 10px 30px;
-    font-size: 15px;
-    font-family: 'MyFont', Arial, Helvetica, sans-serif;
-    border-radius: 5px;
     background-color: #0d92f4;
-    transition: 0.3s ease background-color;
 }
 
 .form-div .inner-form .sign-up-button-div button:hover {
-    cursor: pointer;
     background-color: #0b7cd1;
-}
-
-@media (max-width: 1300px)   {
-    .form-div {
-        width: 50%;
-    }
-
-    .form-div .inner-form {
-        padding: 20px;
-    }
-}
-
-@media (max-width: 1000px)   {
-    .form-div {
-        width: 50%;
-    }
-
-    .form-div .inner-form {
-        padding: 20px;
-    }
-}
-
-@media (max-width: 600px)   {
-    .form-div {
-        width: 60%;
-    }
-
-    .form-div .inner-form {
-        padding: 20px;
-    }
-}
-
-@font-face {
-    font-family: 'MyFont';
-    src: url(../fonts/Rubik/Rubik-VariableFont_wght.ttf); 
-}
-
-@font-face {
-    font-family: 'MyFontItalic';
-    src: url(../fonts/Rubik/Rubik-Italic-VariableFont_wght.ttf); 
-}
-a {
-    text-decoration: none;
 }

@@ -22,6 +22,9 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - AlgoVerse Academy</title>
     <!-- STYLE -->
+    <link rel="stylesheet" href="style/about-us.css">
+    <link rel="stylesheet" href="style/navbar.css">
+
     <link rel="stylesheet" href="<?php echo htmlspecialchars(getStylesheetPath('about-us.css')); ?>">
     <link rel="stylesheet" href="<?php echo htmlspecialchars(getStylesheetPath('navbar.css')); ?>">
 

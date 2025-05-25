@@ -141,7 +141,8 @@ $message = "";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AlgoVerse Academy</title>
     
-    <!--<link rel="stylesheet" href="style_light/homepage.css"> -->
+    <link rel="stylesheet" href="style/homepage.css">
+
     <link rel="stylesheet" href="<?php echo htmlspecialchars(getStylesheetPath('homepage.css')); ?>">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">

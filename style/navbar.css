@@ -1,0 +1,117 @@
+#algoverse {
+    text-decoration: none;
+    transition: 0.3s ease color;
+}
+
+.profile-container {
+    position: relative;
+    display: inline-block;
+    margin-left: 35px;
+    height: 40px;
+    vertical-align: middle;
+}
+
+.profile-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.profile-icon:hover {
+    transform: scale(1.05);
+}
+
+.profile-dropdown {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    border-radius: 8px;
+    width: 180px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+.profile-dropdown::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    right: 0;
+    width: 100%;
+    height: 10px;
+    background: transparent;
+}
+
+.profile-dropdown a {
+    display: block;
+    padding: 12px 15px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    font-size: 15px;
+}
+
+.profile-dropdown a:last-child {
+    border-bottom: none;
+}
+
+.profile-dropdown a:hover {
+    padding-left: 20px;
+}
+
+.profile-container:hover .profile-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+@media (max-width: 1010px) {
+    .profile-container {
+        margin: 15px 0 0 0;
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .profile-icon {
+        margin: 0 auto;
+    }
+
+    .profile-dropdown {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        width: 100%;
+        margin-top: 10px;
+        display: none;
+    }
+
+    .profile-container.active .profile-dropdown {
+        display: block;
+        animation: fadeIn 0.3s ease-in-out;
+    }
+
+    #nav-links .profile-container {
+        text-align: center;
+        padding: 10px 0;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+a {
+    text-decoration: none;
+}

@@ -86,6 +86,8 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Profile</title>
 
+    <link rel="stylesheet" href="style/profile-admin.css">
+
     <link rel="stylesheet" href="<?php echo htmlspecialchars(getStylesheetPath('profile-admin.css')); ?>">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
