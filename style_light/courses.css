@@ -1,115 +1,30 @@
 body {
-    margin: 0;
     line-height: 1;
-    font-family: sans-serif, serif;
 }
-
-html {
-    scroll-behavior: smooth;
-}
-
-.row {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-}
-
-.row::after {
-    display: table;
-    clear: both;
-    content: "";
-}
-
-.col-1 {width: 8.33%;}
-.col-2 {width: 16.66%;}
-.col-3 {width: 25%;}
-.col-4 {width: 33.33%;}
-.col-5 {width: 41.66%;}
-.col-6 {width: 50%;}
-.col-7 {width: 58.33%;}
-.col-8 {width: 66.66%;}
-.col-9 {width: 75%;}
-.col-10 {width: 83.33%;}
-.col-11 {width: 91.66%;}
-.col-12 {width: 100%;}
 
 nav {
     background: linear-gradient(45deg, #4CC9FE, #0D92F4);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    height: 67.83px;
 }
 
 .navbar-container {
     background: linear-gradient(45deg, #4CC9FE, #0D92F4);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-}
-#logo {
-    width: 60px;
-    height: 56px;
-    object-fit: contain;
-    margin-top:2px;
-}
-.title h2 {
-    margin-top:-40px;
-    margin-left: 100px;
 }
 
-ul {
-    float: right;
-}
-
-.links {
-    display: flex;
-    list-style: none;
-    margin-right: 45px;
-}
-
-.links li {
-    margin-left: 35px;
-    margin-top: 12px;
-}
-.links li a.active {
-    color: blue;
-     
-}
 .links li a {
-    text-decoration: none;
     color: black;
-    transition: 0.3s ease color;
-    font-family: "Cinzel", serif;
-    font-weight: bold;
 }
 
 .links li a:hover {
     color: blue;
 }
 
-.title-main {
-    text-align: center;
-    margin: 60px 0;
-    font-family: "Changa", sans-serif;
-    font-size: 29px;
-    text-shadow: 1px 1px 4px;
+.links li a.active {
+    color: blue;
 }
 
 .hamburger {
-    display: none;
-    font-size: 1.5rem;
-    cursor: pointer;
     color: #fff;
-    transition: background-color 0.2s ease, box-shadow 0.2s ease;
-    padding: 8px 20px;
     border: 2px solid black;
-    border-radius: 8px;
-    margin-right: 20px;
-    float: right;
 }
 
 .hamburger:active,
@@ -119,71 +34,16 @@ ul {
 }
 
 nav .title h2 {
-    font-family: "Spicy Rice", serif;
-    font-size: 1.5em;
-    margin-left: -100px;
     color: black;
 }
 
 @media (max-width: 1010px) {
-    .mobile-row .col-4 {
-        flex: 0 0 83.3333%;
-        max-width: 83.3333%;
-    }
-
-    .mobile-row .col-8 {
-        flex: 0 0 16.6667%;
-        max-width: 16.6667%;
-    }
-
-    .col-3, .col-4, .col-5, .col-6 {
-        display: block;
-        margin: auto;
-        width: 60%;
-    }
-
     .links {
-        flex-direction: column;
-        gap: 20px;
-        position: absolute;
-        top: 50px;
-        right: -45px;
-        border-bottom-left-radius: 8px;
         background: linear-gradient(45deg, #4CC9FE, #0D92F4);
-        padding: 15px;
-        z-index: 1;
-        width: 35%;
-        font-size: 18px;
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(-20px);
-        transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.3s;
     }
-
-    .links.active {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-        transition: opacity 0.3s ease, transform 0.3s ease;
-    }
-
-    .hamburger {
-        display: block;
-    }
-
-    .hamburger p {
-        margin: 10px 0;
-    }
-}
-
-section {
-    padding: 40px 0;
 }
 
 h2 {
-    font-size: 2em;
-    margin-bottom: 20px;
-    text-align: center;
     color: #333;
 }
 
@@ -191,146 +51,39 @@ h2 {
     background-color: #FFF1DB;
 }
 
-.courses h2 {
-    opacity: 0;
-    animation: fadeIn 1.5s ease-out forwards;
-    animation-delay: 0.3s;
-}
-
-.row-other {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-}
-
 .col {
-    width: 30%;
-    max-width: 300px;
     background-color: #fff;
-    border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    text-align: center;
-    padding: 20px;
-    opacity: 0;
-    animation: fadeIn 1.5s ease-out forwards;
-    animation-delay: 0.5s;
-}
-
-.col-other {
-    width: 30%;
-    max-width: 300px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    text-align: center;
-    padding: 20px;
-}
-
-.col-other:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
 .col:hover {
-    transform: translateY(-10px);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
-.card img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
+.col-other {
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.col-other:hover {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
 .card h3 {
-    margin-top: 15px;
-    font-size: 1.3em;
     color: #333;
 }
 
 .card p {
-    margin-top: 10px;
-    font-size: 1em;
     color: #666;
 }
 
-@media (max-width: 768px) {
-    .col {
-        width: 45%;
-    }
-}
-
-@media (max-width: 480px) {
-    .col {
-        width: 100%;
-    }
-}
-
-.reveal {
-    position: relative;
-    transform: translateY(50px);
-    opacity: 0;
-    transition: all 2s ease;
-}
-
-.reveal.active {
-    transform: translateY(0px);
-    opacity: 1;
-    z-index: 1;
-}
-
-.reveal-left {
-    position: relative;
-    transform: translateX(-50px);
-    opacity: 0;
-    transition: all 2s ease;
-}
-
-.reveal-left.active {
-    transform: translateX(0px);
-    opacity: 1;
-    z-index: 1;
-}
-
-.reveal-right {
-    position: relative;
-    transform: translateX(50px);
-    opacity: 0;
-    transition: all 2s ease;
-}
-
-.reveal-right.active {
-    transform: translateX(0px);
-    opacity: 1;
-    z-index: 1;
-}
-
 footer {
-    text-align: center;
-    padding: 20px;
     background: linear-gradient(45deg, #4CC9FE, #0D92F4);
-
-}
-
-.apply-container {
-    text-align: center;
-    margin-top: 40px;
 }
 
 #applyButton {
     background-color: #0d92f4;
     color: white;
-    padding: 15px 30px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1.2em;
-    cursor: pointer;
-    transition: background-color 0.3s;
 }
 
 #applyButton:hover {
@@ -338,122 +91,40 @@ footer {
 }
 
 .apply-modal {
-    display: none; 
-    position: fixed;
-    z-index: 1; 
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5); 
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .apply-modal-content {
     background-color: #fff;
-    margin: 10% auto;
-    padding: 20px;
-    border-radius: 8px;
-    width: 400px;
-    position: relative;
-}
-
-.apply-modal-content h3 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.apply-modal-content form {
-    display: flex;
-    flex-direction: column;
-}
-
-.apply-modal-content input,
-.apply-modal-content select,
-.apply-modal-content button {
-    margin-bottom: 15px;
-    padding: 10px;
-    font-size: 1em;
-    border-radius: 5px;
-    border: 1px solid #ccc;
 }
 
 .apply-modal-content button {
     background-color: #0d92f4;
     color: white;
-    cursor: pointer;
 }
 
 .apply-modal-content button:hover {
     background-color: #0950b7;
 }
 
+.apply-modal-content input,
+.apply-modal-content select {
+    border: 1px solid #ccc;
+}
+
 .drag-drop-area {
     border: 2px dashed #0D92F4;
-    padding: 20px;
-    text-align: center;
     background-color: #f9f9f9;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-bottom: 20px;
-  }
-  
-  .drag-drop-area p {
-    margin: 0;
-  }
-  
-  .drag-drop-area:hover {
+}
+
+.drag-drop-area:hover {
     background-color: #e0f7ff;
-  }
-  
-  #file-upload {
-    display: none;
-  }
-  
-  #file-upload:focus {
-    outline: none;
-  }
-  
+}
 
-
-
-
-
-
-/* Close Button */
 .close-btn {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    font-size: 1.5em;
-    cursor: pointer;
     color: #333;
 }
 
 .close-btn:hover {
     color: #0d92f4;
-}
-
-@font-face {
-    font-family: 'MyFont';
-    src: url(../fonts/Rubik/Rubik-VariableFont_wght.ttf); 
-}
-
-@font-face {
-    font-family: 'MyFontItalic';
-    src: url(../fonts/Rubik/Rubik-Italic-VariableFont_wght.ttf); 
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-a {
-    text-decoration: none;
 }

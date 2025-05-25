@@ -166,6 +166,9 @@ require 'navbar.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Courses and Professors</title>
 
+    <link rel="stylesheet" href="style/courses.css">
+    <link rel="stylesheet" href="style/navbar.css">
+
     <link rel="stylesheet" href="<?php echo htmlspecialchars(getStylesheetPath('courses.css')); ?>">
     <link rel="stylesheet" href="<?php echo htmlspecialchars(getStylesheetPath('navbar.css')); ?>">  
 

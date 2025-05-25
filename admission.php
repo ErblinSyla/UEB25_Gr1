@@ -127,6 +127,10 @@ if (isset($_POST['submit']) && $_POST["submit"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admissions - AlgoVerse Academy</title>
+    
+    <link rel="stylesheet" href="style/admission.css">
+    <link rel="stylesheet" href="style/navbar.css">
+
     <link rel="stylesheet" href="<?php echo htmlspecialchars(getStylesheetPath('admission.css')); ?>">
     <link rel="stylesheet" href="<?php echo htmlspecialchars(getStylesheetPath('navbar.css')); ?>">
 

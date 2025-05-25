@@ -178,6 +178,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title>Contact Us - AlgoVerse Academy</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="style/contact.css">
+    <link rel="stylesheet" href="style/navbar.css">
+
     <link rel="stylesheet" href="<?php echo htmlspecialchars(getStylesheetPath('contact.css')); ?>">
     <link rel="stylesheet" href="<?php echo htmlspecialchars(getStylesheetPath('navbar.css')); ?>">
 
