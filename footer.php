@@ -38,6 +38,5 @@ async function fetchJoke() {
 fetchJoke();
 
 
-setInterval(fetchJoke, 10000);
+setInterval(fetchJoke, 20000);// Fetch a new joke every 30 seconds
 </script>
-

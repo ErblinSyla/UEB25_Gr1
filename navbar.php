@@ -40,7 +40,6 @@ $profile_link = (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') ? 'p
                                     <span class="slider"></span>
                                 </label>
                             </div>
-                            <!-- Mute Toggle -->
                             <div class="toggle-item">
                                 <span>Mute Audio</span>
                                 <label class="theme-switch">
@@ -48,7 +47,13 @@ $profile_link = (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') ? 'p
                                     <span class="slider"></span>
                                 </label>
                             </div>
-
+                            <div class="toggle-item">
+                                <span>Dyslexia sup.</span>
+                                <label class="theme-switch">
+                                    <input type="checkbox" id="dyslexiaToggle" <?= isset($_COOKIE['dyslexia_' . $username]) && $_COOKIE['dyslexia_' . $username] === 'on' ? 'checked' : '' ?>>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
                             <div class="dropdown-divider"></div>
 
                             <a href="logout.php" class="dropdown-item logout">
@@ -120,6 +125,36 @@ document.addEventListener('DOMContentLoaded', function() {
         audioElements.forEach(audio => {
             audio.muted = true;
         });
+    }
+});
+</script>
+<script>
+    document.getElementById('dyslexiaToggle').addEventListener('change', function() {
+    const isDyslexiaMode = this.checked ? 'on' : 'off';
+    const username = '<?php echo addslashes($username); ?>';
+    const dyslexiaCookieName = username ? 'dyslexia_' + username : null;
+
+    // Toggle dyslexia mode class
+    document.body.classList.toggle('dyslexia-mode', this.checked);
+
+    if (dyslexiaCookieName) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'set_dyslexia.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // No reload; font change is instant
+            }
+        };
+        xhr.send('dyslexia=' + isDyslexiaMode + '&cookie_name=' + encodeURIComponent(dyslexiaCookieName));
+    }
+});
+
+// Apply dyslexia mode on page load
+document.addEventListener('DOMContentLoaded', function() {
+    const dyslexiaToggle = document.getElementById('dyslexiaToggle');
+    if (dyslexiaToggle.checked) {
+        document.body.classList.add('dyslexia-mode');
     }
 });
 </script>
@@ -282,5 +317,11 @@ input:checked+.slider {
 }
 input:checked+.slider:before {
     transform: translateX(20px);
+}
+body.dyslexia-mode {
+    font-family: 'Comic Sans MS', cursive, sans-serif !important;
+}
+body.dyslexia-mode * {
+    font-family: 'Comic Sans MS', cursive, sans-serif !important;
 }
 </style>
