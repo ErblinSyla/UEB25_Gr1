@@ -155,9 +155,167 @@ footer {
 }
 
 .close-btn:hover {
-    color: #00aaff;
+    color: #00aaff; /* Bright accent for hover */
 }
 
 a {
     color: #00aaff;
+}
+body {
+    margin: 0;
+    line-height: 1;
+    font-family: sans-serif, serif;
+    background-color: #2d3436;
+    color: #f0f0f0;
+}
+
+body.light-mode {
+    background-color: #f0f0f0;
+    color: #333333;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.row-other {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.col, .col-other {
+    flex: 1 1 300px;
+    max-width: 300px;
+    background-color: #3d4548;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    padding: 20px;
+    min-height: 400px; /* Ensure enough height for content */
+}
+
+body.light-mode .col, body.light-mode .col-other {
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.col:hover, .col-other:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+}
+
+body.light-mode .col:hover, body.light-mode .col-other:hover {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card {
+    background: transparent;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: contain;
+    max-height: 150px; /* Prevent image from oversized */
+}
+
+.card h3 {
+    margin-top: 15px;
+    font-size: 1.3em;
+    color: #f0f0f0;
+}
+
+body.light-mode .card h3 {
+    color: #333333;
+}
+
+.card p {
+    margin-top: 10px;
+    font-size: 1em;
+    color: #b0b0b0;
+}
+
+body.light-mode .card p {
+    color: #666666;
+}
+
+/* Remaining styles unchanged */
+.reveal-left {
+    position: relative;
+    transform: translateX(-50px);
+    opacity: 0;
+    transition: all 1s ease;
+}
+
+.reveal-left.active {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+/* Modal and other styles unchanged */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+}
+
+body.light-mode .modal {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Add remaining modal, button, and other styles from original courses.css */
+body.dark-mode .modal-content {
+    background-color: #3d4548;
+    color: #f0f0f0;
+    border: 2px solid #0a5d9c;
+}
+body.dark-mode .modal-content h3,
+body.dark-mode .modal-content label {
+    color: #f0f0f0;
+}
+body.dark-mode .modal-content input,
+body.dark-mode .modal-content textarea,
+body.dark-mode .modal-content select {
+    background-color: #2d3436;
+    color: #f0f0f0;
+    border: 1px solid #0a5d9c;
+}
+body.dark-mode .modal-content button[type="submit"] {
+    background-color: #0a5d9c;
+    color: #f0f0f0;
+}
+body.dark-mode .modal-content button[type="submit"]:hover {
+    background-color: #084c82;
+}
+body.dark-mode .close-btn {
+    color: #f0f0f0;
+}
+body.dark-mode .close-btn:hover {
+    color: #0a5d9c;
+}
+body.dark-mode .card-buttons button {
+    background-color: #0a5d9c;
+    color: #f0f0f0;
+}
+body.dark-mode .card-buttons button:hover {
+    background-color: #084c82;
+}
+body.dark-mode #addCourseButton,
+body.dark-mode #addProfessorButton {
+    background-color: #0a5d9c;
+    color: #f0f0f0;
+}
+body.dark-mode #addCourseButton:hover,
+body.dark-mode #addProfessorButton:hover {
+    background-color: #084c82;
 }

@@ -38,3 +38,43 @@
 .form-div .inner-form .create-button-div button:hover {
     background-color: #0b7cd1;
 }
+
+@media (max-width: 1300px)   {
+    .form-div {
+        width: 50%;
+    }
+
+    .form-div .inner-form {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 1000px)   {
+    .form-div {
+        width: 50%;
+    }
+
+    .form-div .inner-form {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 600px)   {
+    .form-div {
+        width: 60%;
+    }
+
+    .form-div .inner-form {
+        padding: 20px;
+    }
+}
+
+@font-face {
+    font-family: 'MyFont';
+    src: url(../fonts/Rubik/Rubik-VariableFont_wght.ttf); 
+}
+
+@font-face {
+    font-family: 'MyFontItalic';
+    src: url(../fonts/Rubik/Rubik-Italic-VariableFont_wght.ttf); 
+}
