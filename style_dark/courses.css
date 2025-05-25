@@ -221,7 +221,7 @@ body.light-mode .col:hover, body.light-mode .col-other:hover {
     height: auto;
     border-radius: 8px;
     object-fit: contain;
-    max-height: 150px; /* Prevent image from oversized */
+    max-height: 250px; /* Prevent image from oversized */
 }
 
 .card h3 {
